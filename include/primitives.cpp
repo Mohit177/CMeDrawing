@@ -93,7 +93,7 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 			int incrD = 2*xi*a + 2*yi*b;
 			while(yp!=yf)
 			{
-				if(d<=0)
+				if(d>0)
 				{
 					d+=incrS;
 				}
