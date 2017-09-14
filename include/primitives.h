@@ -25,8 +25,12 @@ class Primitive
 		unsigned int width;
 		unsigned int height;
 		Primitive(Context* context);
-		template<typename T1>
-		void drawPixel(point<T1> p,color_t color);
+		template<typename T>
+		point<T> translate(point<T> pi,T xd, T yd);
+		template<typename T>
+		point<T> rotate(point<T> pi,int deg);
+		template<typename T>
+		void drawPixel(point<T> p,color_t color);
 		template<typename T1>
 		void drawLine(point<T1> p1,point<T1> p2,color_t color);
 		template<typename T1>
