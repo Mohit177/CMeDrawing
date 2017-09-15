@@ -61,21 +61,22 @@ int main()
 	//glDrawPixels(context.getWindowWidth(),context.getWindowHeight(),GL_RGB,GL_UNSIGNED_INT,buffer);
 	Primitive p = Primitive(&context);
 	point<double> p1,p2;
-	cin>>p1.x>>p1.y>>p2.x>>p2.y;
+	cin>>p1.x>>p1.y>>p2.x;
 	color_t c;
 	c.r = 255*prod;
 	c.g = 255*prod;
 	c.b = 0;
-	p.drawLine(p1,p2,c);
-	p.flushBuffer();
+	//p.drawLine(p1,p2,c);
+	//p.flushBuffer();
 	point<double> tt = p1;
-	p1 = p.translate(p1,-1*p1.x,-1*p1.y);
+	/*p1 = p.translate(p1,-1*p1.x,-1*p1.y);
 	p2 = p.translate(p2,-1*tt.x,-1*tt.y);
 	p1 = p.rotate(p1,45);
 	p2 = p.rotate(p2,45);
 	p1 = p.translate(p1,tt.x,tt.y);
-	p2 = p.translate(p2,tt.x,tt.y);
-	p.drawLine(p1,p2,c);
+	p2 = p.translate(p2,tt.x,tt.y);*/
+	//p.drawLine(p1,p2,c);
+	p.drawCircle(p1,p2.x,c);
 	//sleep(5);
 	glfwSwapBuffers(context.getWindow());
 	glfwPollEvents();

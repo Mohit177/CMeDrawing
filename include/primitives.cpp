@@ -23,6 +23,14 @@ void Primitive::flushBuffer()
 	glfwPollEvents();
 }
 
+template<typename T>
+point<T> Primitive::makePoint(T x, T y)
+{
+	point<T> temp;
+	temp.x = x;
+	temp.y = y;
+	return temp;
+}
 // Draw a single pixel.
 /* Precondition: The point parameter can be of type unsigned int, float, or double only
 and must be a positive value in case of float or double*/
@@ -123,12 +131,12 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 				drawPixel(temp,color);
 			}
 		}
+		flushBuffer();
 	}
-	flushBuffer();
 }
 
 template<typename T1>
-void drawCircle(point<T1> center, T1 radius, color_t color)
+void Primitive::drawCircle(point<T1> center, T1 radius, color_t color)
 {
 	if(std::is_same<float,T1>::value || std::is_same<double,T1>::value)
 	{
@@ -145,14 +153,14 @@ void drawCircle(point<T1> center, T1 radius, color_t color)
 		int d = 5/4 - radius;
 		int deltaE = 3;
 		int deltaSE = 5 - 2*radius;
-		drawPixel(center.x+xp,center.y+yp);
-		drawPixel(center.x+yp,center.y+xp);
-		drawPixel(center.x-yp,center.y+xp);
-		drawPixel(center.x+xp,center.y-yp);
-		drawPixel(center.x-xp,center.y-yp);
-		drawPixel(center.x-yp,center.y-xp);
-		drawPixel(center.x+yp,center.y-xp);
-		drawPixel(center.x-xp,center.y+yp);
+		drawPixel(makePoint(center.x+xp,center.y+yp),color);
+		drawPixel(makePoint(center.x+yp,center.y+xp),color);
+		drawPixel(makePoint(center.x-yp,center.y+xp),color);
+		drawPixel(makePoint(center.x+xp,center.y-yp),color);
+		drawPixel(makePoint(center.x-xp,center.y-yp),color);
+		drawPixel(makePoint(center.x-yp,center.y-xp),color);
+		drawPixel(makePoint(center.x+yp,center.y-xp),color);
+		drawPixel(makePoint(center.x-xp,center.y+yp),color);
 		while(xp<=yp)
 		{
 			if(d<=0)
@@ -171,14 +179,14 @@ void drawCircle(point<T1> center, T1 radius, color_t color)
 				yp--;
 			}
 			xp++;
-			drawPixel(center.x+xp,center.y+yp);
-			drawPixel(center.x+yp,center.y+xp);
-			drawPixel(center.x-yp,center.y+xp);
-			drawPixel(center.x+xp,center.y-yp);
-			drawPixel(center.x-xp,center.y-yp);
-			drawPixel(center.x-yp,center.y-xp);
-			drawPixel(center.x+yp,center.y-xp);
-			drawPixel(center.x-xp,center.y+yp);
+			drawPixel(makePoint(center.x+xp,center.y+yp),color);
+			drawPixel(makePoint(center.x+yp,center.y+xp),color);
+			drawPixel(makePoint(center.x-yp,center.y+xp),color);
+			drawPixel(makePoint(center.x+xp,center.y-yp),color);
+			drawPixel(makePoint(center.x-xp,center.y-yp),color);
+			drawPixel(makePoint(center.x-yp,center.y-xp),color);
+			drawPixel(makePoint(center.x+yp,center.y-xp),color);
+			drawPixel(makePoint(center.x-xp,center.y+yp),color);
 		}
 		flushBuffer();
 	}

@@ -26,6 +26,8 @@ class Primitive
 		unsigned int height;
 		Primitive(Context* context);
 		template<typename T>
+		point<T> makePoint(T x,T y);
+		template<typename T>
 		point<T> translate(point<T> pi,T xd, T yd);
 		template<typename T>
 		point<T> rotate(point<T> pi,int deg);
