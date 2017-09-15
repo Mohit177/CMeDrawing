@@ -20,6 +20,7 @@ Primitive::Primitive(Context* context)
 void Primitive::flushBuffer()
 {
 	glfwSwapBuffers(this->window);
+	glfwPollEvents();
 }
 
 // Draw a single pixel.
@@ -29,9 +30,13 @@ and must be a positive value in case of float or double*/
 template<typename T>
 void Primitive::drawPixel(point<T> p,color_t color)
 {
-	if(std::is_same<unsigned int,T>::value)
+	if(std::is_same<unsigned int,T>::value || std::is_same<int,T>::value)
 	{
-		this->buffer[p.y*width+p.x] = color;
+		unsigned int temp = p.y*this->width+p.x;
+		if(temp>=0 && temp<((this->width)*(this->height)))
+		{
+			this->buffer[temp] = color;
+		}
 	}
 }
 
@@ -120,6 +125,63 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 		}
 	}
 	flushBuffer();
+}
+
+template<typename T1>
+void drawCircle(point<T1> center, T1 radius, color_t color)
+{
+	if(std::is_same<float,T1>::value || std::is_same<double,T1>::value)
+	{
+		point<unsigned int> ncenter;
+		ncenter.x = floor(center.x+0.5);
+		ncenter.y = floor(center.y+0.5);
+		unsigned int nrad = floor(radius+0.5);
+		drawCircle(ncenter,nrad,color);
+	}
+	if(std::is_same<unsigned int,T1>::value)
+	{
+		int xp = 0;
+		int yp = radius;
+		int d = 5/4 - radius;
+		int deltaE = 3;
+		int deltaSE = 5 - 2*radius;
+		drawPixel(center.x+xp,center.y+yp);
+		drawPixel(center.x+yp,center.y+xp);
+		drawPixel(center.x-yp,center.y+xp);
+		drawPixel(center.x+xp,center.y-yp);
+		drawPixel(center.x-xp,center.y-yp);
+		drawPixel(center.x-yp,center.y-xp);
+		drawPixel(center.x+yp,center.y-xp);
+		drawPixel(center.x-xp,center.y+yp);
+		while(xp<=yp)
+		{
+			if(d<=0)
+			{
+				/* Mid point lies inside the circle, choose east pixel*/
+				d+=deltaE;
+				deltaE+=2;
+				deltaSE+=2;
+			}
+			else
+			{
+				/*Mid point lies outside circle, choose south east pixel*/
+				d+=deltaSE;
+				deltaSE+=4;
+				deltaE+=2;
+				yp--;
+			}
+			xp++;
+			drawPixel(center.x+xp,center.y+yp);
+			drawPixel(center.x+yp,center.y+xp);
+			drawPixel(center.x-yp,center.y+xp);
+			drawPixel(center.x+xp,center.y-yp);
+			drawPixel(center.x-xp,center.y-yp);
+			drawPixel(center.x-yp,center.y-xp);
+			drawPixel(center.x+yp,center.y-xp);
+			drawPixel(center.x-xp,center.y+yp);
+		}
+		flushBuffer();
+	}
 }
 
 template<typename T>
