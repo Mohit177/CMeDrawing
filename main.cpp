@@ -15,6 +15,7 @@
 using namespace std;
 
 double angle=0,length=0;
+
 template<typename T>
 struct coords
 {
@@ -28,7 +29,7 @@ struct seg
 {
 	int dir;
 	point<T> base;
-	vector<pair<point<T>,point<T> > >plist;
+	vector<coords<T> > plist;
 };
 
 unsigned int prod=256*256*256;
@@ -60,8 +61,11 @@ int main()
 	map<char,string> rule;
 	int iter;
 	cin>>iter;
-	rule['F']="X+[F]X-[F]F";
+	rule['F']="R+[F]B-[F]F";
 	rule['X']="XX";
+	rule['B']="BB";
+	rule['G']="GG";
+	rule['R']="RR";
 	rule['[']="[";
 	rule[']']="]";
 	rule['+']="+";
@@ -71,6 +75,7 @@ int main()
 	point<double> sp;
 	cin>>sp.x>>sp.y;
 	cin>>angle>>length;
+	length= length/iter;
 	cout<<draw<<endl;
 	stack<seg<double> > st;
 	color_t c;
@@ -102,7 +107,7 @@ int main()
 		}
 		else if(draw[i]==']')
 		{
-			vector<pair<point<double>,point<double> > > v;
+			vector<coords<double> > v;
 			ll ls = st.top().plist.size();
 			seg<double> top = st.top();
 			st.pop();
@@ -143,7 +148,29 @@ int main()
 				temp.plist.clear();
 				st.push(temp);
 			}
-			st.top().plist.push_back(make_pair(p1,p2));
+			if(draw[i]=='R')
+			{
+				c.r = 255*prod;
+				c.g=0;
+				c.b=0;
+			}
+			else if(draw[i]=='F')
+			{
+				c.r=0;
+				c.g=255*prod;
+				c.b=0;
+			}
+			else if(draw[i]=='B')
+			{
+				c.r=0;
+				c.g=0;
+				c.b=255*prod;
+			}
+			coords<double> kk;
+			kk.first=p1;
+			kk.second=p2;
+			kk.color=c;
+			st.top().plist.push_back(kk);
 			sp=p2;
 		}
 	}
@@ -152,7 +179,7 @@ int main()
 	for(i=0;i<size;i++)
 	{
 		cout<<st.top().plist[i].first.x<<" "<<st.top().plist[i].first.y<<" "<<st.top().plist[i].second.x<<" "<<st.top().plist[i].second.y<<endl;
-		p.drawLine(st.top().plist[i].first,st.top().plist[i].second,c);
+		p.drawLine(st.top().plist[i].first,st.top().plist[i].second,st.top().plist[i].color);
 	}
 	color_t* buffer = context.getFrameBuffer();
 	glfwSwapBuffers(context.getWindow());
