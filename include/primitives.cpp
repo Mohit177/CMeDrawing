@@ -63,7 +63,7 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 	}
 	if(std::is_same<unsigned int, T1>::value)
 	{
-		point<unsigned int> temp;
+		point<T1> temp;
 		if(p1.x>p2.x)
 		{
 			point<T1> as = p1;
@@ -94,7 +94,7 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 			int incrD = 2*a*xi + 2*b*yi;
 			while(xp!=xf)
 			{
-				if(d<=0)
+				if(d*yi<=0)
 				{
 					d+=incrS;
 				}
@@ -116,7 +116,7 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 			int incrD = 2*xi*a + 2*yi*b;
 			while(yp!=yf)
 			{
-				if(d>0)
+				if(d*yi>0)
 				{
 					d+=incrS;
 				}
