@@ -131,7 +131,7 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 				drawPixel(temp,color);
 			}
 		}
-		flushBuffer();
+		//flushBuffer();
 	}
 }
 
@@ -188,7 +188,7 @@ void Primitive::drawCircle(point<T1> center, T1 radius, color_t color)
 			drawPixel(makePoint(center.x+yp,center.y-xp),color);
 			drawPixel(makePoint(center.x-xp,center.y+yp),color);
 		}
-		flushBuffer();
+		//flushBuffer();
 	}
 }
 
@@ -213,4 +213,18 @@ point<T> Primitive::rotate(point<T> pi, int deg)
 	pf.x = xn;
 	pf.y = yn;
 	return pf;
+}
+
+template<typename T>
+point<double> Primitive::viewPortTransform(point<T> pi,point<T> lb, point<T> ub, point<T> wi, point<T> wf)
+{
+    point<double> ans;
+	point<double> s,t;
+	s.x = (ub.x*1.0000 - lb.x*1.000)/(wf.x*1.000 - wi.x*1.000);
+	s.y = (ub.y*1.0000 - lb.y*1.000)/(wf.y*1.000 - wi.y*1.000);
+	t.x = (wf.x*lb.x*1.000 - wi.x*ub.x*1.000)/(wf.x*1.000 - wi.x*1.000);
+	t.y = (wf.y*lb.y*1.000 - wi.y*ub.y*1.000)/(wf.y*1.000 - wi.y*1.000);
+	ans.x = t.x + s.x*pi.x;
+	ans.y = t.y + s.y*pi.y;
+	return ans;
 }

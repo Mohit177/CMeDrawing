@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
+#include <cfloat>
 #include "context.cpp"
 #include <map>
 #include <string>
@@ -31,6 +32,8 @@ class Primitive
 		point<T> translate(point<T> pi,T xd, T yd);
 		template<typename T>
 		point<T> rotate(point<T> pi,int deg);
+		template<typename T>
+		point<double> viewPortTransform(point<T> pi, point<T> lb, point<T> ub, point<T> wi, point<T> wf);
 		template<typename T>
 		void drawPixel(point<T> p,color_t color);
 		template<typename T1>
