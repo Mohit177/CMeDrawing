@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <stack>
 #include <unistd.h>
-#include "include/lsystem1.cpp"
+#include "include/lsystem2.cpp"
 #define ll long long int
 #define uint unsigned int
 using namespace std;
@@ -24,7 +24,7 @@ int main()
 	map<char,string> rule;
 	int iter;
 	cin>>iter;
-	rule['F']="X+[F]G-[F]F";
+	rule['F']="FF-[-F+F+F]+[+F-F-F]";
 	rule['X']="XX";
 	rule['B']="B";
 	rule['G']="GG";
@@ -38,7 +38,7 @@ int main()
 	cin>>sp.x>>sp.y;
 	cin>>angle>>length;
 	length= length/iter;
-	LSystem1 lst = LSystem1(&p);
+	LSystem2 lst = LSystem2(&p);
 	lst.setRules(rule);
 	lst.setAngle(angle);
 	lst.setLength(length);
@@ -49,7 +49,7 @@ int main()
 	point<double> lb,ub;
 	lb.x = 100;
 	lb.y = 100;
-	ub.x = 500;
+	ub.x = 350;
 	ub.y = 500;
 	lst.confineToViewPort(lb,ub);
 	size = lst.pset.size();
