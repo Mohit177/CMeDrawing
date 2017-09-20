@@ -42,6 +42,7 @@ class LSystem2
 		unsigned int prod;
 		std::vector<coords<double> >pset;
 		void generateString(int no_of_it, char axiom);
+		void generateString(int no_of_it, std::string axiom);
 		void setRules(std::map<char,std::string> rule);
 		void setIter(int iter);
 		void setAngle(int angle);

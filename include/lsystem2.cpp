@@ -36,6 +36,29 @@ void LSystem2::generateString(int no_of_it,char axiom)
 	std::cout<<this->exp<<std::endl;
 }
 
+void LSystem2::generateString(int no_of_it, std::string axiom)
+{
+	this->iter = no_of_it;
+	int i,j,k=axiom.length();
+	std::string ans="";
+	for(int q=0; q<k; q++)
+	{
+		ans= ans+rule[axiom[q]];
+	}
+	for(i=1;i<no_of_it;i++)
+	{
+		std::string temp="";
+		for(j=0;j<ans.length();j++)
+		{
+			std::string value = rule[ans[j]];
+			temp+=value;
+		}
+		ans=temp;
+	}
+	this->exp = ans;
+	std::cout<<this->exp<<std::endl;
+}
+
 void LSystem2::setRules(std::map<char,std::string> rule)
 {
 	this->rule = rule;

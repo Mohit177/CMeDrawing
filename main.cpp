@@ -20,12 +20,12 @@ int main()
 	context.initialize();
 	char name[]="My window";
 	context.createWindow(600,600,name);
-	char axiom = 'F';
+	string axiom = "FX";
 	map<char,string> rule;
 	int iter;
 	cin>>iter;
-	rule['F']="FF-[-F+F+F]+[+F-F-F]";
-	rule['X']="XX";
+	rule['F']="FF-[-F+F]+[+F-F]";
+	rule['X']="FF+[+F]+[-F]";
 	rule['B']="B";
 	rule['G']="GG";
 	rule['R']="R";
@@ -42,7 +42,7 @@ int main()
 	lst.setRules(rule);
 	lst.setAngle(angle);
 	lst.setLength(length);
-	lst.generateString(iter,'F');
+	lst.generateString(iter,axiom);
 	lst.generatePset(sp);
 	ll i,size;
 	//cout<<st.top().plist.size()<<endl;
@@ -55,7 +55,7 @@ int main()
 	size = lst.pset.size();
 	for(i=0;i<size;i++)
 	{
-		p.drawLine(lst.pset[i].first,lst.pset[i].second,lst.pset[i].color);
+		p.drawLine(lst.pset[i].first,lst.pset[i].second,lst.pset[i].color,0);
 	}
 	color_t* buffer = context.getFrameBuffer();
 	glfwSwapBuffers(context.getWindow());

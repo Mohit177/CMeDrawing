@@ -39,6 +39,8 @@ class Primitive
 		template<typename T1>
 		void drawLine(point<T1> p1,point<T1> p2,color_t color);
 		template<typename T1>
+		void drawLine(point<T1> p1,point<T1> p2, color_t color,int thick);
+		template<typename T1>
 		void drawCircle(point<T1> center,T1 radius,color_t color);
 		void flushBuffer();
 };

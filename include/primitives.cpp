@@ -136,6 +136,103 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 }
 
 template<typename T1>
+void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color,int thick)
+{
+	if(std::is_same<float,T1>::value || std::is_same<double,T1>::value)
+	{
+		point<unsigned int> pf1,pf2;
+		pf1.x = floor(p1.x+0.5);
+		pf1.y = floor(p1.y+0.5);
+		pf2.x = floor(p2.x+0.5);
+		pf2.y = floor(p2.y+0.5);
+		drawLine(pf1,pf2,color,thick);
+	}
+	if(std::is_same<unsigned int, T1>::value)
+	{
+		point<T1> temp;
+		if(p1.x>p2.x)
+		{
+			point<T1> as = p1;
+			p1 = p2;
+			p2 = as;
+		}
+		int a = p2.y - p1.y;
+		int b = p1.x - p2.x;
+		int xi = 1;
+		int yi = 1;
+		int xp = p1.x;
+		int yp = p1.y;
+		int xf = p2.x;
+		int yf = p2.y;
+		int jj;
+		temp.x=xp;
+		temp.y=yp;
+		drawPixel(temp,color);
+		double m = abs((a)*1.00000)/(abs(b)*1.000000);
+		//std::cout<<m<<std::endl;
+		if(a<0)
+		{
+			yi=-1;
+		}
+		if(m<=1)
+		{
+			int d = (2*a*xi+yi*b);
+			int incrS = 2*a*xi;
+			int incrD = 2*a*xi + 2*b*yi;
+			while(xp!=xf)
+			{
+				if(d*yi<=0)
+				{
+					d+=incrS;
+				}
+				else
+				{
+					d+=incrD;
+					yp+=yi;
+				}
+				xp+=xi;
+				temp.x=xp;
+				temp.y=yp;
+				drawPixel(temp,color);
+				for(jj=1;jj<=thick;jj++)
+				{
+					drawPixel(makePoint(temp.x,temp.y+jj),color);
+					drawPixel(makePoint(temp.x,temp.y-jj),color);
+				}
+			}
+		}
+		else
+		{
+			int d = (a*xi+2*yi*b);
+			int incrS = 2*yi*b;
+			int incrD = 2*xi*a + 2*yi*b;
+			while(yp!=yf)
+			{
+				if(d*yi>0)
+				{
+					d+=incrS;
+				}
+				else
+				{
+					d+=incrD;
+					xp+=xi;
+				}
+				yp+=yi;
+				temp.x=xp;
+				temp.y=yp;
+				drawPixel(temp,color);
+				for(jj=1;jj<=thick;jj++)
+				{
+					drawPixel(makePoint(temp.x+jj,temp.y),color);
+					drawPixel(makePoint(temp.x-jj,temp.y),color);
+				}
+			}
+		}
+		//flushBuffer();
+	}
+}
+
+template<typename T1>
 void Primitive::drawCircle(point<T1> center, T1 radius, color_t color)
 {
 	if(std::is_same<float,T1>::value || std::is_same<double,T1>::value)
