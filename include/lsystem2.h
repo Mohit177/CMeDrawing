@@ -16,6 +16,7 @@ struct coords
 	point<T> first;
 	point<T> second;
 	color_t color;
+	int thick;
 };
 
 template<typename T>
@@ -23,6 +24,7 @@ struct bkp
 {
 	point<T> base;
 	int angle;
+	int thick;
 };
 
 class LSystem2
@@ -33,6 +35,7 @@ class LSystem2
 		int angle;
 		int length;
 		int iter;
+		int i_thick;
 		point<double> wi;
 		point<double> wf;
 
@@ -47,6 +50,7 @@ class LSystem2
 		void setIter(int iter);
 		void setAngle(int angle);
 		void setLength(int length);
+		void setIThick(int thick);
 		template<typename T>
 		void generatePset(point<T> sp);
 		template<typename T>

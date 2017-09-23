@@ -9,6 +9,7 @@ LSystem2::LSystem2(Primitive* p)
 	length=0;
 	iter=0;
 	exp="";
+	i_thick = 0;
 	prod=255*255*255;
 	this->wi.x = DBL_MAX;
 	this->wi.y = DBL_MAX;
@@ -79,6 +80,11 @@ void LSystem2::setIter(int iter)
 	this->iter = iter;
 }
 
+void LSystem2::setIThick(int thick)
+{
+	this->i_thick = thick;
+}
+
 template<typename T>
 void LSystem2::generatePset(point<T> sp)
 {
@@ -91,6 +97,7 @@ void LSystem2::generatePset(point<T> sp)
 	ll i;
 	ll size = exp.length();
 	int langle=0;
+	int lthick = i_thick;
 	bkp<double> temp;
 	coords<double> tt;
 	for(i=0;i<size;i++)
@@ -107,16 +114,23 @@ void LSystem2::generatePset(point<T> sp)
 		{
 			temp.base = sp;
 			temp.angle = langle;
+			temp.thick = lthick;
 			st.push(temp);
+			if(lthick>0)
+			{
+				lthick--;
+			}
 		}
 		else if(exp[i]==']')
 		{
 			langle = st.top().angle;
 			sp = st.top().base;
+			lthick = st.top().thick;
 			st.pop();
 		}
 		else
 		{
+			std::cout<<lthick<<std::endl;
 			point<double> p1 = sp;
 			point<double> p2 = p->makePoint(sp.x,sp.y+length);
 			p2 = p->translate(p2,-1*p1.x,-1*p1.y);
@@ -149,6 +163,7 @@ void LSystem2::generatePset(point<T> sp)
 				c.b=0;
 			}
 			tt.color = c;
+			tt.thick = lthick;
 			pset.push_back(tt);
 			sp = p2;
 		}

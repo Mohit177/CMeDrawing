@@ -176,6 +176,11 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color,int thick)
 		}
 		if(m<=1)
 		{
+			for(jj=1;jj<=thick;jj++)
+			{
+				drawPixel(makePoint(temp.x,temp.y-jj),color);
+				drawPixel(makePoint(temp.x,temp.y+jj),color);
+			}
 			int d = (2*a*xi+yi*b);
 			int incrS = 2*a*xi;
 			int incrD = 2*a*xi + 2*b*yi;
@@ -203,6 +208,11 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color,int thick)
 		}
 		else
 		{
+			for(jj=1;jj<=thick;jj++)
+			{
+				drawPixel(makePoint(temp.x+jj,temp.y),color);
+				drawPixel(makePoint(temp.x-jj,temp.y),color);
+			}
 			int d = (a*xi+2*yi*b);
 			int incrS = 2*yi*b;
 			int incrD = 2*xi*a + 2*yi*b;

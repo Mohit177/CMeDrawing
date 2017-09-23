@@ -37,9 +37,9 @@ void Context::createWindow(int width,int height,char *wname)
 	{
 		for(j=0;j<height;j++)
 		{
-			buffer[i*width+j].r=0;
-			buffer[i*width+j].g=0;
-			buffer[i*width+j].b=0;
+			buffer[j*width+i].r=0;
+			buffer[j*width+i].g=0;
+			buffer[j*width+i].b=0;
 		}
 	}
 	w_width = width;
