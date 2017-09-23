@@ -346,7 +346,7 @@ void LSystem2::generatePset(point<T> sp)
 			st.push(temp);
 			if(lthick>0)
 			{
-				lthick=lthick/2;
+				lthick=lthick--;
 			}
 		}
 		else if(exp[i]==']')

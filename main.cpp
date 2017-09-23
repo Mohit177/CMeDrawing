@@ -26,13 +26,11 @@ int main()
 	ins.open("dInstr.txt");
 	int t;
 	ins>>t;
-	//cout<<t<<endl;
 	while(t>0)
 	{
 		int n;
 		string axiom;
 		ins>>n>>axiom;
-		//cout<<n<<" "<<axiom<<endl;
 		ins.get();
 		map<char,string> rule;
 		while(n>0)
@@ -46,7 +44,6 @@ int main()
 			{
 				temp+=str[i];
 			}
-			//cout<<str[0]<<" "<<temp<<endl;
 			rule[str[0]]=temp;
 			n--;
 		}
@@ -78,44 +75,6 @@ int main()
 		t--;
 	}
 	ins.close();
-	/*string axiom = "F";
-	map<char,string> rule;
-	int iter;
-	cin>>iter;
-	rule['F']="X+[F]+[F]---[F]-[F]";
-	rule['X']="XX";
-	rule['B']="B";
-	rule['G']="GG";
-	rule['R']="R";
-	rule['[']="[";
-	rule[']']="]";
-	rule['+']="+";
-	rule['-']="-";
-	point<double> sp;
-	cin>>sp.x>>sp.y;
-	cin>>angle>>length;
-	length= length/iter;
-	LSystem2 lst = LSystem2(&p);
-	lst.setRules(rule);
-	lst.setAngle(angle);
-	lst.setLength(length);
-	lst.setIThick(3);
-	lst.generateString(iter,axiom);
-	lst.generatePset(sp);
-	ll i,size;
-	//cout<<st.top().plist.size()<<endl;
-	point<double> lb,ub;
-	lb.x = 100;
-	lb.y = 100;
-	ub.x = 400;
-	ub.y = 450;
-	lst.confineToViewPort(lb,ub);
-	size = lst.pset.size();
-	for(i=0;i<size;i++)
-	{
-		//cout<<lst.pset[i].thick<<endl;
-		p.drawLine(lst.pset[i].first,lst.pset[i].second,lst.pset[i].color,lst.pset[i].thick);
-	}*/
 	color_t* buffer = context.getFrameBuffer();
 	glfwSwapBuffers(context.getWindow());
 	glfwPollEvents();
