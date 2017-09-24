@@ -44,6 +44,7 @@ int main()
 		}
 		else
 		{
+			context.terminate();
 			cout<<"Bye"<<endl;
 			cout<<"-------------------------------------------------------"<<endl;
 			return 0;
