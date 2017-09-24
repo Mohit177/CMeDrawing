@@ -224,15 +224,26 @@ void LSystem2::generateString(int no_of_it,char axiom)
 {
 	this->iter = no_of_it;
 	int i,j,k;
-	std::string ans=rule[axiom];
+	std::string ans="";
+	int size = rule[axiom].size();
+	if(size>0)
+	{
+		int rno = rand()%size;
+		ans=rule[axiom][rno];
+	}
 	int vs = rule.size();
 	for(i=1;i<no_of_it;i++)
 	{
 		std::string temp="";
 		for(j=0;j<ans.length();j++)
 		{
-			std::string value = rule[ans[j]];
-			temp+=value;
+			size = rule[ans[j]].size();
+			if(size>0)
+			{
+				int rno = rand()%size;
+				std::string value = rule[ans[j]][rno];
+				temp+=value;
+			}
 		}
 		ans=temp;
 	}
@@ -271,15 +282,25 @@ void LSystem2::generateString(int no_of_it, std::string axiom)
 	std::string ans="";
 	for(int q=0; q<k; q++)
 	{
-		ans= ans+rule[axiom[q]];
+		int size = rule[axiom[q]].size();
+		if(size>0)
+		{
+			int rno = rand()%size;
+			ans=ans+rule[axiom[q]][rno];
+		}
 	}
 	for(i=1;i<no_of_it;i++)
 	{
 		std::string temp="";
 		for(j=0;j<ans.length();j++)
 		{
-			std::string value = rule[ans[j]];
-			temp+=value;
+			int size = rule[ans[j]].size();
+			if(size>0)
+			{
+				int rno = rand()%size;
+				std::string value = rule[ans[j]][rno];
+				temp+=value;
+			}
 		}
 		ans=temp;
 	}
@@ -287,7 +308,7 @@ void LSystem2::generateString(int no_of_it, std::string axiom)
 	std::cout<<this->exp<<std::endl;
 }
 
-void LSystem2::setRules(std::map<char,std::string> rule)
+void LSystem2::setRules(std::map<char,std::vector<std::string> >rule)
 {
 	this->rule = rule;
 }

@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <stack>
 #include <unistd.h>
+#include <time.h>
 #include "include/lsystem.cpp"
 #define ll long long int
 #define uint unsigned int
@@ -23,6 +24,7 @@ int main()
 	context.createWindow(1200,700,name);
 	Primitive p = Primitive(&context);
 	ifstream ins;
+	srand(time(NULL));
 	ins.open("dInstr.txt");
 	int t;
 	ins>>t;
@@ -32,7 +34,7 @@ int main()
 		string axiom;
 		ins>>n>>axiom;
 		ins.get();
-		map<char,string> rule;
+		map<char,vector<string> > rule;
 		while(n>0)
 		{
 			string str;
@@ -44,7 +46,7 @@ int main()
 			{
 				temp+=str[i];
 			}
-			rule[str[0]]=temp;
+			rule[str[0]].push_back(temp);
 			n--;
 		}
 		int iter,angle,length,thickness;

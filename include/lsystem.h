@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdio>
+#include <cstdlib>
 #include <map>
 #include <string>
 #include <vector>
@@ -66,7 +67,7 @@ class LSystem1
 class LSystem2
 {
 	private:
-		std::map<char,std::string> rule;
+		std::map<char,std::vector<std::string> > rule;
 		std::string exp;
 		int angle;
 		int length;
@@ -83,7 +84,7 @@ class LSystem2
 		color_t getColor(char ch);
 		void generateString(int no_of_it, char axiom);
 		void generateString(int no_of_it, std::string axiom);
-		void setRules(std::map<char,std::string> rule);
+		void setRules(std::map<char,std::vector<std::string> > rule);
 		void setIter(int iter);
 		void setAngle(int angle);
 		void setLength(int length);
