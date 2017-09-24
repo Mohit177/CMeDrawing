@@ -7,6 +7,9 @@
 #define ll long long int
 
 // Class for creating window and frame buffer
+
+/*Data Structure to represent color in RGB values*/
+//Color must be of the form value(0,255)*256*256*256 with GLuint type, which is unsigned int
 struct color_t
 {
 	GLuint r;
@@ -18,9 +21,9 @@ class Context
 {
 	private:
 		GLFWwindow* window;
-		color_t* buffer;
-		int w_height;
-		int w_width;
+		color_t* buffer; //The buffer that will be updated by drawing operations and flushed to the window
+		int w_height; //width of context
+		int w_width; //height of context
 
 	public:
 		Context();

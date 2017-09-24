@@ -6,6 +6,7 @@
 // defining functions of Context class
 
 
+//Initializing object with default constructor
 Context::Context()
 {
 	window = NULL;
@@ -69,10 +70,13 @@ unsigned int Context::getWindowWidth()
 {
 	return w_width;
 }
+
+//returns reference to frame buffer
 color_t* Context::getFrameBuffer()
 {
 	return buffer;
 }
+
 //To close the window
 void Context::terminate()
 {

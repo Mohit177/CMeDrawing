@@ -11,6 +11,7 @@
 #define PRIMITIVES_H
 #define ll long long int
 
+//Data structure representing a point, that can be of integer,float or double type
 template<typename T>
 struct point
 {
@@ -18,6 +19,7 @@ struct point
 	T y;
 };
 
+/*Provides primitive operations that are used repeatatively to get the complex figure*/
 class Primitive
 {
 	public:
@@ -25,7 +27,7 @@ class Primitive
 		color_t* buffer;
 		unsigned int width;
 		unsigned int height;
-		Primitive(Context* context);
+		Primitive(Context* context); //Takes reference to a Context class object to set the data attributes defined above
 		template<typename T>
 		point<T> makePoint(T x,T y);
 		template<typename T>

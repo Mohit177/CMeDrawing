@@ -11,6 +11,7 @@
 #ifndef LSYSTEM_1_H
 #define LSYSTEM_1_H
 
+//Data structure to represent a pair of points. Used to call drawLine with color and thickness
 template<typename T>
 struct coords
 {
@@ -20,6 +21,7 @@ struct coords
 	int thick;
 };
 
+//Data structure to represent 
 template<typename T>
 struct seg
 {

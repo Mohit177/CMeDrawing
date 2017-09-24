@@ -17,6 +17,7 @@ Primitive::Primitive(Context* context)
 	this->height = context->getWindowHeight();
 }
 
+/*This swaps the back buffer with the front buffer, so that the updated buffer can be viewed*/
 void Primitive::flushBuffer()
 {
 	glfwSwapBuffers(this->window);
@@ -32,8 +33,7 @@ point<T> Primitive::makePoint(T x, T y)
 	return temp;
 }
 // Draw a single pixel.
-/* Precondition: The point parameter can be of type unsigned int, float, or double only
-and must be a positive value in case of float or double*/
+/* Precondition: The point parameter can be of type unsigned int only*/
 
 template<typename T>
 void Primitive::drawPixel(point<T> p,color_t color)
@@ -47,13 +47,20 @@ void Primitive::drawPixel(point<T> p,color_t color)
 		}
 	}
 }
+/*Post condition: The pixel will be drawn if and only if the x and y values lie inside the window bounds*/
 
 // Line drawing
+/*Precondition: The point paramter must be an integer, float or double data type only.
+In case it is float or double it must be positive*/
+
+/*Algorithm used: Bresenham's mid point algorithm*/
+
 template<typename T1>
 void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 {
 	if(std::is_same<float,T1>::value || std::is_same<double,T1>::value)
 	{
+		/*In case the points are of float or double type, they are approximated to the nearest integer*/
 		point<unsigned int> pf1,pf2;
 		pf1.x = floor(p1.x+0.5);
 		pf1.y = floor(p1.y+0.5);
@@ -94,11 +101,11 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 			int incrD = 2*a*xi + 2*b*yi;
 			while(xp!=xf)
 			{
-				if(d*yi<=0)
+				if(d*yi<=0) //East Pixel choosen
 				{
 					d+=incrS;
 				}
-				else
+				else //NE or SE pixel chosen
 				{
 					d+=incrD;
 					yp+=yi;
@@ -116,11 +123,11 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 			int incrD = 2*xi*a + 2*yi*b;
 			while(yp!=yf)
 			{
-				if(d*yi>0)
+				if(d*yi>0) //North Pixel chosen
 				{
 					d+=incrS;
 				}
-				else
+				else //NE or SE Pixel chosen
 				{
 					d+=incrD;
 					xp+=xi;
@@ -134,7 +141,9 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color)
 		//flushBuffer();
 	}
 }
+/*Postcondition: Only those points of the line are drawn, whose x and y values are within window bounds*/
 
+/*Drawing line with a given thickness*/
 template<typename T1>
 void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color,int thick)
 {
@@ -176,6 +185,7 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color,int thick)
 		}
 		if(m<=1)
 		{
+			/*If slope is between -1,1 the points above and below the one to be rasterized are also illuminated*/
 			for(jj=1;jj<=thick;jj++)
 			{
 				drawPixel(makePoint(temp.x,temp.y-jj),color);
@@ -208,6 +218,7 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color,int thick)
 		}
 		else
 		{
+			/*If slope lies in (-inf,-1),(1,inf) points to right and left of the one to be rasterized are also illuminated*/
 			for(jj=1;jj<=thick;jj++)
 			{
 				drawPixel(makePoint(temp.x+jj,temp.y),color);
@@ -242,6 +253,11 @@ void Primitive::drawLine(point<T1> p1, point<T1> p2, color_t color,int thick)
 	}
 }
 
+
+//Circle drawing
+/*Precondition: The point paramter and radius must belong to integer, float or double data types only.
+In case they are float or double they must be positive */
+
 template<typename T1>
 void Primitive::drawCircle(point<T1> center, T1 radius, color_t color)
 {
@@ -260,6 +276,7 @@ void Primitive::drawCircle(point<T1> center, T1 radius, color_t color)
 		int d = 5/4 - radius;
 		int deltaE = 3;
 		int deltaSE = 5 - 2*radius;
+		/*Making use of 8-way symmetry property*/
 		drawPixel(makePoint(center.x+xp,center.y+yp),color);
 		drawPixel(makePoint(center.x+yp,center.y+xp),color);
 		drawPixel(makePoint(center.x-yp,center.y+xp),color);
@@ -299,15 +316,20 @@ void Primitive::drawCircle(point<T1> center, T1 radius, color_t color)
 	}
 }
 
+/*Postcondition: Only those points of the circle are drawn, whose x and y values lie within window bounds*/
+
+//Translating a point
 template<typename T>
 point<T> Primitive::translate(point <T> pi, T xd, T  yd)
 {
 	point<T> pf;
-	pf.x = pi.x+xd;
-	pf.y = pi.y+yd;
+	pf.x = pi.x+xd; //translating x to x+xd
+	pf.y = pi.y+yd; //translating y to y+yd
 	return pf;
 }
 
+//Rotating a point about (0,0)
+/*Precondition: Same for point parameter, and deg must be in degrees*/
 template<typename T>
 point<T> Primitive::rotate(point<T> pi, int deg)
 {
@@ -321,7 +343,11 @@ point<T> Primitive::rotate(point<T> pi, int deg)
 	pf.y = yn;
 	return pf;
 }
+/*Postcondition: The method returns points rotated anti-clockwise by deg about origin*/
 
+//Fitting a point in one screen bound to another
+//pi represents the point, lb and ub represent the dimensions of the new viewport
+//wi and wf represent the dimensions of the old viewport
 template<typename T>
 point<double> Primitive::viewPortTransform(point<T> pi,point<T> lb, point<T> ub, point<T> wi, point<T> wf)
 {
