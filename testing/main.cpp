@@ -11,7 +11,7 @@
 #include <stack>
 #include <unistd.h>
 #include <ctime>
-#include "include/lsystem.cpp"
+#include "../include/lsystem.cpp"
 #define ll long long int
 #define uint unsigned int
 using namespace std;
@@ -26,9 +26,12 @@ int main()
 	ifstream ins;
 	srand(time(NULL));
 	ins.open("dInstr.txt");
+	ofstream ofil;
+	ofil.open("data.txt",ios_base::out);
 	int t;
 	ins>>t;
-	while(t>0)
+	int it=1;
+	while(it<=t)
 	{
 		int n;
 		string axiom;
@@ -54,13 +57,18 @@ int main()
 		point<double> sp,lb,ub;
 		ins>>sp.x>>sp.y;
 		length = length/iter;
+		clock_t c1 = clock();
 		LSystem2 lst = LSystem2(&p);
 		lst.setRules(rule);
 		lst.setAngle(angle);
 		lst.setLength(length);
 		lst.setIThick(thickness);
 		lst.generateString(iter,axiom);
+		clock_t c2 = clock();
 		lst.generatePset(sp);
+		clock_t c3 = clock();
+		ofil<<it<<", "<<c2-c1<<", "<<c3-c2<<"\n";
+		cout<<it<<", "<<c2-c1<<", "<<c3-c2<<endl;
 		int type;
 		ins>>type;
 		if(type==1)
@@ -68,15 +76,10 @@ int main()
 			ins>>lb.x>>lb.y>>ub.x>>ub.y;
 			lst.confineToViewPort(lb,ub);
 		}
-		long long int size = lst.pset.size();
-		long long int i=0;
-		for(i=0;i<size;i++)
-		{
-			p.drawLine(lst.pset[i].first,lst.pset[i].second,lst.pset[i].color,lst.pset[i].thick);
-		}
-		t--;
+		it++;
 	}
 	ins.close();
+	ofil.close();
 	color_t* buffer = context.getFrameBuffer();
 	glfwSwapBuffers(context.getWindow());
 	glfwPollEvents();

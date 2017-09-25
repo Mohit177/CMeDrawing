@@ -248,7 +248,7 @@ void LSystem2::generateString(int no_of_it,char axiom)
 		ans=temp;
 	}
 	this->exp = ans;
-	std::cout<<this->exp<<std::endl;
+	//std::cout<<this->exp<<std::endl;
 }
 
 color_t LSystem2::getColor(char ch)
@@ -312,7 +312,7 @@ void LSystem2::generateString(int no_of_it, std::string axiom)
 		ans=temp;
 	}
 	this->exp = ans;
-	std::cout<<this->exp<<std::endl;
+	//std::cout<<this->exp<<std::endl;
 }
 
 void LSystem2::setRules(std::map<char,std::vector<std::string> >rule)
