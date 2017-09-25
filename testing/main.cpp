@@ -18,6 +18,11 @@ using namespace std;
 double angle=0,length=0;
 int main()
 {
+
+	/*Exact copy of main.cpp used for execution time analysis: Generates
+	data.txt of the form
+	<n,time for generateString(),time for generatePset()>
+	*/
 	Context context;
 	context.initialize();
 	char name[]="My window";

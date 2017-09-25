@@ -11,6 +11,7 @@ using namespace std;
 
 int main()
 {
+	/*This file generates test cases for main.cpp , by writing drawing instructions to dInstr.txt*/
 	ofstream ofil;
 	ofil.open("/home/nitish/Documents/graphics/test/CMeDrawing/testing/dInstr.txt", ios_base::out);
 	ifstream ifil;

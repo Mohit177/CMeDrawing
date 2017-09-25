@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+#plots sample.txt
 df = pd.read_csv('data.txt', header=None)
 
 plt.figure(1)
