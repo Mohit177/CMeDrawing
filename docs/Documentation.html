@@ -73,9 +73,9 @@
         class LSystem2: For Turtle drawing.
         <br>
         <br>
-        Given the set of rules (std::map<char,std::vector<std::string> >), and axiom (char or std::string),
+        Given the set of rules (std::map&lt;char,std::vector&lt;std::string&gt; &gt;), and axiom (char or std::string),
         generateString() produces a string that specifies drawing instructions to the turtle.
-        generatePset() produces std::vector<coords<double> > pset, where coords is a data structure representing a pair of points with thickness and color (for drawing a line between them).
+        generatePset() produces std::vector&lt;coords&lt;double&gt; &gt; pset, where coords is a data structure representing a pair of points with thickness and color (for drawing a line between them).
         This list in a way represents the line drawing commands which are iterated and called upon by drawLine() function.
         Some drawings might cause the figures points to go outside the window bounds. To overcome this problem, confineToViewPort() transforms all the points in LSystem2::pset to a given bound within the window bounds. Say a figure that lies between (500,500) and (2000,2000) can be transformed to the viewPort (100,100) to (200,200).
         <br>
