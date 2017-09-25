@@ -1,6 +1,12 @@
 # CMeDrawing
 ComputerGraphics_Assignment1
 
+enter command on linux:
+g++ -std=c++14 main.cpp -lGL -lglfw 
+to compile
+
+./a.out to run
+./a.out reads input dInstr.txt
 
 Drawing Instructions
 In the file dInstr.txt, input format is as follows:
