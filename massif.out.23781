@@ -1,0 +1,1479 @@
+desc: (none)
+cmd: ./a.out
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=1189413840
+mem_heap_B=62523594
+mem_heap_extra_B=131886
+mem_stacks_B=0
+heap_tree=detailed
+n7: 62523594 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 29360331 0x536A247: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+  n1: 29360305 0x536AE09: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+   n2: 29360305 0x536AEA2: std::string::reserve(unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+    n2: 29360032 0x536AF46: std::string::append(std::string const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+     n1: 29360032 0x402A77: LSystem2::generateString(int, std::string) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+      n0: 29360032 0x402FFB: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+    n0: 273 in 3 places, all below massif's threshold (01.00%)
+  n0: 26 in 1 place, below massif's threshold (01.00%)
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1576948 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1278352 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n0: 968896 in 2 places, all below massif's threshold (01.00%)
+   n0: 309456 in 67 places, all below massif's threshold (01.00%)
+  n0: 298596 in 215 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 1356992 in 14 places, all below massif's threshold (01.00%)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 1001201 in 378 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=2
+#-----------
+time=2968209752
+mem_heap_B=200936232
+mem_heap_extra_B=131832
+mem_stacks_B=0
+heap_tree=detailed
+n6: 200936232 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 150994944 0x40788B: __gnu_cxx::new_allocator<coords<double> >::allocate(unsigned long, void const*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n1: 150994944 0x407093: std::_Vector_base<coords<double>, std::allocator<coords<double> > >::_M_allocate(unsigned long) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 150994944 0x4061B2: void std::vector<coords<double>, std::allocator<coords<double> > >::_M_emplace_back_aux<coords<double> const&>(coords<double> const&) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 150994944 0x404EBB: std::vector<coords<double>, std::allocator<coords<double> > >::push_back(coords<double> const&) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+     n1: 150994944 0x403EAF: void LSystem2::generatePset<double>(point<double>) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+      n0: 150994944 0x403045: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 16777457 0x536A247: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+  n1: 16777457 0x536AE09: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+   n2: 16777457 0x536AEA2: std::string::reserve(unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+    n2: 16777184 0x536AF46: std::string::append(std::string const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+     n1: 16777184 0x402A77: LSystem2::generateString(int, std::string) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+      n0: 16777184 0x402FFB: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+    n0: 273 in 3 places, all below massif's threshold (01.00%)
+  n0: 0 in 1 place, below massif's threshold (01.00%)
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n0: 3995271 in 379 places, all below massif's threshold (01.00%)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+#-----------
+snapshot=3
+#-----------
+time=4434905094
+mem_heap_B=351931176
+mem_heap_extra_B=131832
+mem_stacks_B=0
+heap_tree=detailed
+n5: 351931176 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 301989888 0x40788B: __gnu_cxx::new_allocator<coords<double> >::allocate(unsigned long, void const*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n1: 301989888 0x407093: std::_Vector_base<coords<double>, std::allocator<coords<double> > >::_M_allocate(unsigned long) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 301989888 0x4061B2: void std::vector<coords<double>, std::allocator<coords<double> > >::_M_emplace_back_aux<coords<double> const&>(coords<double> const&) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 301989888 0x404EBB: std::vector<coords<double>, std::allocator<coords<double> > >::push_back(coords<double> const&) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+     n1: 301989888 0x403EAF: void LSystem2::generatePset<double>(point<double>) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+      n0: 301989888 0x403045: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 16777457 0x536A247: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+  n1: 16777457 0x536AE09: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+   n2: 16777457 0x536AEA2: std::string::reserve(unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+    n2: 16777184 0x536AF46: std::string::append(std::string const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+     n1: 16777184 0x402A77: LSystem2::generateString(int, std::string) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+      n0: 16777184 0x402FFB: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+    n0: 273 in 3 places, all below massif's threshold (01.00%)
+  n0: 0 in 1 place, below massif's threshold (01.00%)
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n0: 6814503 in 380 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=4
+#-----------
+time=7246165422
+mem_heap_B=653921064
+mem_heap_extra_B=131832
+mem_stacks_B=0
+heap_tree=peak
+n5: 653921064 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 603979776 0x40788B: __gnu_cxx::new_allocator<coords<double> >::allocate(unsigned long, void const*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n1: 603979776 0x407093: std::_Vector_base<coords<double>, std::allocator<coords<double> > >::_M_allocate(unsigned long) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 603979776 0x4061B2: void std::vector<coords<double>, std::allocator<coords<double> > >::_M_emplace_back_aux<coords<double> const&>(coords<double> const&) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 603979776 0x404EBB: std::vector<coords<double>, std::allocator<coords<double> > >::push_back(coords<double> const&) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+     n1: 603979776 0x403EAF: void LSystem2::generatePset<double>(point<double>) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+      n0: 603979776 0x403045: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 16777457 0x536A247: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+  n1: 16777457 0x536AE09: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+   n2: 16777457 0x536AEA2: std::string::reserve(unsigned long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+    n2: 16777184 0x536AF46: std::string::append(std::string const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+     n1: 16777184 0x402A77: LSystem2::generateString(int, std::string) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+      n0: 16777184 0x402FFB: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+    n0: 273 in 3 places, all below massif's threshold (01.00%)
+  n0: 0 in 1 place, below massif's threshold (01.00%)
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n0: 6814503 in 380 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=5
+#-----------
+time=10026343988
+mem_heap_B=33369473
+mem_heap_extra_B=154039
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=11632733222
+mem_heap_B=33369473
+mem_heap_extra_B=154039
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=14099815337
+mem_heap_B=33369573
+mem_heap_extra_B=154099
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=15935687757
+mem_heap_B=33369573
+mem_heap_extra_B=154099
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=17542077573
+mem_heap_B=33369573
+mem_heap_extra_B=154099
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=19607433951
+mem_heap_B=33369573
+mem_heap_extra_B=154099
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=22074389399
+mem_heap_B=33369573
+mem_heap_extra_B=154099
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=24311906245
+mem_heap_B=33369720
+mem_heap_extra_B=154160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=25746197860
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=27668127516
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=29475314702
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=32057010636
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=34896876602
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=36646692558
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=39228389176
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=40777407376
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=42957505652
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=44391781958
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=46227654481
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=48694608463
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=50128884769
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=51563159961
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=52997435317
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=54431711623
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=55865986925
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=57300262994
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=58964022090
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=60168814492
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=62234170132
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=63725817468
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=65905915656
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=67684417581
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=70094000587
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33369624 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1935263 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1344940 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n2: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 547552 0xA79E7C1: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 547552 0xA79EF4C: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 547552 0xA7588BB: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 547552 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 547552 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+         n1: 547552 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 547552 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 547552 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+            n1: 547552 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 547552 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 547552 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+               n1: 547552 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+                n0: 547552 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 421344 0xA7DF0FA: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 421344 0xA7588C3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 421344 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 421344 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 421344 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 421344 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 421344 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 421344 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 421344 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 421344 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 421344 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+               n0: 421344 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n0: 376044 in 68 places, all below massif's threshold (01.00%)
+  n0: 590323 in 258 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n3: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 581568 in 12 places, all below massif's threshold (01.00%)
+   n1: 387712 0xA558A43: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 387712 0xA558FA3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 849247 in 388 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=38
+#-----------
+time=72733068479
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=74511569527
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=75888474960
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=77380121128
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=79215994662
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=81338722260
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=83117225122
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=84436758362
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33369624 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1935263 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1344940 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n2: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 547552 0xA79E7C1: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 547552 0xA79EF4C: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 547552 0xA7588BB: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 547552 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 547552 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+         n1: 547552 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 547552 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 547552 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+            n1: 547552 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 547552 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 547552 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+               n1: 547552 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+                n0: 547552 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 421344 0xA7DF0FA: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 421344 0xA7588C3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 421344 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 421344 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 421344 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 421344 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 421344 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 421344 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 421344 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 421344 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 421344 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+               n0: 421344 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n0: 376044 in 68 places, all below massif's threshold (01.00%)
+  n0: 590323 in 258 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n3: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 581568 in 12 places, all below massif's threshold (01.00%)
+   n1: 387712 0xA558A43: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 387712 0xA558FA3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 849247 in 388 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=46
+#-----------
+time=86846342052
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=88854327004
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=90460716634
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=91722879196
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=92927672194
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=94132463086
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=95337254374
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33369624 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1935263 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1344940 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n2: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 547552 0xA79E7C1: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 547552 0xA79EF4C: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 547552 0xA7588BB: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 547552 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 547552 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+         n1: 547552 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 547552 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 547552 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+            n1: 547552 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 547552 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 547552 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+               n1: 547552 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+                n0: 547552 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 421344 0xA7DF0FA: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 421344 0xA7588C3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 421344 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 421344 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 421344 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 421344 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 421344 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 421344 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 421344 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 421344 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 421344 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+               n0: 421344 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n0: 376044 in 68 places, all below massif's threshold (01.00%)
+  n0: 590323 in 258 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n3: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 581568 in 12 places, all below massif's threshold (01.00%)
+   n1: 387712 0xA558A43: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 387712 0xA558FA3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 849247 in 388 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=53
+#-----------
+time=96542046776
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=97746838064
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=98951628956
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=100156421358
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=101361212944
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=102566004536
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=103770796900
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=104975587897
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=106180379033
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=107385170321
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33369624 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1935263 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1344940 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n2: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 547552 0xA79E7C1: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 547552 0xA79EF4C: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 547552 0xA7588BB: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 547552 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 547552 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+         n1: 547552 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 547552 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 547552 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+            n1: 547552 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 547552 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 547552 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+               n1: 547552 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+                n0: 547552 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 421344 0xA7DF0FA: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 421344 0xA7588C3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 421344 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 421344 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 421344 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 421344 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 421344 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 421344 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 421344 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 421344 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 421344 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+               n0: 421344 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n0: 376044 in 68 places, all below massif's threshold (01.00%)
+  n0: 590323 in 258 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n3: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 581568 in 12 places, all below massif's threshold (01.00%)
+   n1: 387712 0xA558A43: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 387712 0xA558FA3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 849247 in 388 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=63
+#-----------
+time=108589961213
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=109794754197
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=110999545783
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=112204337843
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=113409129131
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=114613920419
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=115818712530
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=117023503818
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=71
+#-----------
+time=118228294473
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=119433086533
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33369624 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1935263 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1344940 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n2: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 547552 0xA79E7C1: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 547552 0xA79EF4C: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 547552 0xA7588BB: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 547552 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 547552 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+         n1: 547552 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 547552 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 547552 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+            n1: 547552 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 547552 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 547552 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+               n1: 547552 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+                n0: 547552 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 421344 0xA7DF0FA: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 421344 0xA7588C3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 421344 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 421344 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 421344 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 421344 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 421344 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 421344 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 421344 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 421344 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 421344 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+               n0: 421344 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n0: 376044 in 68 places, all below massif's threshold (01.00%)
+  n0: 590323 in 258 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n3: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 581568 in 12 places, all below massif's threshold (01.00%)
+   n1: 387712 0xA558A43: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 387712 0xA558FA3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 849247 in 388 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=73
+#-----------
+time=120637877425
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=121842669485
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=75
+#-----------
+time=123047461369
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=124252252315
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=77
+#-----------
+time=125457044913
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=78
+#-----------
+time=126661836499
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=79
+#-----------
+time=127866627059
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=80
+#-----------
+time=129071419461
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=81
+#-----------
+time=130276210407
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=82
+#-----------
+time=131481002467
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33369624 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1935263 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1344940 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n2: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 547552 0xA79E7C1: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 547552 0xA79EF4C: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 547552 0xA7588BB: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 547552 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 547552 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+         n1: 547552 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 547552 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 547552 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+            n1: 547552 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 547552 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 547552 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+               n1: 547552 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+                n0: 547552 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 421344 0xA7DF0FA: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 421344 0xA7588C3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 421344 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 421344 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 421344 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 421344 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 421344 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 421344 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 421344 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 421344 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 421344 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+               n0: 421344 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n0: 376044 in 68 places, all below massif's threshold (01.00%)
+  n0: 590323 in 258 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n3: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 581568 in 12 places, all below massif's threshold (01.00%)
+   n1: 387712 0xA558A43: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 387712 0xA558FA3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 849247 in 388 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=83
+#-----------
+time=132685793755
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=84
+#-----------
+time=133890585347
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=85
+#-----------
+time=135095377749
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=86
+#-----------
+time=136300169080
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=87
+#-----------
+time=137504960121
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=88
+#-----------
+time=138709750725
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=89
+#-----------
+time=139914541285
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=90
+#-----------
+time=141119333352
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=91
+#-----------
+time=142324124640
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=92
+#-----------
+time=143528916304
+mem_heap_B=33369624
+mem_heap_extra_B=154128
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33369624 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16269328 0xA568F31: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 16269328 0xA70A3E8: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 16269328 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 16269328 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+     n1: 16269328 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+      n1: 16269328 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+       n1: 16269328 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+        n1: 16269328 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 16269328 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+          n0: 16269328 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 10080000 0x401DCF: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 10080000 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n1: 2819232 0xA4A91B4: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n1: 2819232 0xA55A176: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n1: 2819232 0xA597366: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 2819232 0xA70A41D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 2819232 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 2819232 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+       n1: 2819232 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+        n1: 2819232 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+         n1: 2819232 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+          n1: 2819232 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 2819232 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+            n0: 2819232 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+ n2: 1935263 0xA64AD50: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n2: 1344940 0xA64ADAC: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n2: 968896 0xA64B66D: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 547552 0xA79E7C1: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 547552 0xA79EF4C: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 547552 0xA7588BB: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 547552 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 547552 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+         n1: 547552 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 547552 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 547552 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+            n1: 547552 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 547552 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 547552 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+               n1: 547552 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+                n0: 547552 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+    n1: 421344 0xA7DF0FA: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 421344 0xA7588C3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 421344 0xA752712: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 421344 0xA6BABD0: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 421344 0x4E6B981: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 421344 0x4E4B48A: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 421344 0x4E4711F: glXQueryVersion (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+           n1: 421344 0x50A91E9: _glfwInitContextAPI (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 421344 0x50A2079: _glfwPlatformInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 421344 0x509BEA1: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+              n1: 421344 0x401D15: Context::initialize() (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+               n0: 421344 0x402C5A: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n0: 376044 in 68 places, all below massif's threshold (01.00%)
+  n0: 590323 in 258 places, all below massif's threshold (01.00%)
+ n2: 1416554 0xA4A917F: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+  n3: 1356992 0xA50D27E: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+   n0: 581568 in 12 places, all below massif's threshold (01.00%)
+   n1: 387712 0xA558A43: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+   n1: 387712 0xA558FA3: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+    n1: 387712 0xA547D69: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+     n1: 387712 0xA54679A: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+      n1: 387712 0xA70A403: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+       n1: 387712 0xA6BA902: ??? (in /usr/lib/x86_64-linux-gnu/dri/i965_dri.so)
+        n1: 387712 0x4E6B413: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+         n1: 387712 0x4E46A50: ??? (in /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0)
+          n1: 387712 0x50A9BE0: _glfwCreateContext (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+           n1: 387712 0x50A6527: _glfwPlatformCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+            n1: 387712 0x509E7F4: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.1)
+             n1: 387712 0x401D78: Context::createWindow(int, int, char*) (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+              n0: 387712 0x402C97: main (in /home/mohit/Graphics/CMeDrawing-master/a.out)
+  n0: 59562 in 5 places, all below massif's threshold (01.00%)
+ n0: 849247 in 388 places, all below massif's threshold (01.00%)

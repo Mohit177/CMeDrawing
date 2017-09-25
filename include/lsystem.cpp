@@ -270,6 +270,10 @@ color_t LSystem2::getColor(char ch)
 		case 'P': { temp.r=142*prod; temp.g=36*prod; temp.b=170*prod; break;}
 		case 'T': { temp.r=25*prod; temp.g=165*prod; temp.b=137*prod; break;}
 		case 'F': { temp.r=238*prod; temp.g=220*prod; temp.b=130*prod; break;}
+		case 'E': { temp.r=153*prod; temp.g=102*prod; temp.b=51*prod; break;}
+		case 'U': { temp.r=255*prod; temp.g=153*prod; temp.b=255*prod; break;}
+		case 'L': { temp.r=51*prod; temp.g=153*prod; temp.b=51*prod; break;}
+		case 'Q': { temp.r=153*prod; temp.g=102*prod; temp.b=0*prod; break;}
 		default: { temp.r=255*prod; temp.g=255*prod; temp.b=255*prod; break;}
 	}
 	return temp;

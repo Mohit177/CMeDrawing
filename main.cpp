@@ -25,7 +25,7 @@ int main()
 	Primitive p = Primitive(&context);
 	ifstream ins;
 	srand(time(NULL));
-	ins.open("dInstr(bhaukaal5).txt");
+	ins.open("dInstr.txt");
 	int t;
 	ins>>t;
 	while(t>0)
