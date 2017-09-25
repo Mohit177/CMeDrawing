@@ -2,6 +2,7 @@
 #include <type_traits>
 #define ll long long int
 
+// Constructor takes Primitive object refernce
 LSystem1::LSystem1(Primitive* p)
 {
 	this->p = p;
@@ -16,18 +17,19 @@ LSystem1::LSystem1(Primitive* p)
 	this->wf.y = DBL_MIN;
 }
 
+/*Generates string to be drawn*/
 void LSystem1::generateString(int no_of_it,char axiom)
 {
 	this->iter = no_of_it;
 	int i,j,k;
-	std::string ans=rule[axiom];
+	std::string ans=rule[axiom]; //Iteration 1
 	int vs = rule.size();
 	for(i=1;i<no_of_it;i++)
 	{
 		std::string temp="";
 		for(j=0;j<ans.length();j++)
 		{
-			std::string value = rule[ans[j]];
+			std::string value = rule[ans[j]]; //At each iteration, charachters are replaced by rules meant for character
 			temp+=value;
 		}
 		rule[axiom]=temp;
@@ -57,11 +59,13 @@ void LSystem1::setIter(int iter)
 	this->iter = iter;
 }
 
+
+/*Generates a list of pair of points from string exp*/
 template<typename T>
 void LSystem1::generatePset(point<T> sp)
 {
 	this->pset.clear();
-	std::stack<seg<double> > st;
+	std::stack<seg<double> > st; //Stack used to store attributes of the current point, before branching
 	color_t c;
 	c.r = 255*prod;
 	c.g = 255*prod;
@@ -69,7 +73,8 @@ void LSystem1::generatePset(point<T> sp)
 	seg<double> temp;
 	ll size = exp.length();
 	ll i,j;
-	int ldir=0;
+	int ldir=0; //Current direction 1: left 0: straight 2: right
+	/*Precondition: In the string exp '+' or '-' is followed by [*/
 	for(i=0;i<size;i++)
 	{
 		//cout<<sp.x<<" "<<sp.y<<endl;
@@ -83,6 +88,7 @@ void LSystem1::generatePset(point<T> sp)
 		}
 		else if(exp[i]=='[')
 		{
+			/*Branching*/
 			temp.dir = ldir;
 			st.top().base = sp;
 			temp.base = sp;
@@ -91,6 +97,9 @@ void LSystem1::generatePset(point<T> sp)
 		}
 		else if(exp[i]==']')
 		{
+			/*Closing a branch*/
+			/*The points of the branch to be closed are all rotated based on the value of top.dir
+			The rotated points are added to the plist of the new stack*/
 			std::vector<coords<double> > v;
 			ll ls = st.top().plist.size();
 			seg<double> top = st.top();
@@ -100,6 +109,7 @@ void LSystem1::generatePset(point<T> sp)
 			{
 				if(top.dir==1)
 				{
+					/*Rotating point about base point, not about origin*/
 					top.plist[j].first = p->translate(top.plist[j].first,-1*base.x,-1*base.y);
 					top.plist[j].second = p->translate(top.plist[j].second,-1*base.x,-1*base.y);
 					top.plist[j].first = p->rotate(top.plist[j].first,angle);
@@ -123,6 +133,7 @@ void LSystem1::generatePset(point<T> sp)
 		}
 		else
 		{
+			/*If an alphabet is encountered*/
 			point<double> p1 = sp;
 			point<double> p2 = p->makePoint(sp.x,sp.y+length);
 			if(st.empty())
@@ -175,6 +186,9 @@ void LSystem1::generatePset(point<T> sp)
 	}
 }
 
+
+/*Some drawings might cause the figures points to go outside the window bounds. To overcome this problem, 
+confineToViewPort() transforms all the points in pset to a given bound within the window bounds.*/
 template<typename T>
 void LSystem1::confineToViewPort(point<T> lb, point<T> ub)
 {
@@ -205,6 +219,8 @@ void LSystem1::confineToViewPort(point<T> lb, point<T> ub)
 	}
 }
 
+
+//Constructor for LSystems2, takes Primitive object reference as parameter
 LSystem2::LSystem2(Primitive* p)
 {
 	this->p = p;
@@ -220,6 +236,7 @@ LSystem2::LSystem2(Primitive* p)
 	this->wf.y = DBL_MIN;
 }
 
+/*Generates string to be drawn*/
 void LSystem2::generateString(int no_of_it,char axiom)
 {
 	this->iter = no_of_it;
@@ -228,7 +245,7 @@ void LSystem2::generateString(int no_of_it,char axiom)
 	int size = rule[axiom].size();
 	if(size>0)
 	{
-		int rno = rand()%size;
+		int rno = rand()%size; //Iteration 1
 		ans=rule[axiom][rno];
 	}
 	int vs = rule.size();
@@ -241,7 +258,7 @@ void LSystem2::generateString(int no_of_it,char axiom)
 			if(size>0)
 			{
 				int rno = rand()%size;
-				std::string value = rule[ans[j]][rno];
+				std::string value = rule[ans[j]][rno]; //At each iteration, charachters are replaced by a randomly chosen rule for each character
 				temp+=value;
 			}
 		}
@@ -251,10 +268,12 @@ void LSystem2::generateString(int no_of_it,char axiom)
 	//std::cout<<this->exp<<std::endl;
 }
 
+
+//Returns the color for the line to be drawn, given a Non-Terminal symbol
 color_t LSystem2::getColor(char ch)
 {
 	color_t temp;
-	unsigned int prod = 256*256*256;
+	unsigned int prod = 256*256*256; //colors are of the form like red: rvalue*256*256*256
 	temp.r = 255*prod;
 	temp.g = 255*prod;
 	temp.b = 255*prod;
@@ -282,6 +301,7 @@ color_t LSystem2::getColor(char ch)
 	return temp;
 }
 
+// Function overloading, axiom ca be given as std::string
 void LSystem2::generateString(int no_of_it, std::string axiom)
 {
 	this->iter = no_of_it;
@@ -340,24 +360,26 @@ void LSystem2::setIThick(int thick)
 	this->i_thick = thick;
 }
 
+/*Generates a list of pair of points given string exp*/
 template<typename T>
 void LSystem2::generatePset(point<T> sp)
 {
 	this->pset.clear();
-	std::stack<bkp<double> > st;
+	std::stack<bkp<double> > st; //stack for storing attributes of the current point, on incoming branching
 	color_t c;
 	c.r = 255*prod;
 	c.g = 255*prod;
 	c.b = 255*prod;
 	ll i;
 	ll size = exp.length();
-	int langle=0;
-	int lthick = i_thick;
+	int langle=0; // represents current angle
+	int lthick = i_thick; // represents current thickness
 	bkp<double> temp;
 	coords<double> tt;
 	for(i=0;i<size;i++)
 	{
 		//std::cout<<lthick<<std::endl;
+		//langle 1: left 0: straight 2: right
 		if(exp[i]=='+')
 		{
 			langle+=angle;
@@ -368,26 +390,31 @@ void LSystem2::generatePset(point<T> sp)
 		}
 		else if(exp[i]=='[')
 		{
-			temp.base = sp;
+			/*On branch*/
+			temp.base = sp; //sp reresents current point considered
 			temp.angle = langle;
 			temp.thick = lthick;
 			st.push(temp);
 			if(lthick>0)
 			{
-				lthick=lthick/2;
+				lthick=lthick/2; //at each branching thickness reduced to half its parent value
 			}
 		}
 		else if(exp[i]==']')
 		{
+			/*Closing a branch*/
+			//bringing current point back to where branch occured by taking top of stack
 			langle = st.top().angle;
 			sp = st.top().base;
 			lthick = st.top().thick;
-			st.pop();
+			st.pop(); // Popping the top branch
 		}
 		else
 		{
+			/*If an alphabet is encountered*/
 			point<double> p1 = sp;
 			point<double> p2 = p->makePoint(sp.x,sp.y+length);
+			//while drawing a pair of points the angle of inclination must be 'langle'
 			p2 = p->translate(p2,-1*p1.x,-1*p1.y);
 			p2 = p->rotate(p2,langle);
 			p2 = p->translate(p2,p1.x,p1.y);
@@ -401,6 +428,8 @@ void LSystem2::generatePset(point<T> sp)
 	}
 }
 
+/*Some drawings might cause the figures points to go outside the window bounds. To overcome this problem, 
+confineToViewPort() transforms all the points in LSystem2::pset to a given bound within the window bounds.*/
 template<typename T>
 void LSystem2::confineToViewPort(point<T> lb, point<T> ub)
 {

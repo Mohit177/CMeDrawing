@@ -38,11 +38,13 @@ struct bkp
 	int thick;
 };
 
+//Simple branching and recursion L-Systems
 class LSystem1
 {
 	private:
-		std::map<char,std::string> rule;
-		std::string exp;
+		std::map<char,std::string> rule;  // To specify grammar rules
+		std::string exp; // string to be drawn
+		/*Drawing parameters*/
 		int angle;
 		int length;
 		int iter;
@@ -65,12 +67,13 @@ class LSystem1
 		void confineToViewPort(point<T> lb, point<T> ub);
 };
 
-
+//Turtle drawing L-System
 class LSystem2
 {
 	private:
-		std::map<char,std::vector<std::string> > rule;
-		std::string exp;
+		std::map<char,std::vector<std::string> > rule; //stored as vector of string, if X:XX and X:X both are given, one of them is chosen randomly
+		std::string exp; // string to be drawn
+		/*Drawing parameters*/
 		int angle;
 		int length;
 		int iter;
