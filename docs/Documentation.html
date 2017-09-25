@@ -24,7 +24,11 @@
   <div class="w3-container">
     
   </div>
-  <a href="#" class="tablink" onclick="openTest(event, 'tc0')">The Code</a>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc0')">Introduction</a>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc01')">Project Design</a>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc02')">Execution Time Analysis</a>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc03')">Team Members </a>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc04')">References</a>
   <a href="#" class="tablink" onclick="show()">Test Cases</a>
   <a href="#" class="tablink h" onclick="openTest(event, 'tc1')">Test Case 1</a>
   <a href="#" class="tablink h" onclick="openTest(event, 'tc2')">Test Case 2</a>
@@ -37,7 +41,7 @@
   <a href="#" class="tablink h" onclick="openTest(event, 'tc9')">Test Case 9</a>
   <a href="#" class="tablink h" onclick="openTest(event, 'tc10')">Test Case 10</a>
   <a href="#" class="tablink h" onclick="openTest(event, 'tc11')">Test Case 11</a>
-  <a href="#" class="tablink h" onclick="openTest(event, 'tc12')">Test Case 12</a>
+
 
 </nav>
 
@@ -45,27 +49,218 @@
 
   <div id="tc0" class="w3-container city w3-animate-left">
     <div class="heading" style="color: black">
-   <h1 style="text-align: center;er; text-decoration:underline;">Computer Graphics- Assignment 1</h1>
-   <h3 style="text-align: center">Nitish Ravishankar - 2015A7PS0152H</h2>
-   <h3 style="text-align: center">Mohit Goyal - 2015A7PS0151H</h3>
-</div>
+      <h1 style="text-align: center;er; text-decoration:underline;">Computer Graphics- Assignment 1</h1>
+    </div>
 
-<div class="tabcontent">
+    <div class="tabcontent">
+      <p>
+        L-Systems or Lindenmayer Systems are parallel rewriting systems and a type of formal grammar. The recursive nature of L-Systems makes it possible for beautiful fractals to be drawn out of simple rules applied recursively over multiple iterations. Plant models and organic forms can be easily defined and increasing recursion will grow them into complex structures. The property of “The closer you get, the more they look the same”  is truly remarkable.
+        <br>
+        <br>
+        To implement the tasks, the following functions were used.
+        <br>
+        <b>Task 1 (Line Drawing)</b> : The drawLine() function of primitives.cpp was used for drawing a line between two points. The bresenham’s midpoint line drawing algorithm is used. Additionally required thickness can also be given as parameter.
+        <br>
+        <br>
+        <b>Task 2 (Circle Drawing)</b> : The drawCircle() function of primitives.cpp was used for drawing a circle given coordinates of center and radius. Midpoint circle drawing algorithm used. Requires color to be a parameter.
+        <br>
+        <br>
+        lineCircle.cpp is a menu driven program to freely draw lines and circles. (For first two tasks)
+        <br>
+        <br>
+        <b>Task 3 (LSystems)</b> : We tried two types of LSystems:-
+        class LSystem1 : For simple branching and recursion.
+        class LSystem2: For Turtle drawing.
+        <br>
+        <br>
+        Given the set of rules (std::map<char,std::vector<std::string> >), and axiom (char or std::string),
+        generateString() produces a string that specifies drawing instructions to the turtle.
+        generatePset() produces std::vector<coords<double> > pset, where coords is a data structure representing a pair of points with thickness and color (for drawing a line between them).
+        This list in a way represents the line drawing commands which are iterated and called upon by drawLine() function.
+        Some drawings might cause the figures points to go outside the window bounds. To overcome this problem, confineToViewPort() transforms all the points in LSystem2::pset to a given bound within the window bounds. Say a figure that lies between (500,500) and (2000,2000) can be transformed to the viewPort (100,100) to (200,200).
+        <br>
+        <br>
+        We found that Turtle drawing implementation could represent all those that the former could, but not the other way round.
 
-<br>
-<hr>
-<div style="width: 100%; height: 40px; background-color: black; margin-bottom: -15px;display: block"></div>
+      </p>	
+    </div>
+  </div>
+
+  <div id="tc01" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Project Design</h1>
+    </div>
+    <p>
+      We created a private repository in GitHub accessible and visible only to the two of us, so that we could easily collaborate on the assignment.
+    </p>
+    <img class="w3-animate-left" src="git.png">
+    <p>
+      The key components of the project folder include:
+      <br>
+      <br>
+      <b>include folder</b>
+      <br>
+      This folder contains all the required classes to create primitives and use them to make the complex figure.
+      <br>
+      The folder contains the following files:
+      <br>
+      1. context.h -  Contains class for creating window and frame buffer.
+      <br>
+      2. context.cpp - Constructor and member functions of Context class are defined here.
+      <br> 
+      3. primitives.h - Contains Primitive class for drawing primitives, which on using repetitively produces the required complex figure. (Task 1 and Task2)
+      <br>
+      4. primitives.cpp - Contains implementation of point drawing, line drawing, circle drawing, translate, rotate, viewPortTransform, Definitions for constructor and member functions in primitives.h
+      <br>
+      5. lsystem.h - Contains classes LSystem1 and LSystem2 for two types of LSystems.
+      <br>
+      6. lsystem.cpp - Contains definition of generatePset(), generateString, confineToViewPort() for constructing our drawing.
+      <br><br><hr>
+      <b>lineCircle.cpp </b>- Menu driven program to use only line and circle drawing.
+      <br>
+      <b>dInstr.txt </b>- Specifies drawing instructions to main.cpp
+      <br>
+        Contains information of the format:
+        <br>
+        -------------------------------------------------------------------------------------------------------------
+        <br>
+        First Line contains no of Graftals to be drawn (t)
+        <br>
+        <br>
 
 
+      For each of the t-cases:
+      <br>
+      {no. of rules:int} {axiom:string}
+      <br>
+      Next N lines have rules described like:
+      <br>
+      {nonterminal:char}:{rule:string}
+      <br>
+      Then next line contains,
+      <br>
+      {no_of_iterations:int} {angle:int} {length:int} {thickness:int}
+      <br>
+      {starting point x:double} {starting point y:double}
+      <br>
+      {type}
+      <br>
+      if(type==1)
+      <br>
+      Follows input {Lower bound x} {Lower Bound y} {Upper bound x} {Upper Bound y} all double type.
+      <br>
+      else if(type==0)
+      <br>
+      Nothing
+      <br>
+        --------------------------------------------------------------------------------------------------------------
+        <br>
+      The file: dInstr.txt must be fed with multiple test cases. Each test requires rules, angle, length, no_of_iterations, thickness, starting point and whether viewPort transformation required. If so, the value of viewPort bounds. 
+      <br>
+      <br>
+      <b>main.cpp</b>
+      <br>
+      Creates Context and Primitive class objects to set up window of 1200x700 pixels. Reads from
+      <br>
+      the file dInstr.txt which describes the drawing instructions. For each test case an object of LSystem2 is created along with drawing parameters. p.drawLine() (p object of class Primitive)
+      <br>
+       Is called for each pair of points in the list pset, which draws all the required lines.
+       <br>
+       <br>
+      <b>Designs folder</b>
+      <br>
+      Each file in this folder contains grammar rules for an L-System design.
+      <br>
+      <br>
+      <b>testing folder</b>
+      <br>
+        This folder contains the following file
+        <br>
+      draw.cpp - Generates dInstr.txt for the main.cpp in testing folder to draw
+      <br>
+      main.cpp - Executes for the test cases generated by draw.cpp and makes file sample.txt with execution times for each iteration.
+      main.py - To generate plot.
+      <br>
+      <br>
+
+      <b>docs folder</b>
+      <br>
+      Contains documentation in html format. This site (https://word2cleanhtml.com/) was used to convert docx file into html and in addition to the convertor many lines were manually added.
 
 
-<pre>
+    </p>
+  </div>
 
-</pre>	
-</div>
-    
+  <div id="tc02" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Analysis Report</h1>
+    </div>
+    <p>
+      The generateString() function and generatePset() function were tested for their execution time against level of L-System ( number of iterations ). It
+      took about 1 second for iteration 8 and took more than 10 seconds for iteration 9. A plot was constructed with a csv generated of the form
+      <n(iteration number), time taken for generateString(), time taken for generatePset() >
+      Outcome of the plot generated using python library matplotlib.pyplot:  
+    </p>
+    <figure>
+      <figcaption> Plot for generateString()(Time in milliseconds vs no.of.iterations)</figcaption>
+      <hr>
+      <img class="w3-animate-left" src="time1.png">
+    </figure>
+    <figure>
+      <figcaption>Plot for generatePset()     (Time in milliseconds vs no.of.iterations)</figcaption>
+      <hr>  
+       <img class="w3-animate-left" src="time2.png">
+    </figure>
+    <p>
+      We can infer the time complexity grows exponentially with increase in the number of iterations.
+      <br>
+      For a string of length k generated by generateString() : Time complexity for generatePset() is O(k).
+    </p>
+    <p>
+      We can infer the time complexity grows exponentially with increase in the number of iterations.
+      For a string of length k generated by generateString() : Time complexity for generatePset() is O(k).
+    </p>
+    <p>
+      For Line drawing algorithm:
+      Loop runs from xi,yi to xf,yf: Time complexity = O(max(|xf-xi|,|yf-yi|)
+      <br>
+      For Circle drawing algorithm:
+      Center x,y and radius r: Time complexity = O(8*radius)
+
+    </p>
+  </div>
+  
+  <div id="tc03" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Team Members</h1>
+      <h2 style="text-align: center;er;">Nitish Ravishankar- 2015A7PS0152H</h2>
+      <h2 style="text-align: center;er;">Mohit Goyal- 2015A7PS0151H</h2>
+    </div>
   </div>  
-
+  
+  <div id="tc04" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">References</h1>
+    </div>
+    <hr>
+    <center> 
+      <a href="#">http://www.alvyray.com/Papers/CG/PlantsFractalsandFormalLanguages.pdf</a>
+      <br><hr>
+      <a href="#">http://jflap.org/tutorial/lsystem/index.html</a>
+      <br><hr>
+      <a href="#">http://web.cecs.pdx.edu/~karlaf/CS447_Slides/Set11.pdf</a>
+      <br><hr>
+      <a href="#">https://open.gl/introduction</a>
+      <br><hr>
+      <a href="#">http://www.glfw.org/docs/latest/quick.html</a>
+      <br><hr>
+      <a href="#">http://algorithmicbotany.org/papers/WebApps/LSystems/LSys.html</a>
+      <br><hr>
+      <a href="#">https://www.ics.uci.edu/~gopi/CS211B/opengl_programming_guide_8th_edition.pdf</a>
+      <hr>
+    </center> 
+  </div>
+  
   <div id="tc1" class="w3-container city w3-animate-left">
     	<h2>Drawing 1</h2>
     	<pre>
@@ -391,43 +586,145 @@
     	</pre>
     	<img class="w3-animate-left" src="flower.png">
     </div>
-  <div id="tc8" class="w3-container city w3-animate-left">
-    <h2>Test Case 8</h2>
-    <br>
-    <br>
-    <img class="w3-animate-left" src="screenshots/ss8.png">
-    
-  </div>
-  <div id="tc9" class="w3-container city w3-animate-left">
-    <h2>Test Case 9</h2>
-    <br>
-    <br>
-    <img class="w3-animate-left" src="screenshots/ss9.png">
-    
-  </div>
-  <div id="tc10" class="w3-container city w3-animate-left">
-    <h2>Test Case 10</h2>
-    <br>
-    <br>
-    <img class="w3-animate-left" src="screenshots/ss10.png">
-    
+    <div id="tc8" class="w3-container city w3-animate-left">
+      <h2>Drawing 8</h2>
+      <div>
+      <pre>
+        Axiom:L
+        L:W[--+[-LG]-[-L]-[-LG]W+[+L]][+--[+LG]+[+L]+[+G]W-[-L]]
+        G:W[--+[-LG]-[-L]-[-LG]W+[+L]][+--[+LG]+[+L]+[+G]W-[-L]]
+        [:[
+        ]:]
+        +:+
+        -:-
+        W:WW
+        Generations:5 
+        Angle:15 
+        Length:50 
+        Thickness:4
+      </pre>
+        <h6>Geneartion 1</h6>
+        <img class="w3-animate-left" src="jebaat1.png">
+      </div>
+      <div>
+        <h6>Geneartion 2</h6>
+        <img class="w3-animate-left" src="jebaat2.png">
+      </div>
+      <div>
+        <h6>Geneartion 3</h6>
+        <img class="w3-animate-left" src="jebaat3.png">
+      </div>
+      <div>
+        <h6>Geneartion 4</h6>
+        <img class="w3-animate-left" src="jebaat4.png">
+      </div>
+      <div>
+        <h6>Geneartion 5</h6>
+        <img class="w3-animate-left" src="jebaat.png">
+      </div>
+    </div>
+    <div id="tc9" class="w3-container city w3-animate-left">
+      <h2>Drawing 9</h2>
+      <div>
+        <h6>Generation 1</h6>
+        <img class="w3-animate-left" src="scene21.png">
+      </div>
+      <div>
+        <h6>Generation 2</h6>
+        <img class="w3-animate-left" src="scene222.png">
+      </div>
+      <div>
+        <h6>Generation 3</h6>
+        <img class="w3-animate-left" src="scene23.png">
+      </div>
+      <div>
+        <h6>Generation 4</h6>
+        <img class="w3-animate-left" src="scene24.png">
+      </div>
+      <div>
+        <h6>Generation 5</h6>
+        <img class="w3-animate-left" src="scene25.png">
+      </div>
+    </div>
+    <div id="tc10" class="w3-container city w3-animate-left">
+      <h2>Drawing 10</h2>
+      <pre>
+        Axiom: P
+        P:W+[+P[+X]-[-X]+PP]-[-P[-X]+[+X]-P]W-P
+        [:[
+        ]:]
+        +:+
+        -:-
+        X:XX
+        W:WW
+        Generations:8 
+        Angle:15 
+        Length:10 
+        Thickness:4
+      </pre>
+      <div>
+        <h6>Generation 1</h6>
+        <img class="w3-animate-left" src="bhaukaal1.png">
+      </div>
+      <div>
+        <h6>Generation 2</h6>
+        <img class="w3-animate-left" src="bhaukaal2.png">
+      </div>
+      <div>
+        <h6>Generation 3</h6>
+        <img class="w3-animate-left" src="bhaukaal3.png">
+      </div>
+      <div>
+        <h6>Generation 4</h6>
+        <img class="w3-animate-left" src="bhaukaal4.png">
+      </div>
+      <div>
+        <h6>Generation 8</h6>
+        <img class="w3-animate-left" src="Bhaukaal.png">
+      </div>
   </div>
   <div id="tc11" class="w3-container city w3-animate-left">
-    <h2>Test Case 11</h2>
-    <br>
-    <br>
-    <img class="w3-animate-left" src="screenshots/ss11.png">
-    
-  </div>
-  <div id="tc12" class="w3-container city w3-animate-left">
-    <h2>Test Case 12</h2>
-    <br>
-    <br>
-    <img class="w3-animate-left" src="screenshots/ss12.png">
-    
-  </div>
+    <h2>Drawing 11</h2>
+    <div>
+      <pre>
+        4
+        6 L
+        L:[-LW][+++L]-W-[-L][+++L]
+        [:[
+        ]:]
+        +:+
+        -:-
+        W:WW
+        5 22 15 2
+        540 80
+        0
+        6 L
+        L:[+LW][---L]+W+[+L][---L]
+        [:[
+        ]:]
+        +:+
+        -:-
+        W:WW
+        5 22 15 2
+        460 80
+        0
+        7 P
+        P:W+[+P[+X]-[-X]+PP]-[-P[-X]+[+X]-P]W-P
+        [:[
+        ]:]
+        +:+
+        -:-
+        X:XX
+        W:WW
+        8 15 10 4
+        500 70
+        0
 
-
+      </pre>
+      <h6>Sakura- A Scenic Experience</h6>
+      <img class="w3-animate-left" src="sakura">
+    </div>
+  </div>
 </div>
 
 <script>
