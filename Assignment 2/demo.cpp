@@ -165,7 +165,7 @@ void drawCylinder(GLfloat radius, GLfloat height){
 	GLUquadric* qobj;
 	qobj = gluNewQuadric();
 //	static float alpha = 0;
-	glTranslatef(, 0, -50);
+//	glTranslatef(, 0, -50);
 	glRotatef(-90, 1, 0, 0);
 	gluQuadricNormals(qobj, GLU_SMOOTH);
 	glColor3f(0.3,0.3,0.3);
@@ -193,11 +193,11 @@ void display( GLFWwindow* window )
         gluPerspective( 80, (double)windowWidth / (double)windowHeight, 25, 300 );
 
         glMatrixMode(GL_MODELVIEW_MATRIX);
-        glTranslatef(0,-30,-100);
+        glTranslatef(0,-50,-100);
 
-
-		drawCylinder(10,30);
         drawSeeSaw();
+		drawCylinder(10,30);
+
         // Update Screen
         glfwSwapBuffers(window);
 
