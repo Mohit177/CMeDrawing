@@ -1,9 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <cstdio>
-#include <cstring>
 #include <iostream>
-#include <cmath>
 #include "interaction.h"
 
 void controls(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -155,7 +153,7 @@ void drawSeeSaw()
 
     static float alpha = 0;
     //attempt to rotate cube
-    glRotatef(alpha, 1, 1, 1);			// Comment this line to stop rotation about y axis.
+    glRotatef(alpha, 1, 0, 1);			// Comment this line to stop rotation about y axis.
 
     /* We have a color array and a vertex array */
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -171,22 +169,455 @@ void drawSeeSaw()
     /* Cleanup states */
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
-   alpha += 1;
+    alpha += 1;
 }
 
-void drawCylinder(GLfloat radius, GLfloat height){
+void drawSlide()
+{
+	GLfloat vertices[] = 
+	{
+		// Rods to be slanted.
+		// Vertical rods
+		0,0,0,	1,0,0,	1,10,0,	0,10,0,
+		0,0,4,	1,0,4,	1,10,4,	0,10,4,
+		0,0,1,	1,0,1,	1,10,1,	0,10,1,
+		0,0,5,	1,0,5,	1,10,5,	0,10,5,
+		0,0,0,	0,10,0,	0,10,1,	0,0,1,
+		1,0,0,	1,10,0,	1,10,1,	1,0,1,
+		0,0,4,	0,0,5,	0,10,5, 0,10,4,
+		1,0,4,	1,0,5,	1,10,5,	1,10,4,
+
+		// steps
+		0,1,1,	0,1,4,	0,2,4,	0,2,1,
+		1,1,1,	1,1,4,	1,2,4,	1,2,1,
+		0,1,1,	1,1,1,	1,1,4,	0,1,4,
+		0,2,1,	1,2,1,	1,2,4,	0,2,4,
+
+		0,3,1,	0,3,4,	0,4,4,	0,4,1,
+		1,3,1,	1,3,4,	1,4,4,	1,4,1,
+		0,3,1,	1,3,1,	1,3,4,	0,3,4,
+		0,4,1,	1,4,1,	1,4,4,	0,4,4,
+
+		0,5,1,	0,5,4,	0,6,4,	0,6,1,
+		1,5,1,	1,5,4,	1,6,4,	1,6,1,
+		0,5,1,	1,5,1,	1,5,4,	0,5,4,
+		0,6,1,	1,6,1,	1,6,4,	0,6,4,
+
+		0,7,1,	0,7,4,	0,8,4,	0,8,1,
+		1,7,1,	1,7,4,	1,8,4,	1,8,1,
+		0,7,1,	1,7,1,	1,7,4,	0,7,4,
+		0,8,1,	1,8,1,	1,8,4,	0,8,4,
+
+	};
+
+	GLfloat vertices1[] =
+	{	
+		4,0,0,	5,0,0,	5,10,0,	4,10,0,
+		4,0,4,	5,0,4,	5,10,4,	4,10,4,
+		4,0,1,	5,0,1,	5,10,1,	4,10,1,
+		4,0,5,	5,0,5,	5,10,5,	4,10,5,
+		4,0,0,	4,10,0,	4,10,1,	4,0,1,
+		5,0,0,	5,10,0,	5,10,1,	5,0,1,
+		4,0,4,	4,0,5,	4,10,5, 4,10,4,
+		5,0,4,	5,0,5,	5,10,5,	5,10,4,
+		//top plank
+		0.7,10,0, 0.7,10,5,	5,10,5,	5,10,0,
+		0.7,9,0, 0.7,9,5,	5,9,5,	5,9,0,
+		0.7,9,0, 0.7,10,0,	5,10,0,	5,9,0,
+		0.7,9,5, 0.7,10,5,	5,10,5, 5,9,5
+		
+		// Slide 
+
+	};
+
+	GLfloat colors[] =
+	{
+		//Vertical Rods
+		0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+	};
+
+	GLfloat colors1[] = 
+	{
+		0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
+        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3
+	};
+	glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glTranslatef(10,0,10);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+    glRotatef(-5.0,0,0,1);
+    /* Send data : 24 vertices */
+    glDrawArrays(GL_QUADS, 0, 96);
+    glRotatef(5.0,0,0,1);
+    glVertexPointer(3, GL_FLOAT, 0, vertices1);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+
+    /* Send data : 24 vertices */
+    glDrawArrays(GL_QUADS, 0, 48);
+    //glDrawArrays(GL_TRIANGLES, 0, 6);
+    
+
+    /* Cleanup states */
+    glTranslatef(-20,0,-20);
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    //alpha += 1;
+}
+
+void drawCylinder(GLfloat radius, GLfloat height)
+{
 	glPushMatrix();
-	GLUquadric* qobj;
-	qobj = gluNewQuadric();
-//	static float alpha = 0;
-//	glTranslatef(, 0, -50);
-	glRotatef(-90, 1, 0, 0);
-	gluQuadricNormals(qobj, GLU_SMOOTH);
+	GLUquadric* obj;
+	obj= gluNewQuadric();
+	gluQuadricNormals(obj, GLU_SMOOTH);
 	glColor3f(0.3,0.3,0.3);
-	gluCylinder(qobj, radius, radius, height, 10000, 1);
-	gluDeleteQuadric(qobj);
+	gluCylinder(obj, radius, radius, height, 10000, 1);
+	gluDeleteQuadric(obj);
+	glPopMatrix();
+
+}
+
+void drawMonkeyBars()
+{	
+
+	//glTranslatef(0,0,-35);
+	glPushMatrix(); // fisrt vertical
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
 	glPopMatrix();
 	
+	glPushMatrix(); //fisrt horizontal
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // first back connectors
+	glTranslatef(0,5,-5);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // second vertical
+	glTranslatef(0,0,-5);
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); //second horizontal
+	glTranslatef(0,0,-5);
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // second back connectors
+	glTranslatef(0,0,-5);
+	glTranslatef(0,5,-5);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // third vertical
+	glTranslatef(0,0,-10);
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); //third horizontal
+	glTranslatef(0,0,-10);
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // third back connectors
+	glTranslatef(0,0,-10);
+	glTranslatef(0,5,-5);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // fourth vertical
+	glTranslatef(0,0,-15);
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); //fourth horizontal
+	glTranslatef(0,0,-15);
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	// layer - 2
+	glPushMatrix();
+	glTranslatef(0,5,0);
+	glPushMatrix(); // fisrt vertical
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+	
+	glPushMatrix(); //fisrt horizontal
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // first back connectors
+	glTranslatef(0,5,-5);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // second vertical
+	glTranslatef(0,0,-5);
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); //second horizontal
+	glTranslatef(0,0,-5);
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // second back connectors
+	glTranslatef(0,0,-5);
+	glTranslatef(0,5,-5);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // third vertical
+	glTranslatef(0,0,-10);
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); //third horizontal
+	glTranslatef(0,0,-10);
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // third back connectors
+	glTranslatef(0,0,-10);
+	glTranslatef(0,5,-5);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); // fourth vertical
+	glTranslatef(0,0,-15);
+	glRotatef(-90,1,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glTranslatef(5,0,0);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+
+	glPushMatrix(); //fourth horizontal
+	glTranslatef(0,0,-15);
+	glRotatef(90,0,1,0);
+	glTranslatef(0,5,0);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glTranslatef(0,0,5);
+	drawCylinder(0.5,5);
+	glPopMatrix();
+	glPopMatrix();
+
 }
 
 void display( GLFWwindow* window )
@@ -207,10 +638,11 @@ void display( GLFWwindow* window )
         gluPerspective( 80, (double)windowWidth / (double)windowHeight, 25, 300 );
 
         glMatrixMode(GL_MODELVIEW_MATRIX);
-        glTranslatef(0,-50,-100);
+        glTranslatef(0,-30,-100);
 
         drawSeeSaw();
-		drawCylinder(10,30);
+        drawMonkeyBars();
+        drawSlide();
 
         // Update Screen
         glfwSwapBuffers(window);
