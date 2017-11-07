@@ -322,6 +322,7 @@ void drawSlide(){
     //alpha += 1;
 }
 
+
 void drawCylinder(GLfloat radius, GLfloat height)
 {
 	glPushMatrix();
@@ -335,10 +336,11 @@ void drawCylinder(GLfloat radius, GLfloat height)
 
 }
 
-void drawMonkeyBars()
+void drawJungleGym()
 {	
-
-	//glTranslatef(0,0,-35);
+	glPushMatrix();
+	glTranslatef(0,0,-15);
+	
 	glPushMatrix(); // fisrt vertical
 	glRotatef(-90,1,0,0);
 	drawCylinder(0.5,5);
@@ -635,8 +637,91 @@ void drawMonkeyBars()
 	glTranslatef(0,0,5);
 	drawCylinder(0.5,5);
 	glPopMatrix();
+	
+	glPopMatrix();
+	glPopMatrix();
+}
+
+void drawMonkeyBars()
+{
+	glPushMatrix();
+	glTranslatef(0,0,10);
+
+	glPushMatrix();
+	glRotatef(-90,1,0,0); // front vericals
+	drawCylinder(0.5,10);
+	glTranslatef(20,0,0);
+	drawCylinder(0.5,10);
 	glPopMatrix();
 
+	glPushMatrix();
+	glTranslatef(0,0,-3);
+	glRotatef(-90,1,0,0); // back vericals
+	drawCylinder(0.5,10);
+	glTranslatef(20,0,0);
+	drawCylinder(0.5,10);
+	glPopMatrix();
+
+	glPushMatrix(); // left steps
+	glTranslatef(0,2,-3);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glPopMatrix();
+
+	glPushMatrix(); // right steps
+	glTranslatef(20,2,-3);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glTranslatef(0,2,0);
+	drawCylinder(0.5,3);
+	glPopMatrix();
+
+
+	glPushMatrix(); //top horizontal Bars
+	glTranslatef(0,10,0);
+	glRotatef(90,0,1,0);
+	drawCylinder(0.5,20);
+	glTranslatef(3,0,0);
+	drawCylinder(0.5,20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0,10,-3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	glTranslatef(2,0,0);
+	drawCylinder(0.5,3);
+	
+
+	glPopMatrix();
+
+	glPopMatrix();
 }
 
 
@@ -663,6 +748,7 @@ void display( GLFWwindow* window )
 
 		drawBoundary();
         drawSeeSaw();
+        drawJungleGym();
         drawMonkeyBars();
         drawSlide();
 
