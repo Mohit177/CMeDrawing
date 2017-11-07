@@ -163,24 +163,20 @@ void drawSeeSaw(){
 
 /*	static float alpha = 0;
     //attempt to rotate cube
-<<<<<<< HEAD
     glRotatef(alpha, 1, 1, 1);			// Comment this line to stop rotation about y axis.
 */
-=======
-    glRotatef(alpha, 1, 0, 1);			// Comment this line to stop rotation about y axis.
->>>>>>> 0dbc4fd2b6ee2b70f01912ecd8e34357442845dc
 
-    /* We have a color array and a vertex array */
+    /* Enable color array and a vertex array */
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
 
-    /* Send data : 24 vertices */
+    /* Draw rectangles, 32 vertices */
     glDrawArrays(GL_QUADS, 0, 32);
     
-    /* Draw Triangles */
+    /* Draw Triangles, 6 vertices */
     glVertexPointer(3, GL_FLOAT, 0, vert_triangles);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
@@ -188,16 +184,12 @@ void drawSeeSaw(){
     /* Cleanup states */
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
-<<<<<<< HEAD
-//	alpha += 1;
+
+// alpha += 1;
 }
 
-=======
-    alpha += 1;
-}
+void drawSlide(){
 
-void drawSlide()
-{
 	GLfloat vertices[] = 
 	{
 		// Rods to be slanted.
@@ -248,10 +240,13 @@ void drawSlide()
 		0.7,10,0, 0.7,10,5,	5,10,5,	5,10,0,
 		0.7,9,0, 0.7,9,5,	5,9,5,	5,9,0,
 		0.7,9,0, 0.7,10,0,	5,10,0,	5,9,0,
-		0.7,9,5, 0.7,10,5,	5,10,5, 5,9,5
+		0.7,9,5, 0.7,10,5,	5,10,5, 5,9,5,
 		
 		// Slide 
-
+		5,9,0,	5,10,0,	20,0,0, 20,0,0,
+		5,9,0.5, 5,10,0.5, 20,0,0.5, 20,0,0.5,
+		5,9,4.5, 5,10,4.5, 
+		5,9,5,	5,10,5,	20,0,5, 20,0,5
 	};
 
 	GLfloat colors[] =
@@ -309,14 +304,14 @@ void drawSlide()
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
     glRotatef(-5.0,0,0,1);
-    /* Send data : 24 vertices */
+    /* Send data : 96 vertices */
     glDrawArrays(GL_QUADS, 0, 96);
     glRotatef(5.0,0,0,1);
     glVertexPointer(3, GL_FLOAT, 0, vertices1);
     glColorPointer(3, GL_FLOAT, 0, colors);
 
     /* Send data : 24 vertices */
-    glDrawArrays(GL_QUADS, 0, 48);
+    glDrawArrays(GL_QUADS, 0, 64);
     //glDrawArrays(GL_TRIANGLES, 0, 6);
     
 
@@ -643,7 +638,7 @@ void drawMonkeyBars()
 	glPopMatrix();
 
 }
->>>>>>> 0dbc4fd2b6ee2b70f01912ecd8e34357442845dc
+
 
 void display( GLFWwindow* window )
 {
@@ -663,20 +658,14 @@ void display( GLFWwindow* window )
         gluPerspective( 80, (double)windowWidth / (double)windowHeight, 25, 300 );
 
         glMatrixMode(GL_MODELVIEW_MATRIX);
-<<<<<<< HEAD
+
         glTranslatef(0,-25,-100);
-=======
-        glTranslatef(0,-30,-100);
->>>>>>> 0dbc4fd2b6ee2b70f01912ecd8e34357442845dc
 
 		drawBoundary();
         drawSeeSaw();
-<<<<<<< HEAD
-//		drawCylinder(10,50);
-=======
         drawMonkeyBars();
         drawSlide();
->>>>>>> 0dbc4fd2b6ee2b70f01912ecd8e34357442845dc
+
 
         // Update Screen
         glfwSwapBuffers(window);
