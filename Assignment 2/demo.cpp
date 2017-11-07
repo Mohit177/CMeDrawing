@@ -1,7 +1,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <cstdio>
+#include <cstring>
 #include <iostream>
+#include <cmath>
 #include "interaction.h"
 
 void controls(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -155,7 +157,22 @@ void drawSeeSaw()
     /* Cleanup states */
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
-    alpha += 1;
+   alpha += 1;
+}
+
+void drawCylinder(GLfloat radius, GLfloat height){
+	glPushMatrix();
+	GLUquadric* qobj;
+	qobj = gluNewQuadric();
+//	static float alpha = 0;
+	glTranslatef(, 0, -50);
+	glRotatef(-90, 1, 0, 0);
+	gluQuadricNormals(qobj, GLU_SMOOTH);
+	glColor3f(0.3,0.3,0.3);
+	gluCylinder(qobj, radius, radius, height, 10000, 1);
+	gluDeleteQuadric(qobj);
+	glPopMatrix();
+	
 }
 
 void display( GLFWwindow* window )
@@ -178,8 +195,9 @@ void display( GLFWwindow* window )
         glMatrixMode(GL_MODELVIEW_MATRIX);
         glTranslatef(0,-30,-100);
 
-        drawSeeSaw();
 
+		drawCylinder(10,30);
+        drawSeeSaw();
         // Update Screen
         glfwSwapBuffers(window);
 
