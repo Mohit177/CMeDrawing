@@ -25,7 +25,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos){
-	std::cout << xpos <<" "<<ypos << "\n";
+	;//std::cout << xpos <<" "<<ypos << "\n";
 }
 
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -35,16 +35,42 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
     if(key == GLFW_KEY_ESCAPE){
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
-    switch(key){
-		case GLFW_KEY_W:    cam.slide(0,0,-2); break; // slide camera forward
-		case GLFW_KEY_S:    cam.slide(0,0,2); break; // slide camera backward
+//	std::cout << GLFW_MOD_SHIFT <<"\n";
+	
+	if(mods == GLFW_MOD_SHIFT){
+		switch(key){
+			case GLFW_KEY_Y:	cam.yaw(-1.0); break;
+			case GLFW_KEY_P:	cam.pitch(-1.0); break;
+			case GLFW_KEY_R:	cam.roll(-1.0); break;
+			default:			return;
+		}
+	}
+	else{
+		switch(key){
+			case GLFW_KEY_Y:	cam.yaw(1.0); break;
+			case GLFW_KEY_P:	cam.pitch(1.0); break;
+			case GLFW_KEY_R:	cam.roll(1.0); break;
+			
+			case GLFW_KEY_W:    
+			case GLFW_KEY_UP:		cam.slide(0,0,-2); break;	// Move Backward
+		
+			case GLFW_KEY_S:    
+			case GLFW_KEY_DOWN:		cam.slide(0,0,2); break;	// Move Forward
+		
+			case GLFW_KEY_A:   
+			case GLFW_KEY_LEFT:		cam.slide(-1,0,0); break;	// Move Left
 
-		case GLFW_KEY_A:      cam.yaw(-1.0); break;		// See left
-		case GLFW_KEY_D:      cam.yaw(1.0); break;		// See left
-		case GLFW_KEY_Z:    cam.pitch(-1.0); break;
-		case GLFW_KEY_Q:    cam.pitch(1.0); break;
+			case GLFW_KEY_D:      
+			case GLFW_KEY_RIGHT:      	cam.slide(1,0,0); break;	// Move Right
 
+			case GLFW_KEY_Q:    	cam.slide(0,1,0); break;	// Move Up	
+			case GLFW_KEY_Z:    	cam.slide(0,-1,0); break;			// Move Down
+			default: return;
 
+		}
+		return;
+	}
+	
 		// add roll controls
 /*		case 'r':      cam.roll(1.0); break;
 		case 'R': cam.roll(-1.0); break;
@@ -59,8 +85,7 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
 		case 'b': bl+=0.1; break;
 		case 'B': if(bl>0.1) bl-=0.1; break;
 */
-		default: return;
-	}
+//		default: return;
 	//glutPostRedisplay();
 }
 
@@ -139,7 +164,7 @@ void display( GLFWwindow* window )
 */
 		glPushMatrix();
 		
-		glTranslatef(0,0,-200);
+		glTranslatef(0,0,-10);
 		drawBoundary();
         drawSeeSaw();
         drawJungleGym();
@@ -160,7 +185,7 @@ int main(int argc, char** argv)
 {
     GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,0,-5),Point3(0,0,-20),Vector3(0,1,0));
-	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 100.0, 1000.0);
+	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);
     
     if( NULL != window )
     {
