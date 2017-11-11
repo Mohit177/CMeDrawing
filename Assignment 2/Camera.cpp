@@ -61,12 +61,11 @@ void Camera:: set(Point3 Eye, Point3 look, Vector3 up)
 	setModelviewMatrix(); 
 }
 
-void Camera:: slide(float delU, float delV, float delN)
-{
+bool Camera:: slide(float delU, float delV, float delN){
 	
-	if(eye.x + delU * u.x + delV * v.x + delN * n.x >100 || eye.x + delU * u.x + delV * v.x + delN * n.x < -100)	return;
-	if(eye.y + delU * u.y + delV * v.y + delN * n.y >100 || eye.y + delU * u.y + delV * v.y + delN * n.y < 0)	return;
-	if(eye.z + delU * u.z + delV * v.z + delN * n.z >100 || eye.z + delU * u.z + delV * v.z + delN * n.z < -100)	return;
+	if(eye.x + delU * u.x + delV * v.x + delN * n.x >100 || eye.x + delU * u.x + delV * v.x + delN * n.x < -100)	return false;
+	if(eye.y + delU * u.y + delV * v.y + delN * n.y >100 || eye.y + delU * u.y + delV * v.y + delN * n.y < 0)		return false;
+	if(eye.z + delU * u.z + delV * v.z + delN * n.z >100 || eye.z + delU * u.z + delV * v.z + delN * n.z < -100)	return false;
 	
 	eye.x += delU * u.x + delV * v.x + delN * n.x;
 	eye.y += delU * u.y + delV * v.y + delN * n.y;
@@ -77,6 +76,7 @@ void Camera:: slide(float delU, float delV, float delN)
 	look.y += delU * u.y + delV * v.y + delN * n.y;
 	look.z += delU * u.z + delV * v.z + delN * n.z;
 	setModelviewMatrix();
+	return true;
 }
 
 void Camera:: roll(float angle)

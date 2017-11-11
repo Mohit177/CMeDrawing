@@ -2,24 +2,26 @@
 #include <GLFW/glfw3.h>
 #include <cstdio>
 #include <iostream>
-        #include <chrono>
-		#include <thread>
 #include "Scene.h"
 #include "Camera.h"
 #include "Utility.h"
 
 Camera cam;
+int zoom_level=0;
+const GLfloat field_of_view = 45.0f;
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
 	/*
 		button : GLFW_MOUSE_BUTTON_LEFT or GLFW_MOUSE_BUTTON_RIGHT
 		action : GLFW_PRESS or GLFW_RELEASE
 	*/
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
-    	cam.slide(0,0,50);		// slide camera forward to zoom in
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && zoom_level<3){
+    	if(cam.slide(0,0,-50))		// If camera can slide forward, do it and increase zoom level
+    		zoom_level++;
     }
-    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
-    	cam.slide(0,0,-50);		// slide camera backward to zoom out
+    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS && zoom_level>0){
+    	if(cam.slide(0,0,50))		// If camera can slide backward, do it and decrease zoom level
+			zoom_level--;
     }
 }
 
@@ -132,7 +134,7 @@ GLFWwindow* initWindow(const int resX, const int resY)
     
 	glMatrixMode(GL_PROJECTION_MATRIX);
 	glLoadIdentity();
-	gluPerspective( 45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 25, 300 );
+	gluPerspective( field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 25, 300 );
 
 	glMatrixMode(GL_MODELVIEW_MATRIX);
 
@@ -165,6 +167,7 @@ void display( GLFWwindow* window )
 		glPushMatrix();
 		
 		glTranslatef(0,0,-10);
+
 		drawBoundary();
         drawSeeSaw();
         drawJungleGym();
@@ -184,7 +187,7 @@ void display( GLFWwindow* window )
 int main(int argc, char** argv)
 {
     GLFWwindow* window = initWindow(1024, 620);
-	cam.set(Point3(0,0,-5),Point3(0,0,-20),Vector3(0,1,0));
+	cam.set(Point3(0,5,-5),Point3(0,5,-20),Vector3(0,1,0));
 	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);
     
     if( NULL != window )

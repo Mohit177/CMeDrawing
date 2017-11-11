@@ -23,7 +23,7 @@ class Camera {
 		void roll(float angle);
 		void pitch(float angle);
 		void yaw(float angle);
-		void slide(float delU, float delV, float delN);
+		bool slide(float delU, float delV, float delN);
 		void setShape(float vAng, float asp, float nearD, float farD);
 		//void getShape(float &vAng, float &asp, float &nearD, float &farD);
 };
