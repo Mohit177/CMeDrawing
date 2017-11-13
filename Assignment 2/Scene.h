@@ -9,9 +9,13 @@
 void drawBoundary();
 void drawSeeSaw();
 void drawSlide();
-void drawCylinder(GLfloat radius, GLfloat height);
+void drawSwings();
+void drawUnitCube(GLfloat red, GLfloat green, GLfloat blue);
+void drawCylinder(GLfloat radius, GLfloat height, GLfloat red, GLfloat green, GLfloat blue);
+void drawDisk(GLfloat inner_radius, GLfloat outer_radius,GLfloat red, GLfloat green, GLfloat blue);
 void drawJungleGym();
 void drawMonkeyBars();
 void drawMerryGoRound();
+void drawBench(GLfloat red, GLfloat green, GLfloat blue);
 
 #endif

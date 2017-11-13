@@ -248,14 +248,14 @@ void drawSlide(){
 	GLfloat colors[] =
 	{
 		//Vertical Rods
-		0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
+		0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
         
         0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
         0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
@@ -304,23 +304,32 @@ void drawSlide(){
 }
 
 
-void drawCylinder(GLfloat radius, GLfloat height)
+void drawCylinder(GLfloat radius, GLfloat height, GLfloat red = 0.3, GLfloat green = 0.3, GLfloat blue = 0.3)
 {
 	glPushMatrix();
 	GLUquadric* obj;
 	obj= gluNewQuadric();
 	gluQuadricNormals(obj, GLU_SMOOTH);
-	glColor3f(0.3,0.3,0.3);
+	glColor3f(red,green,blue);
 	gluCylinder(obj, radius, radius, height, 10000, 1);
 	gluDeleteQuadric(obj);
 	glPopMatrix();
+}
 
+void drawDisk(GLfloat inner_radius, GLfloat outer_radius,GLfloat red = 0.3, GLfloat green = 0.3, GLfloat blue = 0.3){
+	glPushMatrix();
+	GLUquadric* obj;
+	obj= gluNewQuadric();
+	gluQuadricNormals(obj, GLU_SMOOTH);
+	glColor3f(red,green,blue);
+	gluDisk(obj, inner_radius, outer_radius, 10000, 1);
+	gluDeleteQuadric(obj);
+	glPopMatrix();
 }
 
 void drawJungleGym()
 {	
 	glPushMatrix();
-	glTranslatef(0,0,-15);
 	
 	glPushMatrix(); // fisrt vertical
 	glRotatef(-90,1,0,0);
@@ -705,20 +714,382 @@ void drawMonkeyBars()
 	glPopMatrix();
 }
 
+
 void drawMerryGoRound(){
+glPushMatrix();
 	glPushMatrix();
-	
+		
 		glRotatef(-90.0,1,0,0);
-		drawCylinder(0.75,0.5);
-		GLUquadric* disk1 =  (GLUquadric*)new gluNewQuadric();
-		gluDisk(disk1,0.0f, 0.75f, 10000,1);
-)
+		drawCylinder(0.75, 0.5, 1.0,0.0,0.0);	// Red Bottom cylinder
 		glRotatef(90.0,1,0,0);
 		
-		glTranslatef(0.0,0.5,0.0);
+		glTranslatef(0,0.5,0);
+		
 		glRotatef(-90.0,1,0,0);
+		glColor3f(0.0,0.0,0.0);
+		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+		drawDisk(0.75,4);			// medium violetred
 		drawCylinder(4,0.5);
 		glRotatef(90.0,1,0,0);
+		
+		glRotatef(-90.0,1,0,0);
+		glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+		drawDisk(0.75,4,199.0/255,21.0/255,133.0/255);			// medium violetred
+		drawCylinder(4,0.5, 199.0/255,21.0/255,133.0/255);
+		glRotatef(90.0,1,0,0);
+		
+		glTranslatef(0,0.5,0);
+		glRotatef(-90.0,1,0,0);
+		drawDisk(0.75,4,199.0/255,21.0/255,133.0/255);			// medium violetred
+		glRotatef(90.0,1,0,0);
+		
+		glRotatef(-90.0,1,0,0);
+		drawCylinder(0.75,3,1.0,0.0,0.0);	// Red
+		glRotatef(90.0,1,0,0);
+		
+		glTranslatef(0,0.5,0);
+		glRotatef(-90.0,1,0,0);
+		drawDisk(0.0,0.75,1.0,0.0,0.0);	// Red
+		glRotatef(90.0,1,0,0);
+		
+		// Draw four rods
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(3.8,1,0);
+		glRotatef(-90.0f,1,0,0);
+		drawCylinder(0.2,3,1.0,0.0,0.0);	// Red
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(-3.8,1,0);
+		glRotatef(-90.0f,1,0,0);
+		drawCylinder(0.2,3,1.0,0.0,0.0);	// Red
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0,1,3.8);
+		glRotatef(-90.0f,1,0,0);
+		drawCylinder(0.2,3,1.0,0.0,0.0);	// Red
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0,1,-3.8);
+		glRotatef(-90.0f,1,0,0);
+		drawCylinder(0.2,3,1.0,0.0,0.0);	// Red
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0,3.6,-3.8);
+		drawCylinder(0.2,7.6,1.0,0.0,0.0);	// Red
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(-3.8,3.6,0.0);
+		glRotatef(90.0f,0,1,0);
+		drawCylinder(0.2,7.6,1.0,0.0,0.0);	// Red
+	glPopMatrix();	
+glPopMatrix();
+}
+
+
+void drawSwings()
+{
+	glPushMatrix();
+	glTranslatef(-10,0,10);
+	glRotatef(-90,1,0,0);
+	glRotatef(22.62,1,0,0);
+	drawCylinder(0.25,13);
+	glRotatef(-22.62,1,0,0);
+	glRotatef(90,1,0,0);
+
+	glTranslatef(0,0,10);
+	glRotatef(-90,1,0,0);
+	glRotatef(-22.62,1,0,0);
+	drawCylinder(0.25,13);
+	glRotatef(+22.62,1,0,0);
+	glRotatef(90,1,0,0);
+	//glTranslatef(-10,0,0);
+	glTranslatef(-20,0,-10);
+	glRotatef(-90,1,0,0);
+	glRotatef(22.62,1,0,0);
+	drawCylinder(0.25,13);
+	glRotatef(-22.62,1,0,0);
+	glRotatef(90,1,0,0);
+
+	glTranslatef(0,0,10);
+	glRotatef(-90,1,0,0);
+	glRotatef(-22.62,1,0,0);
+	drawCylinder(0.25,13);
+	glRotatef(+22.62,1,0,0);
+	glRotatef(90,1,0,0);
+
+	glTranslatef(0,12,-5);
+	glRotatef(90,0,1,0);
+	drawCylinder(0.25,20);
+	glRotatef(-90,0,1,0);
+	
+	glTranslatef(2,0,0);
+	
+	GLfloat vertices[] = 
+	{
+		// connections to rod.
+		0,-0.25,0.25, 0.5,-0.25,0.25, 0.5,0.25,0.25, 0,0.25,0.25,
+		0,-0.25,-0.25, 0.5,-0.25,-0.25, 0.5,0.25,-0.25, 0,0.25,-0.25,
+		0,0.25,0.25, 0,0.25,-0.25, 0.5,0.25,-0.25, 0.5,0.25,0.25,
+		0,-0.25,0.25, 0,-0.25,-0.25, 0.5,-0.25,-0.25, 0.5,-0.25,0.25
+	};
+	GLfloat vertices1[] =
+	{
+		//Swing seat.
+		0,0,1.5, 0.5,0,1.5, 0.5,0,-1.5, 0,0,-1.5,
+		4.5,0,1.5, 5,0,1.5, 5,0,-1.5, 4.5,0,-1.5,
+
+		0,0,1.5, 0,0,-1.5,1.5, 0.5,-1.5,1.5, 0.5,0,1.5,
+		0,0,-1.5, 0,0,-1.5,-1.5, 0.5,-1.5,-1.5, 0.5,0,-1.5,
+		4.5,0,1.5, 4.5,0,-1.5,1.5, 5,-1.5,1.5, 5,0,1.5,
+		4.5,0,-1.5, 4.5,0,-1.5,-1.5, 5,-1.5,-1.5, 5,0,-1.5,
+
+		0,-2,1.5, 0,-1.5,1.5, 5,-1.5,1.5, 5,-2,1.5,
+		0,-2,-1.5, 0,-1.5,-1.5, 5,-1.5,-1.5, 5,-2,-1.5,
+
+
+
+
+
+	};
+
+	GLfloat colors[16]={0.3};
+	glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+    glDrawArrays(GL_QUADS, 0, 16);
+
+    glTranslatef(5,0,0);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+    glDrawArrays(GL_QUADS, 0, 16);
+
+    glTranslatef(6,0,0);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+    glDrawArrays(GL_QUADS, 0, 16);
+
+    glTranslatef(5,0,0);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+    glDrawArrays(GL_QUADS, 0, 16);
+
+    glTranslatef(0.25,0,0);
+    double cl = 0.5/4;
+    double radius = 0.025;
+    double angle = 36.8;
+    double al = 0.3*1.0/4;
+    double ch = 0.3*1.0/4;
+    double bl = 0.4*1.0/4;
+    double diff = 0.1/4;
+	int i,j;
+	for(j=0;j<4;j++)
+	{
+		glPushMatrix();
+	    for(i=0;i<18;i++)
+	    {
+		    glPushMatrix();
+		    glRotatef(180,0,0,1);
+		    glRotatef(-90,1,0,0);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,-1*al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
+
+		    glRotatef(-90,1,0,0);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,-1*al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
+		    glRotatef(180,0,0,1);
+			glPopMatrix();
+
+			glTranslatef(0,-1*(bl+ch+bl-1*diff),0);
+			glPushMatrix();
+			glRotatef(90,0,1,0);
+			glRotatef(180,0,0,1);
+		    glRotatef(-90,1,0,0);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,-1*al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
+
+		    glRotatef(-90,1,0,0);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,-1*al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
+		    glRotatef(180,0,0,1);
+			glRotatef(-90,0,1,0);
+			glPopMatrix();
+			glTranslatef(0,-1*(bl+ch+bl-1*diff),0);
+		}
+		glPopMatrix();
+		if(j%2==0)
+		{
+
+		}
+		if(j==1)
+		{
+			glTranslatef(-6,0,0);
+		}
+		else
+		{
+			glTranslatef(-5,0,0);
+		}
+	}
 	glPopMatrix();
 }
 
+void drawUnitCube(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
+	glPushMatrix();
+	GLfloat vertices[] =
+	{
+		0.0,0.0,0.0,	0.0,1.0,0.0,	1.0,1.0,0.0,	1.0,0.0,0.0,	// Back
+		0.0,0.0,0.0,	0.0,1.0,0.0,	0.0,1.0,1.0,	0.0,0.0,1.0,	// Left
+		1.0,0.0,0.0,	1.0,1.0,0.0,	1.0,1.0,1.0,	1.0,0.0,1.0,	// Right
+		0.0,0.0,1.0,	0.0,1.0,1.0,	1.0,1.0,1.0,	1.0,0.0,1.0,	// Front
+		0.0,1.0,0.0,	0.0,1.0,1.0,	1.0,1.0,1.0,	1.0,1.0,0.0,	// Top
+		0.0,0.01,0.0,	0.0,0.01,1.0,	1.0,0.01,1.0,	1.0,0.01,0.0,	// Bottom
+	};
+	
+	GLfloat colors[72] = {0.0};
+		
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+	
+    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+    glEnable(GL_POLYGON_OFFSET_LINE);
+	glPolygonOffset(-1.f,-1.f);
+    glDrawArrays(GL_QUADS, 0, 24);
+
+    /* Cleanup states */
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+
+	for(int i=0;i<72;i+=3){
+		colors[i]=red;
+		colors[i+1]=green;
+		colors[i+2]=blue;		
+	}
+	
+	glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+	
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+    glDrawArrays(GL_QUADS, 0, 24);
+
+    /* Cleanup states */
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glPopMatrix();
+}
+
+void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
+glPushMatrix();
+	glPushMatrix();
+		glScalef(0.5,5,0.5);				// Left leg back
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(10,0,0);				// Right leg back
+		glScalef(0.5,5,0.5);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0,0,5);				// Left leg front
+		glScalef(0.5,3,0.5);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(10,0,5);				// Right leg front
+		glScalef(0.5,3,0.5);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0,2,0);				// Seat
+		glScalef(10,0.5,5);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0,3,0);				// left handrest
+		glScalef(0.5,0.5,6);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(10,3,0);				// Right handrest
+		glScalef(0.5,0.5,6);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0,5,0);				// Top bar
+		glScalef(10.5,0.5,0.5);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0,3,0);				// back bar
+		glScalef(10,0.5,0.5);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0,4,0);				// back bar
+		glScalef(10.5,0.5,0.5);
+		drawUnitCube(red,green,blue);
+	glPopMatrix();
+glPopMatrix();
+}

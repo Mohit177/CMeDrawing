@@ -18,6 +18,7 @@ GLfloat yPrev  = SCREEN_HEIGHT/2;
 GLfloat xNew  = xPrev, yNew = yPrev;
 GLfloat YAW = -90.0f, PITCH = 0.0f;
 bool static_view = false;
+double animation_speed = 1.0f;
 
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
@@ -74,9 +75,11 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
 	
 	if(mods == GLFW_MOD_SHIFT){
 		switch(key){
-			case GLFW_KEY_Y:	cam.yaw(-1.0); break;
-			case GLFW_KEY_P:	cam.pitch(-1.0); break;
-			case GLFW_KEY_R:	cam.roll(-1.0); break;
+			case GLFW_KEY_Y:		cam.yaw(-1.0); break;
+			case GLFW_KEY_P:		cam.pitch(-1.0); break;
+			case GLFW_KEY_R:		cam.roll(-1.0); break;
+			case GLFW_KEY_MINUS:	animation_speed = max(animation_speed-2,1.0); break;
+			case GLFW_KEY_EQUAL:	animation_speed = min(animation_speed+2,9.0); break;
 			default:			return;
 		}
 	}
@@ -149,19 +152,13 @@ GLFWwindow* initWindow(const int resX, const int resY)
     glDisable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     
-	glMatrixMode(GL_PROJECTION_MATRIX);
-	glLoadIdentity();
-	gluPerspective( field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 1, 1000 );
-
-	glMatrixMode(GL_MODELVIEW_MATRIX);
-
-	glTranslatef(0,-25,-100);
     return window;
 }
 
 
 void display( GLFWwindow* window )
 {
+	static GLfloat merry_alpha = 0.0f;
     while(!glfwWindowShouldClose(window))
     {
         // Scale to window size
@@ -175,29 +172,53 @@ void display( GLFWwindow* window )
 
 /*		glMatrixMode(GL_PROJECTION_MATRIX);
         glLoadIdentity();
-        gluPerspective( field_of_view, (double)windowWidth / (double)windowHeight, 0.1, 3000 );
+        gluPerspective( 45.0f, (double)windowWidth / (double)windowHeight, 0.1, 3000 );
 
         glMatrixMode(GL_MODELVIEW_MATRIX);
 */
-        
-		glPushMatrix();
-		
-		glTranslatef(0,0,-10);
-
+    glPushMatrix();
 		drawBoundary();
+		
 		glPushMatrix();
-			glTranslatef(-25,0,25);
-	        drawSeeSaw();
+			glTranslatef(-40,0,-40);			// Monkey bar
+	        drawMonkeyBars();
 		glPopMatrix();
 		
-		drawMerryGoRound();
+		glPushMatrix();
+			glTranslatef(-40,0,-10);			// Slide
+	        drawSlide();
+		glPopMatrix();
 		
-/*        drawJungleGym();
-        drawMonkeyBars();
-        drawSlide();
-*/
-		glPopMatrix();		
+		glPushMatrix();
+			glTranslatef(10,0,-25);				// Jungle Gym
+	        drawJungleGym();
+		glPopMatrix();
+		
+		
+		glPushMatrix();
+			glTranslatef(10,0,10);
+			merry_alpha += animation_speed;		// Merry-go-round
+			glRotatef(merry_alpha,0,1,0);
+			drawMerryGoRound();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(15,0,-15);
+			drawSeeSaw();						// See-saw 1
+			glTranslatef(17,0,0);
+			drawSeeSaw();						// See-saw 2
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(0,0,0);
+			drawBench(160.0/255,82.0/255,45.0/255);
+		glPopMatrix();
 
+//	    drawSwings();
+
+		
+
+    glPopMatrix();
         // Update Screen
         glfwSwapBuffers(window);
 
@@ -209,7 +230,7 @@ void display( GLFWwindow* window )
 int main(int argc, char** argv)
 {
     GLFWwindow* window = initWindow(1024, 620);
-	cam.set(Point3(0,5,-5),Point3(0,5,-20),Vector3(0,1,0));
+	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
 	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);
     
     if( NULL != window )
