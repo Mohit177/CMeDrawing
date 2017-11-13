@@ -1,8 +1,14 @@
+/**	\file camera.cpp
+Camera functions implementation file.
+*/
 #include "Camera.h"
 
+/**
+	Empty constructor to initialize a camera.
+*/
 Camera:: Camera(void)
 {
-	setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 25.0f, 1000.0f); 
+	setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 1.0f, 1000.0f); 
 	
 	Point3 eyePoint = Point3( 0.0, 0.0, 20.0 );
 	Point3 lookPoint = Point3( 0.0, 0.0, -20.0f );
@@ -12,6 +18,14 @@ Camera:: Camera(void)
 }
 
 
+/**
+Method to set the Viewing volume.
+@param vAngle:	Viewing angle.
+@param asp:		Aspect ratio of the screen.
+@param nr:		Near clipping plane.
+@param fr:		Further clipping plane.
+@return 		void
+*/
 void Camera :: setShape(float vAngle, float asp, float nr, float fr) 
 { 
     viewAngle = vAngle; 
@@ -24,6 +38,12 @@ void Camera :: setShape(float vAngle, float asp, float nr, float fr)
     glMatrixMode(GL_MODELVIEW); 
 }
 
+/**
+Method to set the Model view matrix.
+@param: void
+@return void
+
+*/
 void Camera :: setModelviewMatrix(void)
 {
 	float m[16];
@@ -48,6 +68,13 @@ void Camera :: setModelviewMatrix(void)
 	glLoadMatrixf(m);
 }
 
+/**
+Method to update the eye, normal, view, and up vectors.
+@param Eye: Point3 object containing the new location of eye.
+@param look: Point3 object containing the new look location.
+@param up:	Vector3 object containing the new up vector.
+@return void
+*/
 void Camera:: set(Point3 Eye, Point3 look, Vector3 up)
 {
 	eye.set(Eye);
@@ -61,6 +88,13 @@ void Camera:: set(Point3 Eye, Point3 look, Vector3 up)
 	setModelviewMatrix(); 
 }
 
+/**
+Method to slide the camera in the given direction.
+@param delU: Change in Up vector.
+@param delV: Change in View vector.
+@param delN: Change in Normal vector.
+@return true if camera slides successfullly(i.e. its new position is inside the park), false otherwise.
+*/
 bool Camera:: slide(float delU, float delV, float delN){
 	
 	if(eye.x + delU * u.x + delV * v.x + delN * n.x >100 || eye.x + delU * u.x + delV * v.x + delN * n.x < -100)	return false;
@@ -71,7 +105,6 @@ bool Camera:: slide(float delU, float delV, float delN){
 	eye.y += delU * u.y + delV * v.y + delN * n.y;
 	eye.z += delU * u.z + delV * v.z + delN * n.z;
 	
-	
 	look.x += delU * u.x + delV * v.x + delN * n.x;
 	look.y += delU * u.y + delV * v.y + delN * n.y;
 	look.z += delU * u.z + delV * v.z + delN * n.z;
@@ -79,6 +112,11 @@ bool Camera:: slide(float delU, float delV, float delN){
 	return true;
 }
 
+/**
+Method to roll the view, along the front-to-back axis.
+@param angle: Angle of rotation.
+@return void
+*/
 void Camera:: roll(float angle)
 {
 	float cs= cos(PI/180 * angle);
@@ -89,6 +127,12 @@ void Camera:: roll(float angle)
 	setModelviewMatrix();
 }
 
+
+/**
+Method to pitch the view, along side-to-side axis.
+@param angle: Angle of rotation.
+@return void
+*/
 void Camera:: pitch(float angle)
 {
 	float cs= cos(PI/180 * angle);
@@ -99,6 +143,11 @@ void Camera:: pitch(float angle)
 	setModelviewMatrix(); 
 }
 
+/**
+Method to yaw the view, along vertical axis.
+@param angle: Angle of rotation.
+@return void
+*/
 void Camera:: yaw(float angle)
 {
 	float cs= cos(PI/180 * angle);
