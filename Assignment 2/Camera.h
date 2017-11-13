@@ -1,3 +1,6 @@
+/**	\file Camera.h
+Camera functions header file.
+*/
 #ifndef CAMERA_H_INCLUDED
 #define CAMERA_H_INCLUDED
 #include <GL/glu.h>
@@ -15,10 +18,11 @@ class Camera {
 		Point3 eye, look, up;
 		Vector3 u, v, n;
 		double viewAngle, aspect, nearDist, farDist;
-		void setModelviewMatrix();
+
 	
 	public:
 		Camera();
+		void setModelviewMatrix();
 		void set(Point3 eye, Point3 look, Vector3 up);
 		void roll(float angle);
 		void pitch(float angle);

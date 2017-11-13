@@ -1,3 +1,6 @@
+/**	\file demo.cpp
+Test file containing main function.
+*/
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <cstdio>
@@ -7,8 +10,14 @@
 #include "Utility.h"
 
 Camera cam;
-int zoom_level=0;
-const GLfloat field_of_view = 45.0f;
+int zoom_level= 1.0f;
+GLfloat field_of_view = 45.0f;
+
+GLfloat xPrev = SCREEN_WIDTH/2;
+GLfloat yPrev  = SCREEN_HEIGHT/2;
+GLfloat xNew  = xPrev, yNew = yPrev;
+GLfloat YAW = -90.0f, PITCH = 0.0f;
+
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
 	/*
@@ -16,19 +25,34 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 		action : GLFW_PRESS or GLFW_RELEASE
 	*/
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && zoom_level<3){
-    	if(cam.slide(0,0,-50))		// If camera can slide forward, do it and increase zoom level
-    		zoom_level++;
+    	if(cam.slide(0,0,-30))		// If camera can slide forward, do it and increase zoom level
+			zoom_level++;
     }
     else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS && zoom_level>0){
-    	if(cam.slide(0,0,50))		// If camera can slide backward, do it and decrease zoom level
+    	if(cam.slide(0,0,30))		// If camera can slide backward, do it and decrease zoom level
 			zoom_level--;
     }
 }
 
 
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos){
-	;//std::cout << xpos <<" "<<ypos << "\n";
+void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
+	YAW = (xPrev-xPos)/40.0f;
+	PITCH = (yPrev-yPos)/40.0f;
+	
+	if(PITCH > 89.0f)
+		PITCH = 89.0f;
+	else if (PITCH < -89.0f)
+		PITCH = -89.0f;
+	cam.yaw(YAW);
+	cam.pitch(PITCH);
+	xPrev = xPos;
+	yPrev = yPos;
+	//xNew = xPrev;
+	//	yNew = yPrev;
+	
 }
+
+
 
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -72,23 +96,7 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
 		}
 		return;
 	}
-	
-		// add roll controls
-/*		case 'r':      cam.roll(1.0); break;
-		case 'R': cam.roll(-1.0); break;
-		case '!': d[0]-=100; break;
-		case '1': d[0]+=100; break;
-		case '@': d[1]-=100; break;
-		case '2': d[1]+=100; break;
-		case '#': d[2]-=100; break;
-		case '3': d[2]+=100; break;
-		case '$': d[3]-=100; break;
-		case '4': d[3]+=100; break;
-		case 'b': bl+=0.1; break;
-		case 'B': if(bl>0.1) bl-=0.1; break;
-*/
-//		default: return;
-	//glutPostRedisplay();
+
 }
 
 GLFWwindow* initWindow(const int resX, const int resY)
@@ -134,7 +142,7 @@ GLFWwindow* initWindow(const int resX, const int resY)
     
 	glMatrixMode(GL_PROJECTION_MATRIX);
 	glLoadIdentity();
-	gluPerspective( field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 25, 300 );
+	gluPerspective( field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 1, 1000 );
 
 	glMatrixMode(GL_MODELVIEW_MATRIX);
 
@@ -156,14 +164,13 @@ void display( GLFWwindow* window )
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-/*        glMatrixMode(GL_PROJECTION_MATRIX);
+/*		glMatrixMode(GL_PROJECTION_MATRIX);
         glLoadIdentity();
-        gluPerspective( FOV, (double)windowWidth / (double)windowHeight, 25, 300 );
+        gluPerspective( field_of_view, (double)windowWidth / (double)windowHeight, 0.1, 3000 );
 
         glMatrixMode(GL_MODELVIEW_MATRIX);
-
-        
 */
+        
 		glPushMatrix();
 		
 		glTranslatef(0,0,-10);
