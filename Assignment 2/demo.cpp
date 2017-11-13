@@ -36,8 +36,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
-	YAW = (xPrev-xPos)/40.0f;
-	PITCH = (yPrev-yPos)/40.0f;
+	YAW = (xPrev-xPos)/20.0f;
+	PITCH = (yPrev-yPos)/20.0f;
 	
 	if(PITCH > 89.0f)
 		PITCH = 89.0f;
@@ -46,12 +46,8 @@ void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 	cam.yaw(YAW);
 	cam.pitch(PITCH);
 	xPrev = xPos;
-	yPrev = yPos;
-	//xNew = xPrev;
-	//	yNew = yPrev;
-	
+	yPrev = yPos;	
 }
-
 
 
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -129,6 +125,7 @@ GLFWwindow* initWindow(const int resX, const int resY)
 	
 	// Set Cursor position function
 	glfwSetCursorPosCallback(window, cursor_position_callback);
+//	glfwSetCursorEnterCallback(window, cursor_enter_callback);
     
 
     // Get info of GPU and supported OpenGL version
