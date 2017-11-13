@@ -9,6 +9,7 @@
 void drawBoundary();
 void drawSeeSaw();
 void drawSlide();
+void drawSwings();
 void drawCylinder(GLfloat radius, GLfloat height);
 void drawJungleGym();
 void drawMonkeyBars();

@@ -173,6 +173,7 @@ void display( GLFWwindow* window )
         drawJungleGym();
         drawMonkeyBars();
         drawSlide();
+        drawSwings();
 
 		glPopMatrix();		
 
