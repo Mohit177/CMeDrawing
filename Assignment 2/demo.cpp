@@ -185,11 +185,17 @@ void display( GLFWwindow* window )
 		glTranslatef(0,0,-10);
 
 		drawBoundary();
-        drawSeeSaw();
-        drawJungleGym();
+		glPushMatrix();
+			glTranslatef(-25,0,25);
+	        drawSeeSaw();
+		glPopMatrix();
+		
+		drawMerryGoRound();
+		
+/*        drawJungleGym();
         drawMonkeyBars();
         drawSlide();
-
+*/
 		glPopMatrix();		
 
         // Update Screen

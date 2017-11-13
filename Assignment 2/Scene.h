@@ -12,5 +12,6 @@ void drawSlide();
 void drawCylinder(GLfloat radius, GLfloat height);
 void drawJungleGym();
 void drawMonkeyBars();
+void drawMerryGoRound();
 
 #endif
