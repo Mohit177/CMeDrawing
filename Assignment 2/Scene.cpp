@@ -37,7 +37,19 @@ void drawBoundary(){
 	};
 	
 	// Boundary
-	GLfloat colors[sizeof(vertices)/sizeof(vertices[0])];
+		
+	GLfloat colors[sizeof(vertices)/sizeof(vertices[0])] = {0.0};
+	
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+	
+	
+    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+    glEnable(GL_POLYGON_OFFSET_LINE);
+	glPolygonOffset(-1.f,-1.f);
+    glDrawArrays(GL_QUADS, 0, 92);
 	
 	for(int i=0;i<204;i++){
 		colors[i] = 0.2;
@@ -59,12 +71,10 @@ void drawBoundary(){
     //attempt to rotate cube
    glRotatef(alpha, 1, 1, 1);			// Comment this line to stop rotation about y axis.
 */    
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(3, GL_FLOAT, 0, colors);
+
 
     /* Send data : 24 vertices */
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     glDrawArrays(GL_QUADS, 0, 92);
 
     /* Cleanup states */
@@ -98,8 +108,8 @@ void drawSeeSaw(){
     	-1,0,-1,	0,2,-1,	1,0,-1		// Rear face of Wedge
     };
 
-    GLfloat colors[] =			// Each vertex has a color component
-    {
+    GLfloat colors[96] = {0.0f};			// Each vertex has a color component
+   /* {
     	// Wedge
         0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
         0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
@@ -111,6 +121,8 @@ void drawSeeSaw(){
 	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
 	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35
     };
+    
+    */
 
 /*	static float alpha = 0;
     //attempt to rotate cube
@@ -123,15 +135,43 @@ void drawSeeSaw(){
     
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
-
-    /* Draw rectangles, 32 vertices */
+    
+    // Draw outline
+    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+    glEnable(GL_POLYGON_OFFSET_LINE);
+	glPolygonOffset(-1.f,-1.f);
+    glEnable(GL_DEPTH_TEST);
     glDrawArrays(GL_QUADS, 0, 32);
     
-    /* Draw Triangles, 6 vertices */
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+    
+    // Set Red Color
+    for(int i=0;i<96;i+=3){
+    	colors[i] = 1.0; colors[i+1]=0.0; colors[i+2]=0.0;
+    }
+    
+    // Draw Triangles, 6 vertices
     glVertexPointer(3, GL_FLOAT, 0, vert_triangles);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY); 
+	
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+	
+	// Set Blue Color for wedge
+    for(int i=24;i<96;i+=3){
+    	colors[i] = 0.0; colors[i+1]=0.0; colors[i+2]=1.0;
+    }
+    
+    // Draw rectangles, 32 vertices
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+    glDrawArrays(GL_QUADS, 0, 32);
+   
+    
     /* Cleanup states */
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -662,6 +702,23 @@ void drawMonkeyBars()
 
 	glPopMatrix();
 
+	glPopMatrix();
+}
+
+void drawMerryGoRound(){
+	glPushMatrix();
+	
+		glRotatef(-90.0,1,0,0);
+		drawCylinder(0.75,0.5);
+		GLUquadric* disk1 =  (GLUquadric*)new gluNewQuadric();
+		gluDisk(disk1,0.0f, 0.75f, 10000,1);
+)
+		glRotatef(90.0,1,0,0);
+		
+		glTranslatef(0.0,0.5,0.0);
+		glRotatef(-90.0,1,0,0);
+		drawCylinder(4,0.5);
+		glRotatef(90.0,1,0,0);
 	glPopMatrix();
 }
 
