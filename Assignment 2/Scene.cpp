@@ -731,23 +731,74 @@ void drawSwings()
     /* Send data : 96 vertices */
     glDrawArrays(GL_QUADS, 0, 16);
     glTranslatef(0.5,0,0);
+    double cl = 0.5*10;
+    double radius = 0.025*10;
+    double angle = 36.8;
+    double al = 0.3*1.0*10;
+    double ch = 0.3*1.0*10;
+    double bl = 0.4*1.0*10;
+    double diff = 0.1;
+
+    glPushMatrix();
     glRotatef(180,0,0,1);
     glRotatef(-90,1,0,0);
-    glRotatef(36.8,1,0,0);
-    drawCylinder(0.25,4);
-    glRotatef(-36.8,1,0,0);
-    glTranslatef(0,-4,0);
-    drawCylinder(0.25,3);
-    glTranslatef(0,4,0);
+    glRotatef(angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(-1*angle,1,0,0);
+    glTranslatef(0,al,bl);
+    drawCylinder(radius,ch);
+    glTranslatef(0,0,ch);
+    glRotatef(angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(-1*angle,1,0,0);
+    glTranslatef(0,-1*al,-1*(bl+ch));
     glRotatef(90,1,0,0);
 
     glRotatef(-90,1,0,0);
-    glRotatef(-36.8,1,0,0);
-    drawCylinder(0.25,4);
-    glRotatef(+36.8,1,0,0);
-    glTranslatef(0,-4,3);
-    drawCylinder(0.25,3);
-    glTranslatef(0,4,-3);
+    glRotatef(-1*angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(angle,1,0,0);
+    glTranslatef(0,-1*al,bl);
+    drawCylinder(radius,ch);
+    glTranslatef(0,0,ch);
+    glRotatef(-1*angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(angle,1,0,0);
+    glTranslatef(0,al,-1*(bl+ch));
     glRotatef(90,1,0,0);
+    glRotatef(180,0,0,1);
+	glPopMatrix();
+
+	//glTranslatef(0,)
+	glRotatef(90,0,1,0);
+	glRotatef(180,0,0,1);
+    glRotatef(-90,1,0,0);
+    glRotatef(angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(-1*angle,1,0,0);
+    glTranslatef(0,al,bl);
+    drawCylinder(radius,ch);
+    glTranslatef(0,0,ch);
+    glRotatef(angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(-1*angle,1,0,0);
+    glTranslatef(0,-1*al,-1*(bl+ch));
+    glRotatef(90,1,0,0);
+
+    glRotatef(-90,1,0,0);
+    glRotatef(-1*angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(angle,1,0,0);
+    glTranslatef(0,-1*al,bl);
+    drawCylinder(radius,ch);
+    glTranslatef(0,0,ch);
+    glRotatef(-1*angle,1,0,0);
+    drawCylinder(radius,cl);
+    glRotatef(angle,1,0,0);
+    glTranslatef(0,al,-1*(bl+ch));
+    glRotatef(90,1,0,0);
+    glRotatef(180,0,0,1);
+	glRotatef(-90,0,1,0);
+
 	glPopMatrix();
 }
