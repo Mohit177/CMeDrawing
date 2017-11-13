@@ -208,14 +208,14 @@ void drawSlide(){
 	GLfloat colors[] =
 	{
 		//Vertical Rods
-		0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,			
-        0.5, 0.5, 0.5,	0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,	 0.5, 0.5, 0.5,
+		0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,			
+        0.01, 0.01, 0.01,	0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,	 0.01, 0.01, 0.01,
         
         0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
         0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
@@ -264,17 +264,16 @@ void drawSlide(){
 }
 
 
-void drawCylinder(GLfloat radius, GLfloat height)
+void drawCylinder(GLfloat radius, GLfloat height, GLfloat red = 0.3, GLfloat green = 0.3, GLfloat blue = 0.3)
 {
 	glPushMatrix();
 	GLUquadric* obj;
 	obj= gluNewQuadric();
 	gluQuadricNormals(obj, GLU_SMOOTH);
-	glColor3f(0.3,0.3,0.3);
+	glColor3f(red,green,blue);
 	gluCylinder(obj, radius, radius, height, 10000, 1);
 	gluDeleteQuadric(obj);
 	glPopMatrix();
-
 }
 
 void drawJungleGym()
@@ -682,7 +681,7 @@ void drawSwings()
 	glRotatef(+22.62,1,0,0);
 	glRotatef(90,1,0,0);
 	//glTranslatef(-10,0,0);
-	glTranslatef(-15,0,-10);
+	glTranslatef(-20,0,-10);
 	glRotatef(-90,1,0,0);
 	glRotatef(22.62,1,0,0);
 	drawCylinder(0.25,13);
@@ -698,107 +697,154 @@ void drawSwings()
 
 	glTranslatef(0,12,-5);
 	glRotatef(90,0,1,0);
-	drawCylinder(0.25,15);
+	drawCylinder(0.25,20);
 	glRotatef(-90,0,1,0);
 	
-	glTranslatef(5,0,0);
+	glTranslatef(2,0,0);
 	
 	GLfloat vertices[] = 
 	{
 		// connections to rod.
-		0,-0.25,0.25, 1,-0.25,0.25, 1,0.25,0.25, 0,0.25,0.25,
-		0,-0.25,-0.25, 1,-0.25,-0.25, 1,0.25,-0.25, 0,0.25,-0.25,
-		0,0.25,0.25, 0,0.25,-0.25, 1,0.25,-0.25, 1,0.25,0.25,
-		0,-0.25,0.25, 0,-0.25,-0.25, 1,-0.25,-0.25, 1,-0.25,0.25
+		0,-0.25,0.25, 0.5,-0.25,0.25, 0.5,0.25,0.25, 0,0.25,0.25,
+		0,-0.25,-0.25, 0.5,-0.25,-0.25, 0.5,0.25,-0.25, 0,0.25,-0.25,
+		0,0.25,0.25, 0,0.25,-0.25, 0.5,0.25,-0.25, 0.5,0.25,0.25,
+		0,-0.25,0.25, 0,-0.25,-0.25, 0.5,-0.25,-0.25, 0.5,-0.25,0.25
 	};
+	GLfloat vertices1[] =
+	{
+		//Swing seat.
+		0,0,1.5, 0.5,0,1.5, 0.5,0,-1.5, 0,0,-1.5,
+		4.5,0,1.5, 5,0,1.5, 5,0,-1.5, 4.5,0,-1.5,
+
+		0,0,1.5, 0,0,-1.5,1.5, 0.5,-1.5,1.5, 0.5,0,1.5,
+		0,0,-1.5, 0,0,-1.5,-1.5, 0.5,-1.5,-1.5, 0.5,0,-1.5,
+		4.5,0,1.5, 4.5,0,-1.5,1.5, 5,-1.5,1.5, 5,0,1.5,
+		4.5,0,-1.5, 4.5,0,-1.5,-1.5, 5,-1.5,-1.5, 5,0,-1.5,
+
+		0,-2,1.5, 0,-1.5,1.5, 5,-1.5,1.5, 5,-2,1.5,
+		0,-2,-1.5, 0,-1.5,-1.5, 5,-1.5,-1.5, 5,-2,-1.5,
+
+
+
+
+
+	};
+
 	GLfloat colors[16]={0.3};
 	glEnableClientState(GL_VERTEX_ARRAY);
-    //glEnableClientState(GL_COLOR_ARRAY);
-   // glTranslatef(20,0,20);
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
-    //glRotatef(-5.0,0,0,1);
-    /* Send data : 96 vertices */
     glDrawArrays(GL_QUADS, 0, 16);
 
     glTranslatef(5,0,0);
     glEnableClientState(GL_VERTEX_ARRAY);
-    //glEnableClientState(GL_COLOR_ARRAY);
-   // glTranslatef(20,0,20);
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
-    //glRotatef(-5.0,0,0,1);
-    /* Send data : 96 vertices */
     glDrawArrays(GL_QUADS, 0, 16);
-    glTranslatef(0.5,0,0);
-    double cl = 0.5*10;
-    double radius = 0.025*10;
+
+    glTranslatef(6,0,0);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+    glDrawArrays(GL_QUADS, 0, 16);
+
+    glTranslatef(5,0,0);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    glColorPointer(3, GL_FLOAT, 0, colors);
+    glDrawArrays(GL_QUADS, 0, 16);
+
+    glTranslatef(0.25,0,0);
+    double cl = 0.5/4;
+    double radius = 0.025;
     double angle = 36.8;
-    double al = 0.3*1.0*10;
-    double ch = 0.3*1.0*10;
-    double bl = 0.4*1.0*10;
-    double diff = 0.1;
+    double al = 0.3*1.0/4;
+    double ch = 0.3*1.0/4;
+    double bl = 0.4*1.0/4;
+    double diff = 0.1/4;
+	int i,j;
+	for(j=0;j<4;j++)
+	{
+		glPushMatrix();
+	    for(i=0;i<18;i++)
+	    {
+		    glPushMatrix();
+		    glRotatef(180,0,0,1);
+		    glRotatef(-90,1,0,0);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,-1*al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
 
-    glPushMatrix();
-    glRotatef(180,0,0,1);
-    glRotatef(-90,1,0,0);
-    glRotatef(angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(-1*angle,1,0,0);
-    glTranslatef(0,al,bl);
-    drawCylinder(radius,ch);
-    glTranslatef(0,0,ch);
-    glRotatef(angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(-1*angle,1,0,0);
-    glTranslatef(0,-1*al,-1*(bl+ch));
-    glRotatef(90,1,0,0);
+		    glRotatef(-90,1,0,0);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,-1*al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
+		    glRotatef(180,0,0,1);
+			glPopMatrix();
 
-    glRotatef(-90,1,0,0);
-    glRotatef(-1*angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(angle,1,0,0);
-    glTranslatef(0,-1*al,bl);
-    drawCylinder(radius,ch);
-    glTranslatef(0,0,ch);
-    glRotatef(-1*angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(angle,1,0,0);
-    glTranslatef(0,al,-1*(bl+ch));
-    glRotatef(90,1,0,0);
-    glRotatef(180,0,0,1);
-	glPopMatrix();
+			glTranslatef(0,-1*(bl+ch+bl-1*diff),0);
+			glPushMatrix();
+			glRotatef(90,0,1,0);
+			glRotatef(180,0,0,1);
+		    glRotatef(-90,1,0,0);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(-1*angle,1,0,0);
+		    glTranslatef(0,-1*al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
 
-	//glTranslatef(0,)
-	glRotatef(90,0,1,0);
-	glRotatef(180,0,0,1);
-    glRotatef(-90,1,0,0);
-    glRotatef(angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(-1*angle,1,0,0);
-    glTranslatef(0,al,bl);
-    drawCylinder(radius,ch);
-    glTranslatef(0,0,ch);
-    glRotatef(angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(-1*angle,1,0,0);
-    glTranslatef(0,-1*al,-1*(bl+ch));
-    glRotatef(90,1,0,0);
+		    glRotatef(-90,1,0,0);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,-1*al,bl);
+		    drawCylinder(radius,ch);
+		    glTranslatef(0,0,ch);
+		    glRotatef(-1*angle,1,0,0);
+		    drawCylinder(radius,cl);
+		    glRotatef(angle,1,0,0);
+		    glTranslatef(0,al,-1*(bl+ch));
+		    glRotatef(90,1,0,0);
+		    glRotatef(180,0,0,1);
+			glRotatef(-90,0,1,0);
+			glPopMatrix();
+			glTranslatef(0,-1*(bl+ch+bl-1*diff),0);
+		}
+		glPopMatrix();
+		if(j%2==0)
+		{
 
-    glRotatef(-90,1,0,0);
-    glRotatef(-1*angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(angle,1,0,0);
-    glTranslatef(0,-1*al,bl);
-    drawCylinder(radius,ch);
-    glTranslatef(0,0,ch);
-    glRotatef(-1*angle,1,0,0);
-    drawCylinder(radius,cl);
-    glRotatef(angle,1,0,0);
-    glTranslatef(0,al,-1*(bl+ch));
-    glRotatef(90,1,0,0);
-    glRotatef(180,0,0,1);
-	glRotatef(-90,0,1,0);
-
+		}
+		if(j==1)
+		{
+			glTranslatef(-6,0,0);
+		}
+		else
+		{
+			glTranslatef(-5,0,0);
+		}
+	}
 	glPopMatrix();
 }

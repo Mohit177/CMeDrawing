@@ -10,7 +10,7 @@ void drawBoundary();
 void drawSeeSaw();
 void drawSlide();
 void drawSwings();
-void drawCylinder(GLfloat radius, GLfloat height);
+void drawCylinder(GLfloat radius, GLfloat height, GLfloat red, GLfloat green, GLfloat blue);
 void drawJungleGym();
 void drawMonkeyBars();
 
