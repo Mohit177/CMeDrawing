@@ -43,8 +43,8 @@ void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 		PITCH = 89.0f;
 	else if (PITCH < -89.0f)
 		PITCH = -89.0f;
-	cam.yaw(YAW);
-	cam.pitch(PITCH);
+	cam.yaw(-YAW);
+	cam.pitch(-PITCH);
 	xPrev = xPos;
 	yPrev = yPos;	
 }
