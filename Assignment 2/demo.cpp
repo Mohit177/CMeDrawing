@@ -17,13 +17,13 @@ GLfloat xPrev = SCREEN_WIDTH/2;
 GLfloat yPrev  = SCREEN_HEIGHT/2;
 GLfloat xNew  = xPrev, yNew = yPrev;
 GLfloat YAW = -90.0f, PITCH = 0.0f;
+bool static_view = false;
 
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
-	/*
-		button : GLFW_MOUSE_BUTTON_LEFT or GLFW_MOUSE_BUTTON_RIGHT
-		action : GLFW_PRESS or GLFW_RELEASE
-	*/
+	//	button : GLFW_MOUSE_BUTTON_LEFT or GLFW_MOUSE_BUTTON_RIGHT
+	//	action : GLFW_PRESS or GLFW_RELEASE
+	
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && zoom_level<3){
     	if(cam.slide(0,0,-30))		// If camera can slide forward, do it and increase zoom level
 			zoom_level++;
@@ -36,19 +36,27 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
-	YAW = (xPrev-xPos)/20.0f;
-	PITCH = (yPrev-yPos)/20.0f;
+
+	if (!static_view){
+		YAW = (xPrev-xPos)/20.0f;
+		PITCH = (yPrev-yPos)/20.0f;
 	
-	if(PITCH > 89.0f)
-		PITCH = 89.0f;
-	else if (PITCH < -89.0f)
-		PITCH = -89.0f;
-	cam.yaw(-YAW);
-	cam.pitch(-PITCH);
-	xPrev = xPos;
-	yPrev = yPos;	
+		if(PITCH > 89.0f)
+			PITCH = 89.0f;
+		else if (PITCH < -89.0f)
+			PITCH = -89.0f;
+		cam.yaw(-YAW);
+		cam.pitch(-PITCH);
+		xPrev = xPos;
+		yPrev = yPos;
+	}
 }
 
+/*
+void cursor_enter_callback(GLFWwindow* window, int entered){
+	glfwSetCursorPos(window,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+}
+*/
 
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -56,6 +64,11 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
 		return;
     if(key == GLFW_KEY_ESCAPE){
 		glfwSetWindowShouldClose(window, GL_TRUE);
+		return;
+	}
+	else if(key == GLFW_KEY_L){
+		static_view = !(static_view);
+		return;
 	}
 //	std::cout << GLFW_MOD_SHIFT <<"\n";
 	
@@ -105,7 +118,7 @@ GLFWwindow* initWindow(const int resX, const int resY)
     glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
 
     // Open a window and create its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(resX, resY, "Childeren's Park", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(resX, resY, "Childeren's Park", glfwGetPrimaryMonitor(), NULL);
 
     if(window == NULL)
     {
@@ -125,9 +138,8 @@ GLFWwindow* initWindow(const int resX, const int resY)
 	
 	// Set Cursor position function
 	glfwSetCursorPosCallback(window, cursor_position_callback);
-//	glfwSetCursorEnterCallback(window, cursor_enter_callback);
-    
-
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	
     // Get info of GPU and supported OpenGL version
     printf("Renderer: %s\n", glGetString(GL_RENDERER));
     printf("OpenGL version supported %s\n", glGetString(GL_VERSION));
