@@ -59,3 +59,12 @@ Vector3 Vector3::cross(Vector3 b){
 	result.z= x * b.y - y * b.x;
 	return result;
 }
+
+Vector3 Vector3::diff(Vector3 b)
+{
+	Vector3 result;
+	result.x = x-b.x;
+	result.y = y-b.y;
+	result.z = z-b.z;
+	return result;
+}

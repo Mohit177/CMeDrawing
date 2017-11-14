@@ -235,15 +235,15 @@ void display( GLFWwindow* window )
 
 int main(int argc, char** argv)
 {
-    GLFWwindow* window = initWindow(1024, 620);
+    /*GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
-	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);
-    
-    if( NULL != window )
+	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);*/
+    importObjFile("BlenderNatureAsset.obj");
+   /* if( NULL != window )
     {
         display( window );
     }
     glfwDestroyWindow(window);
-    glfwTerminate();
+    glfwTerminate();*/
     return 0;
 }

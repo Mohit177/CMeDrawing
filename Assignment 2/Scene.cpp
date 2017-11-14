@@ -1,4 +1,8 @@
 #include "Scene.h"
+#include "Utility.h"
+#include <fstream>
+#include <vector>
+using namespace std;
 
 void drawBoundary(){
 
@@ -1166,4 +1170,67 @@ void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 		}
 	}
 	glPopMatrix();
+}
+
+void importObjFile(const string& objfile)
+{
+	ifstream ifil;
+	int i,j;
+	ifil.open(objfile.c_str());
+	vector<Vector3> vlist;
+	vector<int> flist;
+	while(!ifil.eof())
+	{
+		string line;
+		int state=0;
+		getline(ifil,line);
+		//cout<<line<<endl;
+		if(line.length()>=2 && line[0]!='#')
+		{
+			if(line[0]=='o' && line[1]==' ')
+			{
+				int size = vlist.size();
+				for(i=0;i<size;i++)
+				{
+					cout<<vlist[i].x<<" "<<vlist[i].y<<" "<<vlist[i].z<<endl;
+				}
+				cout<<"****"<<endl;
+				vlist.clear();
+			}
+			else
+			{
+				if(line[0]=='v' && line[1]==' ')
+				{
+					int size = line.length();
+					string temp = "";
+					vector<string> tt;
+					for(i=2;i<size;i++)
+					{
+						if(line[i]==' ')
+						{
+							tt.push_back(temp);
+							temp = "";
+						}
+						else
+						{
+							temp.push_back(line[i]);
+						}
+					}
+					tt.push_back(temp);
+					//cout<<tt[0]<<" "<<tt[1]<<" "<<tt[2]<<endl;
+					Vector3 tv;
+					tv.x = atof(tt[0].c_str());
+					tv.y = atof(tt[1].c_str());
+					tv.z = atof(tt[2].c_str());
+					vlist.push_back(tv);
+				}
+				else if(line[0]=='f' && line[1]==' ')
+				{
+					int size = line.length();
+					
+				}
+			}
+		}
+	}
+	ifil.close();
 }

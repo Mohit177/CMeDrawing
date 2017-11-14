@@ -26,6 +26,7 @@ class Vector3
 		void normalize();
 		float dot(Vector3 b);
 		Vector3 cross(Vector3 b);
+		Vector3 diff(Vector3 b);
 };
 
 #endif

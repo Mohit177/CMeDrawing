@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <cstdio>
+#include <string>
 #include <iostream>
 
 void drawBoundary();
@@ -17,5 +18,6 @@ void drawJungleGym();
 void drawMonkeyBars();
 void drawMerryGoRound();
 void drawBench(GLfloat red, GLfloat green, GLfloat blue);
+void importObjFile(const std::string& );
 
 #endif
