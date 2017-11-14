@@ -173,7 +173,7 @@ void display( GLFWwindow* window )
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		cam.setShape(field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 10.0f, 1000.0);
+		cam.setShape(field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01f, 1000.0);
 	
     glPushMatrix();
 		drawBoundary();
@@ -242,7 +242,7 @@ int main(int argc, char** argv)
 {
     GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
-	cam.setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 10.0, 1000.0);
+	cam.setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01f, 1000.0);
     importObjFile("first.obj","first.mtl");
     if( NULL != window )
     {
