@@ -7,7 +7,6 @@ Test file containing main function.
 #include <iostream>
 #include "Scene.h"
 #include "Camera.h"
-#include "Utility.h"
 
 Camera cam;
 int zoom_level= 1.0f;
@@ -184,13 +183,18 @@ void display( GLFWwindow* window )
 		glPopMatrix();
 		
 		glPushMatrix();
-			glTranslatef(-40,0,-10);			// Slide
+			glTranslatef(-35,0,-10);			// Slide 1
 	        drawSlide1();
 		glPopMatrix();
-
+		
+		glPushMatrix();
+			glTranslatef(-35,0,-25);			// Slide 2
+	        drawSlide1();
+		glPopMatrix();
+		
 		glPushMatrix();
 			glTranslatef(-10,0,20);
-			glScalef(0.8,1,1);				// Swing
+			glScalef(0.8,1,1);					// Swing
 	        drawSwings();
 		glPopMatrix();
 		
@@ -201,7 +205,8 @@ void display( GLFWwindow* window )
 		
 		
 		glPushMatrix();
-			glTranslatef(10,0,10);
+			glTranslatef(20,0,20);
+			glScalef(1.2,1,1.2);
 			merry_alpha += animation_speed;		// Merry-go-round
 			glRotatef(merry_alpha,0,1,0);
 			drawMerryGoRound();
@@ -216,18 +221,14 @@ void display( GLFWwindow* window )
 		
 		glPushMatrix();
 			glTranslatef(0,0,0);
-			drawBench(160.0/255,82.0/255,45.0/255);
+			drawBench(160.0/255,82.0/255,45.0/255);	// Benches
 		glPopMatrix();
 
 		glPushMatrix();
 			glScalef(2,2,2);
-			glTranslatef(0,2.3,0);
+			glTranslatef(0,2.3,0);			// Tree
 			drawObjFile();
 		glPopMatrix();
-
-//	    drawSwings();
-
-		
 
     glPopMatrix();
         // Update Screen
