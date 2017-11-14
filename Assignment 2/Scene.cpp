@@ -2,7 +2,27 @@
 #include "Utility.h"
 #include <fstream>
 #include <vector>
+#include <map>
 using namespace std;
+
+struct Face
+{
+	int p1;
+	int p2;
+	int p3;
+};
+
+struct TVertex
+{
+	Vector3 v1;
+	Vector3 v2;
+	Vector3 v3;
+};
+
+vector<TVertex> vset;
+vector<Vector3> cset;
+GLfloat* varr;
+GLfloat* carr;
 
 void drawBoundary(){
 
@@ -1172,30 +1192,84 @@ void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	glPopMatrix();
 }
 
-void importObjFile(const string& objfile)
+void importObjFile(const string& objfile,const string& mtlfile)
 {
 	ifstream ifil;
 	int i,j;
-	ifil.open(objfile.c_str());
-	vector<Vector3> vlist;
-	vector<int> flist;
+	string line;
+	ifil.open(mtlfile.c_str());
+	int state=0;
+	map<string,Vector3> cmap;
+	string mtlname="";
 	while(!ifil.eof())
 	{
-		string line;
-		int state=0;
+		getline(ifil,line);
+		if(line.length()>=2 && line[0]!='#')
+		{
+			if(state==1)
+			{
+				if(line.find("Kd")!=string::npos)
+				{
+					int size = line.length();
+					string temp="";
+					vector<string> tt;
+					for(i=3;i<size;i++)
+					{
+						if(line[i]==' ')
+						{
+							tt.push_back(temp);
+							temp="";
+						}
+						else
+						{
+							temp.push_back(line[i]);
+						}
+					}
+					tt.push_back(temp);
+					Vector3 v3;
+					v3.x = atof(tt[0].c_str());
+					v3.y = atof(tt[1].c_str());
+					v3.z = atof(tt[2].c_str());
+					//v3.normalize();
+					cmap[mtlname]=v3;
+					state=0;
+				}
+			}
+			if(line.find("newmtl")!=string::npos)
+			{
+				mtlname = line.substr(7,line.length());
+				state=1;
+			}
+		}
+	}
+	ifil.close();
+	ifil.open(objfile.c_str());
+	vector<Vector3> vlist;
+	vector<Face> flist;
+	Vector3 lcl;
+	lcl.set(0.3,0.3,0.3);
+	vset.clear();
+	while(!ifil.eof())
+	{
 		getline(ifil,line);
 		//cout<<line<<endl;
 		if(line.length()>=2 && line[0]!='#')
 		{
 			if(line[0]=='o' && line[1]==' ')
 			{
-				int size = vlist.size();
+				int size = flist.size();
+				//cout<<"#####"<<endl;
 				for(i=0;i<size;i++)
 				{
-					cout<<vlist[i].x<<" "<<vlist[i].y<<" "<<vlist[i].z<<endl;
+					TVertex tvx;
+					tvx.v1 = vlist[flist[i].p1];
+					tvx.v2 = vlist[flist[i].p2];
+					tvx.v3 = vlist[flist[i].p3];
+					vset.push_back(tvx);
 				}
-				cout<<"****"<<endl;
-				vlist.clear();
+				//cout<<"*****"<<endl;
+				//vlist.clear();
+				flist.clear();
 			}
 			else
 			{
@@ -1226,11 +1300,116 @@ void importObjFile(const string& objfile)
 				}
 				else if(line[0]=='f' && line[1]==' ')
 				{
+					cset.push_back(lcl);
 					int size = line.length();
-					
+					string temp = "";
+					vector<string> tt;
+					for(i=2;i<size;i++)
+					{
+						if(line[i]==' ')
+						{
+							tt.push_back(temp);
+							temp = "";
+						}
+						else
+						{
+							temp.push_back(line[i]);
+						}
+					}
+					tt.push_back(temp);
+					//cout<<tt[0]<<" "<<tt[1]<<" "<<tt[2]<<endl;
+					Face face;
+					for(i=0;i<3;i++)
+					{
+						int ss = tt[i].length();
+						string temps="";
+						for(j=0;j<ss;j++)
+						{
+							if(tt[i][j]=='/')
+							{
+								if(i==0)
+								{
+									face.p1 = atoi(temps.c_str());
+								}
+								else if(i==1)
+								{
+									face.p2 = atoi(temps.c_str());
+								}
+								else
+								{
+									face.p3 = atoi(temps.c_str());
+								}
+								break;
+							}
+							else
+							{
+								temps.push_back(tt[i][j]);
+							}
+						}
+					}
+					flist.push_back(face);
+				}
+				else if(line.find("usemtl ")!=string::npos)
+				{
+					string tem_string = line.substr(7,line.length());
+					lcl = cmap[tem_string];
+					cout<<"Idhar: "<<tem_string<<" "<<lcl.x<<" "<<lcl.y<<" "<<lcl.z<<endl;
 				}
 			}
 		}
 	}
+	if(flist.size()>0)
+	{
+		int size = flist.size();
+		for(i=0;i<size;i++)
+		{
+			TVertex tvx;
+			tvx.v1 = vlist[flist[i].p1];
+			tvx.v2 = vlist[flist[i].p2];
+			tvx.v3 = vlist[flist[i].p3];
+			vset.push_back(tvx);
+		}
+		vlist.clear();
+	}
 	ifil.close();
+	int size = vset.size()*9;
+	varr = new GLfloat[size];
+	carr = new GLfloat[size];
+	size = vset.size();
+	int k=0;
+	for(i=0;i<size;i++)
+	{
+		varr[k]=vset[i].v1.x;
+		carr[k++]=cset[i].x;
+		varr[k]=vset[i].v1.y;
+		carr[k++]=cset[i].y;
+		varr[k]=vset[i].v1.z;
+		carr[k++]=cset[i].z;
+
+		varr[k]=vset[i].v2.x;
+		carr[k++]=cset[i].x;
+		varr[k]=vset[i].v2.y;
+		carr[k++]=cset[i].y;
+		varr[k]=vset[i].v2.z;
+		carr[k++]=cset[i].z;
+
+		varr[k]=vset[i].v3.x;
+		carr[k++]=cset[i].x;
+		varr[k]=vset[i].v3.y;
+		carr[k++]=cset[i].y;
+		varr[k]=vset[i].v3.z;
+		carr[k++]=cset[i].z;
+	}
+}
+
+void drawObjFile()
+{
+	int size = vset.size()*3;
+	glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, varr);
+    glColorPointer(3, GL_FLOAT, 0, carr);
+    glDrawArrays(GL_TRIANGLES, 0, size);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
 }

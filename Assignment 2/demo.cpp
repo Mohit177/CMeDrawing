@@ -158,6 +158,7 @@ GLFWwindow* initWindow(const int resX, const int resY)
 
 void display( GLFWwindow* window )
 {
+	int i;
 	static GLfloat merry_alpha = 0.0f;
     while(!glfwWindowShouldClose(window))
     {
@@ -220,6 +221,12 @@ void display( GLFWwindow* window )
 			drawBench(160.0/255,82.0/255,45.0/255);
 		glPopMatrix();
 
+		glPushMatrix();
+			glScalef(2,2,2);
+			glTranslatef(0,2.3,0);
+			drawObjFile();
+		glPopMatrix();
+
 //	    drawSwings();
 
 		
@@ -235,15 +242,15 @@ void display( GLFWwindow* window )
 
 int main(int argc, char** argv)
 {
-    /*GLFWwindow* window = initWindow(1024, 620);
+    GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
-	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);*/
-    importObjFile("BlenderNatureAsset.obj");
-   /* if( NULL != window )
+	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);
+    importObjFile("first.obj","first.mtl");
+    if( NULL != window )
     {
         display( window );
     }
     glfwDestroyWindow(window);
-    glfwTerminate();*/
+    glfwTerminate();
     return 0;
 }
