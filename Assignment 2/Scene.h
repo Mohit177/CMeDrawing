@@ -14,6 +14,7 @@ Header file for functions to draw primitive shapes & other objects.
 void drawBoundary();
 void drawSeeSaw();
 void drawSlide();
+void drawSlide1();
 void drawSwings();
 void drawUnitCube(GLfloat red, GLfloat green, GLfloat blue);
 void drawCylinder(GLfloat radius, GLfloat height, GLfloat red, GLfloat green, GLfloat blue);

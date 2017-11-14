@@ -7,7 +7,6 @@ Test file containing main function.
 #include <iostream>
 #include "Scene.h"
 #include "Camera.h"
-#include "Utility.h"
 
 Camera cam;
 int zoom_level= 1.0f;
@@ -185,12 +184,12 @@ void display( GLFWwindow* window )
 		
 		glPushMatrix();
 			glTranslatef(-35,0,-10);			// Slide 1
-	        drawSlide();
+	        drawSlide1();
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(-35,0,-25);			// Slide 2
-	        drawSlide();
+	        drawSlide1();
 		glPopMatrix();
 		
 		glPushMatrix();
