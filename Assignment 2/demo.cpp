@@ -172,7 +172,7 @@ void display( GLFWwindow* window )
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		cam.setShape(field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 10.0f, 1000.0);
+		cam.setShape(field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01f, 1000.0);
 	
     glPushMatrix();
 		drawBoundary();
@@ -205,9 +205,17 @@ void display( GLFWwindow* window )
 		
 		
 		glPushMatrix();
-			glTranslatef(20,0,20);
+			glTranslatef(15,0,20);
 			glScalef(1.2,1,1.2);
 			merry_alpha += animation_speed;		// Merry-go-round
+			glRotatef(merry_alpha,0,1,0);
+			drawMerryGoRound();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(35,0,20);
+			glScalef(1.2,1,1.2);
+			merry_alpha += animation_speed*1.2;		// Merry-go-round
 			glRotatef(merry_alpha,0,1,0);
 			drawMerryGoRound();
 		glPopMatrix();
@@ -225,11 +233,81 @@ void display( GLFWwindow* window )
 		glPopMatrix();
 
 		glPushMatrix();
+			glTranslatef(-42,0,-42);
 			glScalef(2,2,2);
-			glTranslatef(0,2.3,0);			// Tree
+			glTranslatef(0,2.3,0);			// Tree 1
 			drawObjFile();
 		glPopMatrix();
 
+		glPushMatrix();
+			glTranslatef(42,0,-42);
+			glScalef(2,2,2);
+			glTranslatef(0,2.3,0);			// Tree 2
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(42,0,42);
+			glScalef(2,2,2);
+			glTranslatef(0,2.3,0);			// Tree 3
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-42,0,42);
+			glScalef(2,2,2);
+			glTranslatef(0,2.3,0);			// Tree 4
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-42,0,7);
+			glTranslatef(0,2.3,0);			// Tree 11
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-42,0,-7);
+			glTranslatef(0,2.3,0);			// Tree 12
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-7,0,42);
+			glTranslatef(0,2.3,0);			// Tree 13
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(7,0,42);
+			glTranslatef(0,2.3,0);			// Tree 14
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(42,0,7);
+			glTranslatef(0,2.3,0);			// Tree 11
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(42,0,-7);
+			glTranslatef(0,2.3,0);			// Tree 11
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-7,0,-42);
+			glTranslatef(0,2.3,0);			// Tree 13
+			drawObjFile();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(7,0,-42);
+			glTranslatef(0,2.3,0);			// Tree 14
+			drawObjFile();
+		glPopMatrix();
+		
     glPopMatrix();
         // Update Screen
         glfwSwapBuffers(window);
@@ -243,7 +321,7 @@ int main(int argc, char** argv)
 {
     GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
-	cam.setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 10.0, 1000.0);
+	cam.setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01f, 1000.0);
     importObjFile("first.obj","first.mtl");
     if( NULL != window )
     {

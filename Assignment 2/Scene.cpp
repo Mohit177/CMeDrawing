@@ -98,9 +98,9 @@ void drawBoundary(){
 	}
 	// Ground
 	for(int i=204;i<204+48;i+=3){
-		colors[i]	= 0.486;
-		colors[i+1] = 0.988;
-		colors[i+2] = 0;
+		colors[i]	= 0.0;
+		colors[i+1] = 128.0/255;
+		colors[i+2] = 0.0;
 	}
 	// Roadways
 	for(int i=252;i<252+24;i+=3){
@@ -1395,19 +1395,6 @@ void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	glTranslatef(-25,0,-45);
 	for(i=0;i<8;i++)
 	{
-		if(i%4==2 || i%4==3)
-		{
-			if(i%2!=0)
-			{
-				glTranslatef(20,0,20);
-				glRotatef(-90,0,1,0);
-			}
-			else
-			{
-				glTranslatef(50,0,0);
-			}
-			continue;
-		}
 		glScalef(0.8,0.8,0.8);
 		glPushMatrix();
 			glPushMatrix();
