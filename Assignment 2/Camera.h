@@ -1,5 +1,5 @@
-/**	\file Camera.h
-Camera functions header file.
+/**	@file Camera.h
+* Camera functions header file.
 */
 #ifndef CAMERA_H_INCLUDED
 #define CAMERA_H_INCLUDED
@@ -12,12 +12,21 @@ Camera functions header file.
 
 #define SCREEN_WIDTH 1366.0f
 #define SCREEN_HEIGHT 768.0f
-
+/**
+Camera class for defining view and motion.
+*/
 class Camera {
 	private:
-		Point3 eye, look, up;
-		Vector3 u, v, n;
-		double viewAngle, aspect, nearDist, farDist;
+		Point3 eye;		//!< Eye coordinates
+		Point3 look;	//!< Look point coordinates
+		Point3 up;		//!< Up point coordinates
+		Vector3 u;		//!< Up vector
+		Vector3 v; 		//!< view vector
+		Vector3 n;		//!< Normal vector
+		double viewAngle; //!< Field of view
+		double aspect;	//!< Aspect ratio
+		double nearDist;	//!< Near clipping plane
+		double farDist;		//!< Far clipping plane
 
 	public:
 		Camera();

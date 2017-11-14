@@ -1,4 +1,4 @@
-/**	\file camera.cpp
+/**	@file Camera.cpp
 Camera functions implementation file.
 */
 #include "Camera.h"

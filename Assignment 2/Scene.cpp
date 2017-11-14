@@ -9,20 +9,26 @@ Implementation file for functions to draw primitive shapes & other objects.
 #include <map>
 using namespace std;
 
-
+/**
+Face struct for a face of object
+*/
 struct Face
 {
-	int p1;
-	int p2;
-	int p3;
+	int p1;	//!< First point
+	int p2; //!< Second point
+	int p3; //!< Third point
 };
 
+/**
+Vertex struct for vertex of object	
+*/
 struct TVertex
 {
-	Vector3 v1;
-	Vector3 v2;
-	Vector3 v3;
+	Vector3 v1;	//!< First vertex
+	Vector3 v2;	//!< Second vertex
+	Vector3 v3;	//!< Third vertex
 };
+
 
 vector<TVertex> vset;
 vector<Vector3> cset;

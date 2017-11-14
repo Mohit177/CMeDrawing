@@ -1,4 +1,4 @@
-/** \file Scene.h
+/** @file Scene.h
 Header file for functions to draw primitive shapes & other objects.
 */
 
