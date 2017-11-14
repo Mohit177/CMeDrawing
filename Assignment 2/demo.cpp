@@ -187,7 +187,7 @@ void display( GLFWwindow* window )
 		
 		glPushMatrix();
 			glTranslatef(-40,0,-10);			// Slide
-	        drawSlide();
+	        drawSlide1();
 		glPopMatrix();
 
 		glPushMatrix();
