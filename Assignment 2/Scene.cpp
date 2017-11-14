@@ -1,3 +1,7 @@
+/** \file Scene.h
+Implementation file for functions to draw primitive shapes & other objects.
+*/
+
 #include "Scene.h"
 #include "Utility.h"
 #include <fstream>
@@ -6,25 +10,38 @@
 #include <cstring>
 using namespace std;
 
+/**
+Face struct for a face of object
+*/
 struct Face
 {
-	int p1;
-	int p2;
-	int p3;
+	int p1;	//!< First point
+	int p2; //!< Second point
+	int p3; //!< Third point
 };
 
+/**
+Vertex struct for vertex of object	
+*/
 struct TVertex
 {
-	Vector3 v1;
-	Vector3 v2;
-	Vector3 v3;
+	Vector3 v1;	//!< First vertex
+	Vector3 v2;	//!< Second vertex
+	Vector3 v3;	//!< Third vertex
 };
+
 
 vector<TVertex> vset;
 vector<Vector3> cset;
 GLfloat* varr;
 GLfloat* carr;
 
+
+/**
+Method to draw a boundary centered at origin, with length, width & height 100,100 and 6.
+@param void
+@return void
+*/
 void drawBoundary(){
 
 	// Rectangles
@@ -108,100 +125,101 @@ void drawBoundary(){
 //	alpha+=1;
 }
 
-
+/**
+Method to draw see-saw centered at origin, with length, width & height 16, 2 and 2.
+@param void
+@return void
+*/
 void drawSeeSaw(){
 
 	// For rectangles
-    GLfloat vertices[] =
-    {
-    	// Wedge
-		-1,0,-1,	0,2,-1,		0,2,1,	-1,0,1,		// Left face of Wedge
-		1,0,-1,		0,2,-1,		0,2,1,	1,0,1,		// Right face of Wedge
+	glPushMatrix();
+		GLfloat vert_rect[] = {-1,0,-1,	0,2,-1,		0,2,1,	-1,0,1,			1,0,-1,		0,2,-1,		0,2,1,	1,0,1};
+		GLfloat vert_triangles[] = {-1,0,1,		0,2,1,		1,0,1,			-1,0,-1,	0,2,-1,	1,0,-1};
+
+		GLfloat colors[96] = {0.0f};
+
+		/* Enable color array and a vertex array */
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, vert_rect);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+    
+		// Draw outline
+		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+		glEnable(GL_POLYGON_OFFSET_LINE);
+		glPolygonOffset(-1.f,-1.f);
+		glEnable(GL_DEPTH_TEST);
+		glDrawArrays(GL_QUADS, 0, 8);			// Draw wire rectangles
 		
-		// Inclined plane
-		-8,0,-1,					8,4,-1,					8,4,1,					-8,0,1,					//  bottom face
-		-8.097014,0.124254,-1,		7.902985,4.124253,-1,	7.902986,4.124253,1,	-8.097014,0.124254,1,		//	top face
-		-8,0,-1,					8,4,-1,					7.902985,4.124253,-1,   -8.097014, 0.124254,-1,	// rear face
-		-8,0,1,						8,4,1,					7.902985,4.124253,1,	-8.097014, 0.124254,1,		// front face
-		-8,0,-1,					-8,0,1,					-8.097014,0.124254,1,	-8.097014,0.124254,-1,		// Left face
-		8,4,-1,						8,4,1,					7.902985,4.124253,1,	7.902985,4.124253,-1		// Right face
-    };
-    
-    GLfloat vert_triangles[] = 
-    {
-		-1,0,1,		0,2,1,	1,0,1,			// Front face of Wedge
-    	-1,0,-1,	0,2,-1,	1,0,-1		// Rear face of Wedge
-    };
+	    glDisableClientState(GL_COLOR_ARRAY);
+	    glDisableClientState(GL_VERTEX_ARRAY);				
+	glPopMatrix();
 
-    GLfloat colors[96] = {0.0f};			// Each vertex has a color component
-   /* {
-    	// Wedge
-        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
-        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
-        // Inclined plane
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35
-    };
+	glPushMatrix();
+		static double alpha = 15.466009963004;
+		static double d_angle = 0.8f;
+		glRotatef(alpha,0,0,1);
+		glPushMatrix();
+			glTranslatef(-7.5,2,1);
+			glScalef(15,0.3,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-5.5,2,1);
+			glScalef(0.3,1,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(5.5,2,1);
+			glScalef(0.3,1,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		if(alpha >= 15.466009963004)
+			d_angle = -0.8f;
+		else if(alpha <= -15.466009963004)
+			d_angle = 0.8f;
+		alpha += d_angle;
+	glPopMatrix();
+//----		Solid -----
+	glPushMatrix();
+		// Set Red Color
+		for(int i=0;i<96;i+=3){
+			colors[i] = 1.0; colors[i+1]=0.0; colors[i+2]=0.0;
+		}
     
-    */
+		// Draw Triangles, 6 vertices
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, vert_triangles);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+		
+		glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-/*	static float alpha = 0;
-    //attempt to rotate cube
-    glRotatef(alpha, 1, 1, 1);			// Comment this line to stop rotation about y axis.
-*/
-
-    /* Enable color array and a vertex array */
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(3, GL_FLOAT, 0, colors);
-    
-    // Draw outline
-    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-    glEnable(GL_POLYGON_OFFSET_LINE);
-	glPolygonOffset(-1.f,-1.f);
-    glEnable(GL_DEPTH_TEST);
-    glDrawArrays(GL_QUADS, 0, 32);
-    
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    
-    // Set Red Color
-    for(int i=0;i<96;i+=3){
-    	colors[i] = 1.0; colors[i+1]=0.0; colors[i+2]=0.0;
-    }
-    
-    // Draw Triangles, 6 vertices
-    glVertexPointer(3, GL_FLOAT, 0, vert_triangles);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY); 
-	
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(3, GL_FLOAT, 0, colors);
-	
-	// Set Blue Color for wedge
-    for(int i=24;i<96;i+=3){
-    	colors[i] = 0.0; colors[i+1]=0.0; colors[i+2]=1.0;
-    }
-    
-    // Draw rectangles, 32 vertices
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    glDrawArrays(GL_QUADS, 0, 32);
-   
+		glVertexPointer(3, GL_FLOAT, 0, vert_rect);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+		glDrawArrays(GL_QUADS, 0, 8);
+	   
     
     /* Cleanup states */
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
+	    glDisableClientState(GL_COLOR_ARRAY);
+	    glDisableClientState(GL_VERTEX_ARRAY);
+	glPopMatrix();
+    
 }
 
+/**
+Method to draw a slide
+@param void
+@return void
+*/
 void drawSlide(){
 
 	GLfloat vertices[] = 
@@ -374,6 +392,15 @@ void drawSlide(){
     //alpha += 1;
 }
 
+/**
+Method to draw a solid colored cylinder with base centered at origin, and height towards positive z axis.
+@param radius: radius of cylinder
+@param height: height of cylinder
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 
 void drawCylinder(GLfloat radius, GLfloat height, GLfloat red = 0.1, GLfloat green = 0.1, GLfloat blue = 0.1)
 {
@@ -387,6 +414,15 @@ void drawCylinder(GLfloat radius, GLfloat height, GLfloat red = 0.1, GLfloat gre
 	glPopMatrix();
 }
 
+/**
+Method to draw a solid colored disk centered at origin, with inner & outer radius.
+@param inner_radius: inner radius of cylinder
+@param outer_radius: outer radius of cylinder
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 void drawDisk(GLfloat inner_radius, GLfloat outer_radius,GLfloat red = 0.3, GLfloat green = 0.3, GLfloat blue = 0.3){
 	glPushMatrix();
 	GLUquadric* obj;
@@ -397,6 +433,7 @@ void drawDisk(GLfloat inner_radius, GLfloat outer_radius,GLfloat red = 0.3, GLfl
 	gluDeleteQuadric(obj);
 	glPopMatrix();
 }
+
 
 void drawSlide1()
 {
@@ -497,6 +534,12 @@ void drawSlide1()
 	glPopMatrix();
 }
 
+
+/**
+Method to draw a Jungle gym
+@param void
+@return void
+*/
 void drawJungleGym()
 {	
 	glPushMatrix();
@@ -802,6 +845,11 @@ void drawJungleGym()
 	glPopMatrix();
 }
 
+/**
+Method to draw a Monkey bar
+@param void
+@return void
+*/
 void drawMonkeyBars()
 {
 	glPushMatrix();
@@ -884,7 +932,11 @@ void drawMonkeyBars()
 	glPopMatrix();
 }
 
-
+/**
+Method to draw a Merry-go-round
+@param void
+@return void
+*/
 void drawMerryGoRound(){
 glPushMatrix();
 	glPushMatrix();
@@ -962,7 +1014,11 @@ glPushMatrix();
 glPopMatrix();
 }
 
-
+/**
+Method to draw swings
+@param void
+@return void
+*/
 void drawSwings()
 {
 	glPushMatrix();
@@ -1001,7 +1057,16 @@ void drawSwings()
 	glRotatef(-90,0,1,0);
 	
 	glTranslatef(2,0,0);
+	glPopMatrix();
 	
+	// Draw chains, seat and add movement
+glPushMatrix();
+glTranslatef(-20,12,5);
+static double beta = 25.0;	
+static double del_beta = -1.0f;
+glRotatef(beta,1,0,0);
+	glPushMatrix();
+
 	GLfloat vertices[] = 
 	{
 		// connections to rod.
@@ -1249,8 +1314,21 @@ void drawSwings()
 		}
 	}
 	glPopMatrix();
+	if(beta >= 25.0)
+	 del_beta = -1.0;
+	else if(beta <=-25.0)
+	 del_beta = 1.0;
+	beta += del_beta;
+glPopMatrix();
 }
 
+/**
+Method to draw a colored solid unit cube with <left,bottom,back> point on origin.
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 void drawUnitCube(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	glPushMatrix();
 	GLfloat vertices[] =
@@ -1304,6 +1382,13 @@ void drawUnitCube(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
     glPopMatrix();
 }
 
+/**
+Method to draw a colored solid Bench with <left,bottom,back> point on origin.
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	int i;
 	glPushMatrix();
@@ -1398,6 +1483,13 @@ void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	glPopMatrix();
 }
 
+
+/**
+Method to import an .obj file.
+@param objfile: obj file name
+@param mtlfile: mtl fine name
+@return void
+*/
 void importObjFile(const string& objfile,const string& mtlfile)
 {
 	ifstream ifil;
@@ -1578,6 +1670,7 @@ void importObjFile(const string& objfile,const string& mtlfile)
 		vlist.clear();
 	}
 	ifil.close();
+	
 	int size = vset.size()*9;
 	varr = new GLfloat[size];
 	carr = new GLfloat[size];
@@ -1619,3 +1712,4 @@ void drawObjFile()
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
 }
+

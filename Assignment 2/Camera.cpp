@@ -1,4 +1,4 @@
-/**	\file camera.cpp
+/**	@file Camera.cpp
 Camera functions implementation file.
 */
 #include "Camera.h"
@@ -8,9 +8,9 @@ Camera functions implementation file.
 */
 Camera:: Camera(void)
 {
-	setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 1.0f, 1000.0f); 
+	setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 10.0f, 1000.0f); 
 	
-	Point3 eyePoint = Point3( 0.0, 0.0, 20.0 );
+	Point3 eyePoint = Point3( 0.0, 0.0, 0.0 );
 	Point3 lookPoint = Point3( 0.0, 0.0, -20.0f );
 	Vector3 upVector = Vector3( 0, 1, 0 );
 
