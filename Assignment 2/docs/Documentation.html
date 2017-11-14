@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Graphics Assignment 2</title>
+   
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCpp.js"></script>
+	<link type="text/css" rel="stylesheet" href="styles/shCoreEmacs.css"/>
+   <link type="text/css" rel="stylesheet" href="styles/w3.css">
+   
+
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+   <style>
+.city {display:none;}
+</style>
+</head>
+
+<body style="background: rgba(255,255,255); font-family: Helvetica">
+
+
+
+<nav class="w3-sidenav w3-black w3-card-2" style="width:130px">
+  <div class="w3-container">
+    
+  </div>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc0')">Introduction</a>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc01')">Project Design</a>
+  <!--<a href="#" class="tablink" onclick="openTest(event, 'tc02')">Execution Time Analysis</a>!>-->
+  <a href="#" class="tablink" onclick="openTest(event, 'tc03')">Team Members </a>
+  <!-- <a href="#" class="tablink" onclick="openTest(event, 'tc04')">References</a> -->
+  <a href="#" class="tablink" onclick="show()">Be Amazed!</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc1')">Scene 1</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc2')">Scene 2</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc3')">Scene 3</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc4')">Scene 4</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc5')">Demo Video</a>
+</nav>
+
+<div style="margin-left:130px">
+
+  <div id="tc0" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Computer Graphics- Assignment 2</h1>
+    </div>
+
+    <div class="tabcontent">
+      <p>
+        3-D modelling in simple words is creating a scene as we visualise and place it on a screen using basic primitives avialable in graphics which undergo various tranformations such that the end result is the desired object. A camera interacts with the scene with various movements available such as rotate, translate, pan, zoom etc. 
+        <br>
+        <br>
+        To create a scene depicting a children' park; following tasks were completed:- 
+        <br>
+        <b>Task 1</b>: Using openGl primitives following elements were created in the park:
+        <ul>
+        	<li>See saw</li>
+        	<li>Jungle Gym</li>
+        	<li>Monkey Bars</li>
+        	<li>Slide</li>
+        	<li>Swings</li>
+        	<li>Merry-go Round</li>
+        	<li>Benches</li>
+        	<li>Boundary walls</li>
+        </ul>
+        <br>
+        <b>Task 2</b> : Blender was used to include different types of low- poly trees and stones. 4 different kinds of trees were generated. 
+        <br>
+        <center><img class="w3-animate-left" src="img/blender.png"></center>
+        <br>
+        <center><img class="w3-animate-left" src="img/Example.png"></center>
+        <br>
+        <br>
+        <b>Task 3</b> : Following interactive functionality was implemented
+       	<pre>
+       		Keyboard inputs:<br>
+       		w,upkey: forward <br>
+       		s,downkey: backwards <br>
+       		a,leftkey: leftwards <br>
+       		d,rightkey: rightwards <br><br>
+
+       		r: rotate<br>
+       		y: yaw, shift+y: reverse direction<br>
+       		p: pan, shift+p: reverse direction<br>
+       		q: move upwars<br>
+       		z: move downwards<br><br>
+
+       		LMB: zoom-in<br>
+       		RMB: zoom-out
+       	</pre>	
+      </p>	
+    </div>
+  </div>
+
+  <div id="tc01" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Project Design</h1>
+    </div>
+    <p>
+    	<a href="html/index.html" target="_blank">Doxygen</a>
+    	<br><br>
+      	<b>Docs folder</b>
+      	<br>
+      	Contains documentation in html format. Doxygen was used to convert docx file into html and in addition to the convertor many lines were manually added.
+
+
+    </p>
+  </div>
+
+  
+  
+  <div id="tc03" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Team Members</h1>
+      <h2 style="text-align: center;er;">Rishabh Pokharna- 2014A7PS0108H</h2>
+      <h2 style="text-align: center;er;">Nitish Ravishankar- 2015A7PS0152H</h2>
+      <h2 style="text-align: center;er;">Mohit Goyal- 2015A7PS0151H</h2>
+    </div>
+  </div>  
+  
+  	<div id="tc1" class="w3-container city w3-animate-left">
+    	<h2>Scene View 1</h2>
+    	<img class="w3-animate-left" src="img/view1.png">
+
+   	</div>
+
+  	<div id="tc2" class="w3-container city w3-animate-left">
+    	<h2>Scene View 2</h2>
+        <img class="w3-animate-left" src="img/view2.png">
+
+    </div>
+
+  	<div id="tc3" class="w3-container city w3-animate-left">
+    	<h2>Scene View 3</h2>
+        <img class="w3-animate-left" src="img/view3.png">
+
+  	</div>
+  	
+  	<div id="tc4" class="w3-container city w3-animate-left">
+    	<h2>Scene View 4</h2>
+        <img class="w3-animate-left" src="img/view4.png">
+
+
+  	</div>
+  	
+  	<div id="tc5" class="w3-container city w3-animate-left">
+    	<h2>Demo Video</h2>
+    	<video width="1280" height="720" controls >
+    		<source src="img/VID_20170618_161525.mp4" type="video/ogg">
+    	</video>
+    </div>
+  	
+
+<script>
+function openTest(evt, testName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(testName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+function show(){
+   var x = document.getElementsByClassName('h');
+   for(var i=0;i<x.length;i++){
+      if(x[i].style.opacity != "1"){
+         x[i].style.opacity = "1";
+      }else{
+         x[i].style.opacity = "0";
+      }
+   }
+}
+window.onload=function(){
+	
+	document.getElementById('tc0').style.display = "block";
+}
+</script>
+
+
+<style>
+.h{
+   opacity:  0;
+   animation: all 0.8s;
+}
+</style>
+
+</body>
+</html>
