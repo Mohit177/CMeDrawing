@@ -188,6 +188,12 @@ void display( GLFWwindow* window )
 			glTranslatef(-40,0,-10);			// Slide
 	        drawSlide();
 		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(-10,0,20);
+			glScalef(0.8,1,1);			// Slide
+	        drawSwings();
+		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(10,0,-25);				// Jungle Gym

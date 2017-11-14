@@ -321,7 +321,7 @@ void drawSlide(){
 	};
 	glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
-    glTranslatef(20,0,20);
+    //glTranslatef(20,0,20);
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
     glRotatef(-5.0,0,0,1);
@@ -337,7 +337,7 @@ void drawSlide(){
     
 
     /* Cleanup states */
-    glTranslatef(-20,0,-20);
+    //glTranslatef(-20,0,-20);
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
     //alpha += 1;
@@ -837,7 +837,7 @@ glPopMatrix();
 void drawSwings()
 {
 	glPushMatrix();
-	glTranslatef(-10,0,10);
+	//glTranslatef(-10,0,10);
 	glRotatef(-90,1,0,0);
 	glRotatef(22.62,1,0,0);
 	drawCylinder(0.25,13);
@@ -904,9 +904,10 @@ void drawSwings()
 		0,-2,1.5, 0,-2,-1.5, 5,-2,-1.5, 5,-2,1.5
 	};
 
-	GLfloat colors1[56] = {0.3};
+	GLfloat colors1[168] = {0.3};
 
-	GLfloat colors[16]={0.3};
+	GLfloat colors[48]={0.3};
+	//glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 	glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
@@ -929,6 +930,11 @@ void drawSwings()
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
     glDrawArrays(GL_QUADS, 0, 16);
+
+    for(int ii=0;ii<48;ii++)
+    {
+    	colors[ii]=0;
+    }
 
     glTranslatef(0.25,0,0);
     double cl = 0.5/4;
@@ -1082,64 +1088,82 @@ void drawUnitCube(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 }
 
 void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
-glPushMatrix();
+	int i;
 	glPushMatrix();
-		glScalef(0.5,5,0.5);				// Left leg back
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
-	
-	glPushMatrix();
-		glTranslatef(10,0,0);				// Right leg back
-		glScalef(0.5,5,0.5);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
-	
-	glPushMatrix();
-		glTranslatef(0,0,5);				// Left leg front
-		glScalef(0.5,3,0.5);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
-	
-	glPushMatrix();
-		glTranslatef(10,0,5);				// Right leg front
-		glScalef(0.5,3,0.5);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
+	glTranslatef(-25,0,-45);
+	for(i=0;i<8;i++)
+	{
+		glScalef(0.8,0.8,0.8);
+		glPushMatrix();
+			glPushMatrix();
+				glScalef(0.5,5,0.5);				// Left leg back
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(10,0,0);				// Right leg back
+				glScalef(0.5,5,0.5);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,0,5);				// Left leg front
+				glScalef(0.5,3,0.5);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(10,0,5);				// Right leg front
+				glScalef(0.5,3,0.5);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
 
-	glPushMatrix();
-		glTranslatef(0,2,0);				// Seat
-		glScalef(10,0.5,5);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,2,0);				// Seat
+				glScalef(10,0.5,5);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
 
-	glPushMatrix();
-		glTranslatef(0,3,0);				// left handrest
-		glScalef(0.5,0.5,6);
-		drawUnitCube(red,green,blue);
+			glPushMatrix();
+				glTranslatef(0,3,0);				// left handrest
+				glScalef(0.5,0.5,6);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(10,3,0);				// Right handrest
+				glScalef(0.5,0.5,6);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,5,0);				// Top bar
+				glScalef(10.5,0.5,0.5);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,3,0);				// back bar
+				glScalef(10,0.5,0.5);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,4,0);				// back bar
+				glScalef(10.5,0.5,0.5);
+				drawUnitCube(red,green,blue);
+			glPopMatrix();
+		glPopMatrix();
+		glScalef(1.25,1.25,1.25);
+		if(i%2!=0)
+		{
+			glTranslatef(20,0,20);
+			glRotatef(-90,0,1,0);
+		}
+		else
+		{
+			glTranslatef(50,0,0);
+		}
+	}
 	glPopMatrix();
-	
-	glPushMatrix();
-		glTranslatef(10,3,0);				// Right handrest
-		glScalef(0.5,0.5,6);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
-	
-	glPushMatrix();
-		glTranslatef(0,5,0);				// Top bar
-		glScalef(10.5,0.5,0.5);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
-	
-	glPushMatrix();
-		glTranslatef(0,3,0);				// back bar
-		glScalef(10,0.5,0.5);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
-	
-	glPushMatrix();
-		glTranslatef(0,4,0);				// back bar
-		glScalef(10.5,0.5,0.5);
-		drawUnitCube(red,green,blue);
-	glPopMatrix();
-glPopMatrix();
 }
