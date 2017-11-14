@@ -1,9 +1,18 @@
+/** \file Scene.h
+Implementation file for functions to draw primitive shapes & other objects.
+*/
+
 #include "Scene.h"
 #include "Utility.h"
 #include <fstream>
 #include <vector>
 using namespace std;
 
+/**
+Method to draw a boundary centered at origin, with length, width & height 100,100 and 6.
+@param void
+@return void
+*/
 void drawBoundary(){
 
 	// Rectangles
@@ -87,7 +96,11 @@ void drawBoundary(){
 //	alpha+=1;
 }
 
-
+/**
+Method to draw see-saw centered at origin, with length, width & height 16, 2 and 2.
+@param void
+@return void
+*/
 void drawSeeSaw(){
 
 	// For rectangles
@@ -181,6 +194,11 @@ void drawSeeSaw(){
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
+/**
+Method to draw a slide
+@param void
+@return void
+*/
 void drawSlide(){
 
 	GLfloat vertices[] = 
@@ -348,6 +366,15 @@ void drawSlide(){
     //alpha += 1;
 }
 
+/**
+Method to draw a solid colored cylinder with base centered at origin, and height towards positive z axis.
+@param radius: radius of cylinder
+@param height: height of cylinder
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 
 void drawCylinder(GLfloat radius, GLfloat height, GLfloat red = 0.3, GLfloat green = 0.3, GLfloat blue = 0.3)
 {
@@ -361,6 +388,15 @@ void drawCylinder(GLfloat radius, GLfloat height, GLfloat red = 0.3, GLfloat gre
 	glPopMatrix();
 }
 
+/**
+Method to draw a solid colored disk centered at origin, with inner & outer radius.
+@param inner_radius: inner radius of cylinder
+@param outer_radius: outer radius of cylinder
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 void drawDisk(GLfloat inner_radius, GLfloat outer_radius,GLfloat red = 0.3, GLfloat green = 0.3, GLfloat blue = 0.3){
 	glPushMatrix();
 	GLUquadric* obj;
@@ -372,6 +408,11 @@ void drawDisk(GLfloat inner_radius, GLfloat outer_radius,GLfloat red = 0.3, GLfl
 	glPopMatrix();
 }
 
+/**
+Method to draw a Jungle gym
+@param void
+@return void
+*/
 void drawJungleGym()
 {	
 	glPushMatrix();
@@ -677,6 +718,11 @@ void drawJungleGym()
 	glPopMatrix();
 }
 
+/**
+Method to draw a Monkey bar
+@param void
+@return void
+*/
 void drawMonkeyBars()
 {
 	glPushMatrix();
@@ -759,7 +805,11 @@ void drawMonkeyBars()
 	glPopMatrix();
 }
 
-
+/**
+Method to draw a Merry-go-round
+@param void
+@return void
+*/
 void drawMerryGoRound(){
 glPushMatrix();
 	glPushMatrix();
@@ -837,7 +887,11 @@ glPushMatrix();
 glPopMatrix();
 }
 
-
+/**
+Method to draw swings
+@param void
+@return void
+*/
 void drawSwings()
 {
 	glPushMatrix();
@@ -1038,6 +1092,13 @@ void drawSwings()
 	glPopMatrix();
 }
 
+/**
+Method to draw a colored solid unit cube with <left,bottom,back> point on origin.
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 void drawUnitCube(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	glPushMatrix();
 	GLfloat vertices[] =
@@ -1091,6 +1152,13 @@ void drawUnitCube(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
     glPopMatrix();
 }
 
+/**
+Method to draw a colored solid Bench with <left,bottom,back> point on origin.
+@param red: red component
+@param green: green component
+@param blue: blue component
+@return void
+*/
 void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	int i;
 	glPushMatrix();
@@ -1171,6 +1239,12 @@ void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	}
 	glPopMatrix();
 }
+
+/**
+Method to import an .obj file.
+@param objfile: obj file name
+@return void
+*/
 
 void importObjFile(const string& objfile)
 {

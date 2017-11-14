@@ -19,7 +19,6 @@ class Camera {
 		Vector3 u, v, n;
 		double viewAngle, aspect, nearDist, farDist;
 
-	
 	public:
 		Camera();
 		void setModelviewMatrix();
