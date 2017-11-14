@@ -943,13 +943,14 @@ void drawSwings()
 	glRotatef(-90,0,1,0);
 	
 	glTranslatef(2,0,0);
-	glPopMatrix();		// R
+	glPopMatrix();
 	
-glPushMatrix();			// R
-glTranslatef(-20,12,5);	// R
-static double beta = 25.0;
+	// Draw chains, seat and add movement
+glPushMatrix();
+glTranslatef(-20,12,5);
+static double beta = 25.0;	
 static double del_beta = -1.0f;
-glRotatef(beta,1,0,0);	// R
+glRotatef(beta,1,0,0);
 	glPushMatrix();
 
 	GLfloat vertices[] = 
