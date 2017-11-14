@@ -943,7 +943,15 @@ void drawSwings()
 	glRotatef(-90,0,1,0);
 	
 	glTranslatef(2,0,0);
+	glPopMatrix();		// R
 	
+glPushMatrix();			// R
+glTranslatef(-20,12,5);	// R
+static double beta = 25.0;
+static double del_beta = -1.0f;
+glRotatef(beta,1,0,0);	// R
+	glPushMatrix();
+
 	GLfloat vertices[] = 
 	{
 		// connections to rod.
@@ -1104,6 +1112,12 @@ void drawSwings()
 		}
 	}
 	glPopMatrix();
+	if(beta >= 25.0)
+	 del_beta = -1.0;
+	else if(beta <=-25.0)
+	 del_beta = 1.0;
+	beta += del_beta;
+glPopMatrix();
 }
 
 /**
