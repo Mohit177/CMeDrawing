@@ -19,6 +19,9 @@ GLfloat YAW = -90.0f, PITCH = 0.0f;
 bool static_view = false;
 double animation_speed = 1.0f;
 
+/**
+Mouse Button callback function to handle mouse click.
+*/
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
 	//	button : GLFW_MOUSE_BUTTON_LEFT or GLFW_MOUSE_BUTTON_RIGHT
@@ -40,6 +43,9 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     	field_of_view = 5.0;
 }
 
+/**
+Cursor postion callback to handle cursor position update.
+*/
 
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 
@@ -58,12 +64,10 @@ void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 	}
 }
 
-/*
-void cursor_enter_callback(GLFWwindow* window, int entered){
-	glfwSetCursorPos(window,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
-}
-*/
 
+/**
+Keyboard callback to handle key press events.
+*/
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if(action == GLFW_RELEASE)
@@ -116,6 +120,9 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
 
 }
 
+/**
+Method to initialize glfw window.
+*/
 GLFWwindow* initWindow(const int resX, const int resY)
 {
     if(!glfwInit())
@@ -156,6 +163,9 @@ GLFWwindow* initWindow(const int resX, const int resY)
     return window;
 }
 
+/**
+Method to display the primitives i.e redrawing the screen.
+*/
 
 void display( GLFWwindow* window )
 {
@@ -317,6 +327,9 @@ void display( GLFWwindow* window )
     }
 }
 
+/**
+Main function
+*/
 int main(int argc, char** argv)
 {
     GLFWwindow* window = initWindow(1024, 620);

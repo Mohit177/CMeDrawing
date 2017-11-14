@@ -542,153 +542,156 @@ Method to draw a Jungle gym
 */
 void drawJungleGym()
 {	
+	//14.0/255, 117.0/255, 142.0/255
+	//38.0/255, 11.0/255, 3.0/255
+	//4.0/255, 51.0/255, 11.0/255
 	glPushMatrix();
 	
 	glPushMatrix(); // fisrt vertical
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 	
 	glPushMatrix(); //fisrt horizontal
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // first back connectors
 	glTranslatef(0,5,-5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // second vertical
 	glTranslatef(0,0,-5);
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); //second horizontal
 	glTranslatef(0,0,-5);
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // second back connectors
 	glTranslatef(0,0,-5);
 	glTranslatef(0,5,-5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // third vertical
 	glTranslatef(0,0,-10);
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); //third horizontal
 	glTranslatef(0,0,-10);
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // third back connectors
 	glTranslatef(0,0,-10);
 	glTranslatef(0,5,-5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // fourth vertical
 	glTranslatef(0,0,-15);
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); //fourth horizontal
 	glTranslatef(0,0,-15);
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	// layer - 2
@@ -696,149 +699,149 @@ void drawJungleGym()
 	glTranslatef(0,5,0);
 	glPushMatrix(); // fisrt vertical
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 	
 	glPushMatrix(); //fisrt horizontal
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // first back connectors
 	glTranslatef(0,5,-5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // second vertical
 	glTranslatef(0,0,-5);
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); //second horizontal
 	glTranslatef(0,0,-5);
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // second back connectors
 	glTranslatef(0,0,-5);
 	glTranslatef(0,5,-5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // third vertical
 	glTranslatef(0,0,-10);
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); //third horizontal
 	glTranslatef(0,0,-10);
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // third back connectors
 	glTranslatef(0,0,-10);
 	glTranslatef(0,5,-5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // fourth vertical
 	glTranslatef(0,0,-15);
 	glRotatef(-90,1,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glTranslatef(5,0,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,4.0/255, 51.0/255, 11.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); //fourth horizontal
 	glTranslatef(0,0,-15);
 	glRotatef(90,0,1,0);
 	glTranslatef(0,5,0);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glTranslatef(0,0,5);
-	drawCylinder(0.5,5);
+	drawCylinder(0.5,5,38.0/255, 11.0/255, 3.0/255);
 	glPopMatrix();
 	
 	glPopMatrix();
@@ -852,6 +855,8 @@ Method to draw a Monkey bar
 */
 void drawMonkeyBars()
 {
+
+	//237.0/255, 141.0/255, 33.0/255
 	glPushMatrix();
 	glTranslatef(0,0,10);
 
@@ -872,28 +877,28 @@ void drawMonkeyBars()
 
 	glPushMatrix(); // left steps
 	glTranslatef(0,2,-3);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glPopMatrix();
 
 	glPushMatrix(); // right steps
 	glTranslatef(20,2,-3);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(0,2,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glPopMatrix();
 
 
@@ -908,23 +913,23 @@ void drawMonkeyBars()
 	glPushMatrix();
 	glTranslatef(0,10,-3);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	glTranslatef(2,0,0);
-	drawCylinder(0.5,3);
+	drawCylinder(0.5,3,237.0/255, 141.0/255, 33.0/255);
 	
 
 	glPopMatrix();
