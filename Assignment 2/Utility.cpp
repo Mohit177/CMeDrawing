@@ -41,9 +41,7 @@ void Point3::set(float x_, float y_, float z_){
 
 /**
 Method to set a 3D point with another 3D point.
-@param x_: x coordinate
-@param y_: y coordinate
-@param z_: z coordinate
+@param p: Point3 object
 @return: void
 */
 void Point3::set(Point3 p){
@@ -88,9 +86,7 @@ void Vector3::set(float x_, float y_, float z_){
 
 /**
 Method to set a 3D vector with another 3D vector.
-@param x_: x coordinate
-@param y_: y coordinate
-@param z_: z coordinate
+@param v: Vector3 object
 @return: void
 */
 void Vector3::set(Vector3 v){
@@ -101,9 +97,7 @@ void Vector3::set(Vector3 v){
 
 /**
 Method to normalize a 3D vector.
-@param x_: x coordinate
-@param y_: y coordinate
-@param z_: z coordinate
+@param void
 @return: void
 */
 void Vector3::normalize(){
@@ -114,9 +108,7 @@ void Vector3::normalize(){
 
 /**
 Method to find dot product with another 3D vector.
-@param x_: x coordinate
-@param y_: y coordinate
-@param z_: z coordinate
+@param b: Vector3 object
 @return: dot product
 */
 float Vector3::dot(Vector3 b){
@@ -127,9 +119,7 @@ float Vector3::dot(Vector3 b){
 
 /**
 Method to find cross product with another 3D vector.
-@param x_: x coordinate
-@param y_: y coordinate
-@param z_: z coordinate
+@param b: Vector3 object
 @return: cross product
 */
 Vector3 Vector3::cross(Vector3 b){
@@ -142,10 +132,8 @@ Vector3 Vector3::cross(Vector3 b){
 
 /**
 Method to find difference vector, with another 3D vector.
-@param x_: x coordinate
-@param y_: y coordinate
-@param z_: z coordinate
-@return: dot product
+@param b: Vector3 object
+@return: difference vector
 */
 Vector3 Vector3::diff(Vector3 b)
 {
