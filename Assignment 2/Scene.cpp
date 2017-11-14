@@ -126,94 +126,86 @@ Method to draw see-saw centered at origin, with length, width & height 16, 2 and
 void drawSeeSaw(){
 
 	// For rectangles
-    GLfloat vertices[] =
-    {
-    	// Wedge
-		-1,0,-1,	0,2,-1,		0,2,1,	-1,0,1,		// Left face of Wedge
-		1,0,-1,		0,2,-1,		0,2,1,	1,0,1,		// Right face of Wedge
+	glPushMatrix();
+		GLfloat vert_rect[] = {-1,0,-1,	0,2,-1,		0,2,1,	-1,0,1,			1,0,-1,		0,2,-1,		0,2,1,	1,0,1};
+		GLfloat vert_triangles[] = {-1,0,1,		0,2,1,		1,0,1,			-1,0,-1,	0,2,-1,	1,0,-1};
+
+		GLfloat colors[96] = {0.0f};
+
+		/* Enable color array and a vertex array */
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, vert_rect);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+    
+		// Draw outline
+		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+		glEnable(GL_POLYGON_OFFSET_LINE);
+		glPolygonOffset(-1.f,-1.f);
+		glEnable(GL_DEPTH_TEST);
+		glDrawArrays(GL_QUADS, 0, 8);			// Draw wire rectangles
 		
-		// Inclined plane
-		-8,0,-1,					8,4,-1,					8,4,1,					-8,0,1,					//  bottom face
-		-8.097014,0.124254,-1,		7.902985,4.124253,-1,	7.902986,4.124253,1,	-8.097014,0.124254,1,		//	top face
-		-8,0,-1,					8,4,-1,					7.902985,4.124253,-1,   -8.097014, 0.124254,-1,	// rear face
-		-8,0,1,						8,4,1,					7.902985,4.124253,1,	-8.097014, 0.124254,1,		// front face
-		-8,0,-1,					-8,0,1,					-8.097014,0.124254,1,	-8.097014,0.124254,-1,		// Left face
-		8,4,-1,						8,4,1,					7.902985,4.124253,1,	7.902985,4.124253,-1		// Right face
-    };
-    
-    GLfloat vert_triangles[] = 
-    {
-		-1,0,1,		0,2,1,	1,0,1,			// Front face of Wedge
-    	-1,0,-1,	0,2,-1,	1,0,-1		// Rear face of Wedge
-    };
+	    glDisableClientState(GL_COLOR_ARRAY);
+	    glDisableClientState(GL_VERTEX_ARRAY);				
+	glPopMatrix();
 
-    GLfloat colors[96] = {0.0f};			// Each vertex has a color component
-   /* {
-    	// Wedge
-        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,			
-        0.3, 0.3, 0.3,	0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,	 0.3, 0.3, 0.3,
-        // Inclined plane
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,
-	    0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35,	0.35, 0.35, 0.35
-    };
+	glPushMatrix();
+		static double alpha = 15.466009963004;
+		static double d_angle = 0.8f;
+		glRotatef(alpha,0,0,1);
+		glPushMatrix();
+			glTranslatef(-7.5,2,1);
+			glScalef(15,0.3,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-5.5,2,1);
+			glScalef(0.3,1,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(5.5,2,1);
+			glScalef(0.3,1,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		if(alpha >= 15.466009963004)
+			d_angle = -0.8f;
+		else if(alpha <= -15.466009963004)
+			d_angle = 0.8f;
+		alpha += d_angle;
+	glPopMatrix();
+//----		Solid -----
+	glPushMatrix();
+		// Set Red Color
+		for(int i=0;i<96;i+=3){
+			colors[i] = 1.0; colors[i+1]=0.0; colors[i+2]=0.0;
+		}
     
-    */
+		// Draw Triangles, 6 vertices
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, vert_triangles);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+		
+		glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-/*	static float alpha = 0;
-    //attempt to rotate cube
-    glRotatef(alpha, 1, 1, 1);			// Comment this line to stop rotation about y axis.
-*/
-
-    /* Enable color array and a vertex array */
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(3, GL_FLOAT, 0, colors);
-    
-    // Draw outline
-    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-    glEnable(GL_POLYGON_OFFSET_LINE);
-	glPolygonOffset(-1.f,-1.f);
-    glEnable(GL_DEPTH_TEST);
-    glDrawArrays(GL_QUADS, 0, 32);
-    
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    
-    // Set Red Color
-    for(int i=0;i<96;i+=3){
-    	colors[i] = 1.0; colors[i+1]=0.0; colors[i+2]=0.0;
-    }
-    
-    // Draw Triangles, 6 vertices
-    glVertexPointer(3, GL_FLOAT, 0, vert_triangles);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY); 
-	
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(3, GL_FLOAT, 0, colors);
-	
-	// Set Blue Color for wedge
-    for(int i=24;i<96;i+=3){
-    	colors[i] = 0.0; colors[i+1]=0.0; colors[i+2]=1.0;
-    }
-    
-    // Draw rectangles, 32 vertices
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    glDrawArrays(GL_QUADS, 0, 32);
-   
+		glVertexPointer(3, GL_FLOAT, 0, vert_rect);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+		glDrawArrays(GL_QUADS, 0, 8);
+	   
     
     /* Cleanup states */
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
+	    glDisableClientState(GL_COLOR_ARRAY);
+	    glDisableClientState(GL_VERTEX_ARRAY);
+	glPopMatrix();
+    
 }
 
 /**
