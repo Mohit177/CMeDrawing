@@ -25,14 +25,20 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	//	button : GLFW_MOUSE_BUTTON_LEFT or GLFW_MOUSE_BUTTON_RIGHT
 	//	action : GLFW_PRESS or GLFW_RELEASE
 	
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && zoom_level<3){
-    	if(cam.slide(0,0,-30))		// If camera can slide forward, do it and increase zoom level
-			zoom_level++;
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+    	field_of_view -= 10;
+//    	if(cam.slide(0,0,-30))		// If camera can slide forward, do it and increase zoom level
+//			zoom_level++;
     }
-    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS && zoom_level>0){
-    	if(cam.slide(0,0,30))		// If camera can slide backward, do it and decrease zoom level
-			zoom_level--;
+    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
+        	field_of_view += 10;
+//    	if(cam.slide(0,0,30))		// If camera can slide backward, do it and decrease zoom level
+//			zoom_level--;
     }
+    if(field_of_view>85.0)
+    	field_of_view = 85.0;
+    else if(field_of_view < 5.0)
+    	field_of_view = 5.0;
 }
 
 
@@ -143,10 +149,6 @@ GLFWwindow* initWindow(const int resX, const int resY)
 	glfwSetCursorPosCallback(window, cursor_position_callback);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	
-    // Get info of GPU and supported OpenGL version
-    printf("Renderer: %s\n", glGetString(GL_RENDERER));
-    printf("OpenGL version supported %s\n", glGetString(GL_VERSION));
-
     glEnable(GL_DEPTH_TEST); // Depth Testing
     glDepthFunc(GL_LEQUAL);
     glDisable(GL_CULL_FACE);
@@ -171,17 +173,13 @@ void display( GLFWwindow* window )
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-/*		glMatrixMode(GL_PROJECTION_MATRIX);
-        glLoadIdentity();
-        gluPerspective( 45.0f, (double)windowWidth / (double)windowHeight, 0.1, 3000 );
-
-        glMatrixMode(GL_MODELVIEW_MATRIX);
-*/
+		cam.setShape(field_of_view, SCREEN_WIDTH/SCREEN_HEIGHT, 10.0f, 1000.0);
+	
     glPushMatrix();
 		drawBoundary();
 		
 		glPushMatrix();
-			glTranslatef(-40,0,-40);			// Monkey bar
+			glTranslatef(-35,0,-40);			// Monkey bar
 	        drawMonkeyBars();
 		glPopMatrix();
 		
@@ -192,7 +190,7 @@ void display( GLFWwindow* window )
 
 		glPushMatrix();
 			glTranslatef(-10,0,20);
-			glScalef(0.8,1,1);			// Slide
+			glScalef(0.8,1,1);				// Swing
 	        drawSwings();
 		glPopMatrix();
 		
@@ -244,7 +242,7 @@ int main(int argc, char** argv)
 {
     GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
-	cam.setShape(80.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01, 1000.0);
+	cam.setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 10.0, 1000.0);
     importObjFile("first.obj","first.mtl");
     if( NULL != window )
     {
