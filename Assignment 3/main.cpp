@@ -22,8 +22,8 @@ Test file containing main function.
 #include "Point2.h"
 
 using namespace std;
-const double SCREEN_WIDTH = 1024.0;
-const double SCREEN_HEIGHT = 768.0;
+const int SCREEN_WIDTH = 1301.0;
+const int SCREEN_HEIGHT = 744.0;
 
 std::vector<Point2> point_buffer;
 std::vector<Point2> control_points;
@@ -39,8 +39,16 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
 		double xPos=0.0, yPos = 0.0;
 		glfwGetCursorPos(window, &xPos,&yPos);
+		
+		int width=0, height=0;
+		glfwGetWindowSize(window, &width, &height);
+		std::cout << width <<" "<<height <<"\n";
+		
+		xPos = (xPos*SCREEN_WIDTH)/width;
+		yPos = (yPos*SCREEN_HEIGHT)/height;
+		
 		control_points.push_back(Point2(xPos,yPos));
-		std::cout << xPos <<" "<< yPos <<"\n";
+		std::cout <<"Mouse click: "<< xPos <<" "<< yPos <<"\n";
     }
     else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
         
@@ -51,7 +59,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 Cursor postion callback to handle cursor position update.
 */
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
-
+//	std::cout << xPos << " "<< yPos <<"\n";
 }
 
 
@@ -76,6 +84,10 @@ GLFWwindow* initWindow(const int resX, const int resY){
     }
 
     // Open a window and create its OpenGL context
+//    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+//  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+//  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+//  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     GLFWwindow* window = glfwCreateWindow(resX, resY, "Bezier curve", NULL, NULL); // glfwGetPrimaryMonitor()
 
     if(window == NULL)
@@ -110,6 +122,7 @@ GLFWwindow* initWindow(const int resX, const int resY){
 }
 
 void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double blue=0.0){
+	glPointSize(2);  
 	glColor3f(red, green,blue);
 	glBegin(GL_POINTS);
 		glVertex2f(xPos,yPos);
@@ -143,7 +156,7 @@ void display( GLFWwindow* window ){
 
 	    //attempt to draw lines
 	    for(Point2 point: control_points ){
-	    	drawPixel(point.x , point.y);
+	    	drawPixel(point.x , point.y, 1.0, 1.0, 0.0);
 	    }
 	    
 		drawCurve();
@@ -158,6 +171,10 @@ void display( GLFWwindow* window ){
 Main function
 */
 int main(int argc, char** argv){
+
+int a,b,c;
+glfwGetVersion(&a,&b,&c);
+std:: cout << a <<" " << b <<" "<<c;
     GLFWwindow* window = initWindow(1024, 620);
 
     if( window != NULL )
