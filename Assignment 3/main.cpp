@@ -1,6 +1,10 @@
-/**	\file demo.cpp
+/**	\file main.cpp
 Test file containing main function.
 */
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -15,43 +19,28 @@ Test file containing main function.
 #include <unistd.h>
 #include <ctime>
 
+#include "Point2.h"
+
 using namespace std;
 const double SCREEN_WIDTH = 1024.0;
 const double SCREEN_HEIGHT = 768.0;
 
-class Point2
-{
-	public:
-		double x,y;
-		Point2();
-		Point2(double x, double y);
-		void setCords(double x, double y);
-};
+std::vector<Point2> point_buffer;
+std::vector<Point2> control_points;
 
-Point2::Point2()
-{
-	this->x = 0;
-	this->y = 0;
-}
+// function definitions
+void drawPixel(double xPos, double yPos, double red, double green, double blue);
 
-Point2::Point2(double x,double y)
-{
-	this->x = x;
-	this->y = y;
-}
-
-void Point2::setCords(double x, double y)
-{
-	this->x = x;
-	this->y = y;
-}
 
 /**
 Mouse Button callback function to handle mouse click.
 */
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
-  	
+		double xPos=0.0, yPos = 0.0;
+		glfwGetCursorPos(window, &xPos,&yPos);
+		control_points.push_back(Point2(xPos,yPos));
+		std::cout << xPos <<" "<< yPos <<"\n";
     }
     else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
         
@@ -108,24 +97,26 @@ GLFWwindow* initWindow(const int resX, const int resY){
 	// Set Cursor position function
 	glfwSetCursorPosCallback(window, cursor_position_callback);
 	
-	// Set Cursor shape to Cross-hair
-//	GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_CROSSHAIR_CURSOR);
-//	glfwSetCursor(window, cursor);
-
-	
 	// Set cursor to center initailly
-	glfwSetCursorPos(window,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+	int width, height;
+	glfwGetWindowSize(window, &width, &height);
+	glfwSetCursorPos(window,width/2,height/2);
     
     return window;
 }
 
-
-
-void drawPixel(double xPos,double yPos){
+void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double blue=0.0){
+	glColor3f(red, green,blue);
 	glBegin(GL_POINTS);
-		for(int i=0;i<100;i++)
-			glVertex3f((unsigned int)xPos,(unsigned int)yPos+i,0);
-	glEnd();
+		glVertex2f(xPos,yPos);
+	glEnd();	
+}
+
+
+void drawCurve(){
+	for(int i=0;i<point_buffer.size();i++){
+		drawPixel(point_buffer[i].x, point_buffer[i].y);
+	}
 }
 
 /**
@@ -134,8 +125,10 @@ Method to display the primitives i.e redrawing the screen.
 void display( GLFWwindow* window ){
 
     while(!glfwWindowShouldClose(window)){
-
-		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+		int width=0, height=0;
+		glfwGetWindowSize(window, &width, &height);
+		glViewport(0, 0, width, height);
+		
         glClear(GL_COLOR_BUFFER_BIT);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -145,8 +138,11 @@ void display( GLFWwindow* window ){
         glLoadIdentity();
 
 	    //attempt to draw lines
-	    glColor3f(1.0,0.0,0.0);
-		drawPixel(100,100);
+	    for(Point2 point: control_points ){
+	    	drawPixel(point.x , point.y);
+	    }
+	    
+		drawCurve();
 
     	glfwSwapBuffers(window);
 	    glfwPollEvents();
