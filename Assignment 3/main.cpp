@@ -51,7 +51,27 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 		std::cout <<"Mouse click: "<< xPos <<" "<< yPos <<"\n";
     }
     else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
-        
+        double xPos=0.0, yPos=0.0;
+        glfwGetCursorPos(window, &xPos, &yPos);
+
+        int width = 0;
+        int height = 0;
+        glfwGetWindowSize(window,&width, &height);
+        cout<<width<<" "<<height<<endl;
+
+        xPos = (xPos*SCREEN_WIDTH)/width;
+        yPos = (yPos*SCREEN_HEIGHT)/height;
+
+        int size = control_points.size();
+        int i;
+        for(i=0;i<size;i++)
+        {
+        	if(abs(control_points[i].x - xPos)<=3 && abs(control_points[i].y - yPos)<=3)
+        	{
+        		control_points.erase(control_points.begin()+i);
+        		break;
+        	}
+        }
     }
 }
 
@@ -59,7 +79,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 Cursor postion callback to handle cursor position update.
 */
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
-//	std::cout << xPos << " "<< yPos <<"\n";
+	std::cout << xPos << " "<< yPos <<"\n";
 }
 
 
@@ -173,7 +193,7 @@ Point2 interpolate(const Point2& p1, const Point2& p2, double t){
 	return pt;
 }
 
-void deCasteljau(std::vector<Point2> cp,double t){
+/*void deCasteljau(std::vector<Point2> cp,double t){
 	point_buffer.clear();
 
 	int size = cp.size();
@@ -186,7 +206,7 @@ void deCasteljau(std::vector<Point2> cp,double t){
 	}
 	
 	std::vector<Point2> temp_points = cp;
-	std::vecvtor<Point2> next_generation;
+	std::vector<Point2> next_generation;
 	
 	while(temp_points.size()>1){
 		for(int i=0;i<temp_points.size()-1;i++){
@@ -201,7 +221,7 @@ void deCasteljau(std::vector<Point2> cp,double t){
 		nextIt.push_back(ip);
 	}
 	deCasteljau(nextIt,t);
-}
+}*/
 
 	
 /**
