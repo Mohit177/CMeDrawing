@@ -131,8 +131,8 @@ void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double
 
 
 void drawCurve(){
-	for(int i=0;i<point_buffer.size();i++){
-		drawPixel(point_buffer[i].x, point_buffer[i].y);
+	for(const Point2& point: point_buffer){
+		drawPixel(point.x, point.y);
 	}
 }
 
@@ -155,7 +155,7 @@ void display( GLFWwindow* window ){
         glLoadIdentity();
 
 	    //attempt to draw lines
-	    for(Point2 point: control_points ){
+	    for(const Point2& point: control_points ){
 	    	drawPixel(point.x , point.y, 1.0, 1.0, 0.0);
 	    }
 	    
@@ -164,6 +164,43 @@ void display( GLFWwindow* window ){
     	glfwSwapBuffers(window);
 	    glfwPollEvents();
     }
+}
+
+Point2 interpolate(const Point2& p1, const Point2& p2, double t){
+	Point2 pt;
+	pt.x = p1.x*t + p2.x*(1-t);
+	pt.y = p1.y*t + p2.y*(1-t);
+	return pt;
+}
+
+void deCasteljau(std::vector<Point2> cp,double t){
+	point_buffer.clear();
+
+	int size = cp.size();
+	if(size==0){
+		return;	
+	}
+	if(size==1){
+		point_buffer.push_back(cp[0]);
+		return;
+	}
+	
+	std::vector<Point2> temp_points = cp;
+	std::vecvtor<Point2> next_generation;
+	
+	while(temp_points.size()>1){
+		for(int i=0;i<temp_points.size()-1;i++){
+			Point2 intermdiate = interpolate(temp_points[i], temp_points[i+1],);
+		}
+	}
+	int i;
+	vector<Point2> nextIt;
+	for(i=1;i<size;i++)
+	{
+		Point2 ip = interpolate(cp[i],cp[i-1],t);
+		nextIt.push_back(ip);
+	}
+	deCasteljau(nextIt,t);
 }
 
 	
