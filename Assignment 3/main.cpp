@@ -1,3 +1,6 @@
+/**	\file demo.cpp
+Test file containing main function.
+*/
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -11,10 +14,11 @@
 #include <stack>
 #include <unistd.h>
 #include <ctime>
-#include "../include/lsystem.cpp"
 
 using namespace std;
-unsigned int prod = 255*255*255;
+const double SCREEN_WIDTH = 1024.0;
+const double SCREEN_HEIGHT = 768.0;
+
 class Point2
 {
 	public:
@@ -42,35 +46,125 @@ void Point2::setCords(double x, double y)
 	this->y = y;
 }
 
-int main()
-{
-	Context context; //Creating an OpenGL context
-	context.initialize(); // initializing context
-	char name[]="My window";
-	context.createWindow(1200,700,name); // window of dimension 1200x700 pixels
-	Primitive p = Primitive(&context);
-	int i;
-	double x1 = 50;
-	double y1 = 50;
-	color_t color;
-	color.r = 255*prod;
-	color.g = 255*prod;
-	color.b=0;
-	for(i=0;i<100;i++)
-	{
-		p.drawPixel(p.makePoint<double>(x1+i,y1+i),color);
+/**
+Mouse Button callback function to handle mouse click.
+*/
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+  	
+    }
+    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
+        
+    }
+}
+
+/**
+Cursor postion callback to handle cursor position update.
+*/
+void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
+
+}
+
+
+/**
+Keyboard callback to handle key press events.
+*/
+void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
+	if(key == GLFW_KEY_ESCAPE){
+		glfwSetWindowShouldClose(window, GL_TRUE);
+		return;
 	}
-	//p.drawPixel(p.makePoint<double>(x1+100,y1+20),color);
-	color_t* buffer = context.getFrameBuffer();
-	glfwSwapBuffers(context.getWindow());
-	glfwPollEvents();
-	//while the close button of window not pressed, the window keeps refreshing
-	while(!glfwWindowShouldClose(context.getWindow()))
-	{
-		glDrawPixels(context.getWindowWidth(),context.getWindowHeight(),GL_RGB,GL_UNSIGNED_INT,buffer);
-		glfwSwapBuffers(context.getWindow());
-		glfwPollEvents();
-	}
-	context.terminate(); //destroys window
-	return 0;
+}
+
+/**
+Method to initialize glfw window.
+*/
+GLFWwindow* initWindow(const int resX, const int resY){
+    if(!glfwInit())
+    {
+        fprintf(stderr, "Failed to initialize GLFW\n");
+        return NULL;
+    }
+
+    // Open a window and create its OpenGL context
+    GLFWwindow* window = glfwCreateWindow(resX, resY, "Bezier curve", NULL, NULL); // glfwGetPrimaryMonitor()
+
+    if(window == NULL)
+    {
+        fprintf(stderr, "Failed to open GLFW window.\n");
+        glfwTerminate();
+        return NULL;
+    }
+
+    glfwMakeContextCurrent(window);
+    
+    // Keyboard settings
+    glfwSetKeyCallback(window, keyboard_callback);
+    
+    // Set Mouse Button function
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetInputMode( window, GLFW_STICKY_MOUSE_BUTTONS, 1 );
+	
+	// Set Cursor position function
+	glfwSetCursorPosCallback(window, cursor_position_callback);
+	
+	// Set Cursor shape to Cross-hair
+//	GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_CROSSHAIR_CURSOR);
+//	glfwSetCursor(window, cursor);
+
+	
+	// Set cursor to center initailly
+	glfwSetCursorPos(window,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+    
+    return window;
+}
+
+
+
+void drawPixel(double xPos,double yPos){
+	glBegin(GL_POINTS);
+		for(int i=0;i<100;i++)
+			glVertex3f((unsigned int)xPos,(unsigned int)yPos+i,0);
+	glEnd();
+}
+
+/**
+Method to display the primitives i.e redrawing the screen.
+*/
+void display( GLFWwindow* window ){
+
+    while(!glfwWindowShouldClose(window)){
+
+		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+
+        glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+	    //attempt to draw lines
+	    glColor3f(1.0,0.0,0.0);
+		drawPixel(100,100);
+
+    	glfwSwapBuffers(window);
+	    glfwPollEvents();
+    }
+}
+
+	
+/**
+Main function
+*/
+int main(int argc, char** argv){
+    GLFWwindow* window = initWindow(1024, 620);
+
+    if( window != NULL )
+    {
+        display( window );
+    }
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    return 0;
 }
