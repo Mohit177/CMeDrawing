@@ -30,7 +30,7 @@ std::vector<Point2> control_points;
 
 // function definitions
 void drawPixel(double xPos, double yPos, double red, double green, double blue);
-
+void deCasteljau(double t);
 
 /**
 Mouse Button callback function to handle mouse click.
@@ -121,8 +121,8 @@ GLFWwindow* initWindow(const int resX, const int resY){
     return window;
 }
 
-void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double blue=0.0){
-	glPointSize(2);  
+void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double blue=0.0, int pixel_size=1){
+	glPointSize(pixel_size);  
 	glColor3f(red, green,blue);
 	glBegin(GL_POINTS);
 		glVertex2f(xPos,yPos);
@@ -153,12 +153,12 @@ void display( GLFWwindow* window ){
         glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-
-	    //attempt to draw lines
-	    for(const Point2& point: control_points ){
-	    	drawPixel(point.x , point.y, 1.0, 1.0, 0.0);
+	    
+	    for(const Point2& p: control_points){
+	    	drawPixel(p.x, p.y, 1.0, 1.0, 0.0,2);
 	    }
 	    
+	    deCasteljau((double)0.5);
 		drawCurve();
 
     	glfwSwapBuffers(window);
@@ -173,34 +173,32 @@ Point2 interpolate(const Point2& p1, const Point2& p2, double t){
 	return pt;
 }
 
-void deCasteljau(std::vector<Point2> cp,double t){
+void deCasteljau(double t){
 	point_buffer.clear();
-
-	int size = cp.size();
-	if(size==0){
-		return;	
-	}
-	if(size==1){
-		point_buffer.push_back(cp[0]);
-		return;
-	}
+	for(double t= (double)0.0; t<= (double)1.0; t += 0.0001){
 	
-	std::vector<Point2> temp_points = cp;
-	std::vecvtor<Point2> next_generation;
-	
-	while(temp_points.size()>1){
-		for(int i=0;i<temp_points.size()-1;i++){
-			Point2 intermdiate = interpolate(temp_points[i], temp_points[i+1],);
+		int size = control_points.size();
+		if(size==0){
+			return;	
 		}
+		if(size==1){
+			point_buffer.push_back(control_points[0]);
+			return;
+		}
+	
+		std::vector<Point2> temp_points = control_points;
+		std::vector<Point2> next_generation;
+	
+		while(temp_points.size()>1){
+			next_generation.clear();
+			for(int i=0;i<temp_points.size()-1;i++){
+				Point2 intermediate = interpolate(temp_points[i], temp_points[i+1],t);
+				next_generation.emplace_back(intermediate);
+			}
+			temp_points = next_generation;
+		}
+		point_buffer.push_back(temp_points[0]);
 	}
-	int i;
-	vector<Point2> nextIt;
-	for(i=1;i<size;i++)
-	{
-		Point2 ip = interpolate(cp[i],cp[i-1],t);
-		nextIt.push_back(ip);
-	}
-	deCasteljau(nextIt,t);
 }
 
 	
