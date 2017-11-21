@@ -30,7 +30,7 @@ std::vector<Point2> control_points;
 
 // function definitions
 void drawPixel(double xPos, double yPos, double red, double green, double blue);
-
+void deCasteljau(double t);
 
 /**
 Mouse Button callback function to handle mouse click.
@@ -141,8 +141,8 @@ GLFWwindow* initWindow(const int resX, const int resY){
     return window;
 }
 
-void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double blue=0.0){
-	glPointSize(2);  
+void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double blue=0.0, int pixel_size=1){
+	glPointSize(pixel_size);  
 	glColor3f(red, green,blue);
 	glBegin(GL_POINTS);
 		glVertex2f(xPos,yPos);
@@ -173,12 +173,12 @@ void display( GLFWwindow* window ){
         glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-
-	    //attempt to draw lines
-	    for(const Point2& point: control_points ){
-	    	drawPixel(point.x , point.y, 1.0, 1.0, 0.0);
+	    
+	    for(const Point2& p: control_points){
+	    	drawPixel(p.x, p.y, 1.0, 1.0, 0.0,2);
 	    }
 	    
+	    deCasteljau((double)0.5);
 		drawCurve();
 
     	glfwSwapBuffers(window);
@@ -192,36 +192,6 @@ Point2 interpolate(const Point2& p1, const Point2& p2, double t){
 	pt.y = p1.y*t + p2.y*(1-t);
 	return pt;
 }
-
-/*void deCasteljau(std::vector<Point2> cp,double t){
-	point_buffer.clear();
-
-	int size = cp.size();
-	if(size==0){
-		return;	
-	}
-	if(size==1){
-		point_buffer.push_back(cp[0]);
-		return;
-	}
-	
-	std::vector<Point2> temp_points = cp;
-	std::vector<Point2> next_generation;
-	
-	while(temp_points.size()>1){
-		for(int i=0;i<temp_points.size()-1;i++){
-			Point2 intermdiate = interpolate(temp_points[i], temp_points[i+1],);
-		}
-	}
-	int i;
-	vector<Point2> nextIt;
-	for(i=1;i<size;i++)
-	{
-		Point2 ip = interpolate(cp[i],cp[i-1],t);
-		nextIt.push_back(ip);
-	}
-	deCasteljau(nextIt,t);
-}*/
 
 	
 /**
