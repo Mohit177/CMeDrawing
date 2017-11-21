@@ -86,6 +86,7 @@ GLFWwindow* initWindow(const int resX, const int resY){
     }
 
     glfwMakeContextCurrent(window);
+    glfwWindowHint(GLFW_RESIZABLE, false);
     
     // Keyboard settings
     glfwSetKeyCallback(window, keyboard_callback);
@@ -96,6 +97,9 @@ GLFWwindow* initWindow(const int resX, const int resY){
 	
 	// Set Cursor position function
 	glfwSetCursorPosCallback(window, cursor_position_callback);
+	
+	// Set window position
+	glfwSetWindowPos(window, 0, 0);
 	
 	// Set cursor to center initailly
 	int width, height;
