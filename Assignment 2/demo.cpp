@@ -155,6 +155,9 @@ GLFWwindow* initWindow(const int resX, const int resY)
 	glfwSetCursorPosCallback(window, cursor_position_callback);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	
+	// Set cursor to center initailly
+	glfwSetCursorPos(window,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+	
     glEnable(GL_DEPTH_TEST); // Depth Testing
     glDepthFunc(GL_LEQUAL);
     glDisable(GL_CULL_FACE);
@@ -232,9 +235,9 @@ void display( GLFWwindow* window )
 		
 		glPushMatrix();
 			glTranslatef(15,0,-15);
-			drawSeeSaw();						// See-saw 1
+			drawSeeSaw1();						// See-saw 1
 			glTranslatef(17,0,0);
-			drawSeeSaw();						// See-saw 2
+			drawSeeSaw2();						// See-saw 2
 		glPopMatrix();
 		
 		glPushMatrix();

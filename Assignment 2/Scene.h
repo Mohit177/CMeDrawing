@@ -12,7 +12,8 @@ Header file for functions to draw primitive shapes & other objects.
 #include <iostream>
 
 void drawBoundary();
-void drawSeeSaw();
+void drawSeeSaw1();
+void drawSeeSaw2();
 void drawSlide();
 void drawSlide1();
 void drawSwings();

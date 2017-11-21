@@ -130,7 +130,7 @@ Method to draw see-saw centered at origin, with length, width & height 16, 2 and
 @param void
 @return void
 */
-void drawSeeSaw(){
+void drawSeeSaw1(){
 
 	// For rectangles
 	glPushMatrix();
@@ -158,6 +158,96 @@ void drawSeeSaw(){
 
 	glPushMatrix();
 		static double alpha = 15.466009963004;
+		static double d_angle = 0.8f;
+		glRotatef(alpha,0,0,1);
+		glPushMatrix();
+			glTranslatef(-7.5,2,1);
+			glScalef(15,0.3,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(-5.5,2,1);
+			glScalef(0.3,1,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(5.5,2,1);
+			glScalef(0.3,1,2);
+			glTranslatef(0,0,-1);
+			drawUnitCube(0.0,0.0,1.0);
+		glPopMatrix();
+		
+		if(alpha >= 15.466009963004)
+			d_angle = -0.8f;
+		else if(alpha <= -15.466009963004)
+			d_angle = 0.8f;
+		alpha += d_angle;
+	glPopMatrix();
+//----		Solid -----
+	glPushMatrix();
+		// Set Red Color
+		for(int i=0;i<96;i+=3){
+			colors[i] = 1.0; colors[i+1]=0.0; colors[i+2]=0.0;
+		}
+    
+		// Draw Triangles, 6 vertices
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, vert_triangles);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+		
+		glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glVertexPointer(3, GL_FLOAT, 0, vert_rect);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+		glDrawArrays(GL_QUADS, 0, 8);
+	   
+    
+    /* Cleanup states */
+	    glDisableClientState(GL_COLOR_ARRAY);
+	    glDisableClientState(GL_VERTEX_ARRAY);
+	glPopMatrix();
+    
+}
+
+/**
+Method to draw see-saw centered at origin, with length, width & height 16, 2 and 2.
+@param void
+@return void
+*/
+void drawSeeSaw2(){
+
+	// For rectangles
+	glPushMatrix();
+		GLfloat vert_rect[] = {-1,0,-1,	0,2,-1,		0,2,1,	-1,0,1,			1,0,-1,		0,2,-1,		0,2,1,	1,0,1};
+		GLfloat vert_triangles[] = {-1,0,1,		0,2,1,		1,0,1,			-1,0,-1,	0,2,-1,	1,0,-1};
+
+		GLfloat colors[96] = {0.0f};
+
+		/* Enable color array and a vertex array */
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, vert_rect);
+		glColorPointer(3, GL_FLOAT, 0, colors);
+    
+		// Draw outline
+		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+		glEnable(GL_POLYGON_OFFSET_LINE);
+		glPolygonOffset(-1.f,-1.f);
+		glEnable(GL_DEPTH_TEST);
+		glDrawArrays(GL_QUADS, 0, 8);			// Draw wire rectangles
+		
+	    glDisableClientState(GL_COLOR_ARRAY);
+	    glDisableClientState(GL_VERTEX_ARRAY);				
+	glPopMatrix();
+
+	glPushMatrix();
+		static double alpha = -5.00;
 		static double d_angle = 0.8f;
 		glRotatef(alpha,0,0,1);
 		glPushMatrix();
