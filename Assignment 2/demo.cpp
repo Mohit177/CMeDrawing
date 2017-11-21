@@ -246,13 +246,13 @@ void display( GLFWwindow* window )
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(-42,0,-42);
-			glScalef(2,2,2);
-			glTranslatef(0,2.3,0);			// Tree 1
+			glTranslatef(0,5,0);
+			glScalef(10,10,10);
+			//glTranslatef(0,2.3,0);			// Tree 1
 			drawObjFile();
 		glPopMatrix();
 
-		glPushMatrix();
+		/*glPushMatrix();
 			glTranslatef(42,0,-42);
 			glScalef(2,2,2);
 			glTranslatef(0,2.3,0);			// Tree 2
@@ -319,7 +319,7 @@ void display( GLFWwindow* window )
 			glTranslatef(7,0,-42);
 			glTranslatef(0,2.3,0);			// Tree 14
 			drawObjFile();
-		glPopMatrix();
+		glPopMatrix();*/
 		
     glPopMatrix();
         // Update Screen
@@ -338,7 +338,8 @@ int main(int argc, char** argv)
     GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
 	cam.setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01f, 1000.0);
-    importObjFile("first.obj","first.mtl");
+    importObjFile("train.obj","train.mtl");
+
     if( NULL != window )
     {
         display( window );

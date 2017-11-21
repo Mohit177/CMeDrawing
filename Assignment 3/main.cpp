@@ -193,6 +193,35 @@ Point2 interpolate(const Point2& p1, const Point2& p2, double t){
 	return pt;
 }
 
+void deCasteljau(double t)
+{
+	point_buffer.clear();
+	for(double t= (double)0.0; t<= (double)1.0; t += 0.0001){
+	
+		int size = control_points.size();
+		if(size==0){
+			return;	
+		}
+		if(size==1){
+			point_buffer.push_back(control_points[0]);
+			return;
+		}
+	
+		std::vector<Point2> temp_points = control_points;
+		std::vector<Point2> next_generation;
+	
+		while(temp_points.size()>1){
+			next_generation.clear();
+			for(int i=0;i<temp_points.size()-1;i++){
+				Point2 intermediate = interpolate(temp_points[i], temp_points[i+1],t);
+				next_generation.emplace_back(intermediate);
+			}
+			temp_points = next_generation;
+		}
+		point_buffer.push_back(temp_points[0]);
+	}
+}
+
 	
 /**
 Main function

@@ -206,7 +206,7 @@ void drawSeeSaw1(){
 		glVertexPointer(3, GL_FLOAT, 0, vert_rect);
 		glColorPointer(3, GL_FLOAT, 0, colors);
 		glDrawArrays(GL_QUADS, 0, 8);
-	   
+	    
     
     /* Cleanup states */
 	    glDisableClientState(GL_COLOR_ARRAY);
@@ -1574,6 +1574,8 @@ Method to import an .obj file.
 */
 void importObjFile(const string& objfile,const string& mtlfile)
 {
+	vset.clear();
+	cset.clear();
 	ifstream ifil;
 	int i,j;
 	string line;
@@ -1642,9 +1644,9 @@ void importObjFile(const string& objfile,const string& mtlfile)
 				for(i=0;i<size;i++)
 				{
 					TVertex tvx;
-					tvx.v1 = vlist[flist[i].p1];
-					tvx.v2 = vlist[flist[i].p2];
-					tvx.v3 = vlist[flist[i].p3];
+					tvx.v1 = vlist[flist[i].p1-1];
+					tvx.v2 = vlist[flist[i].p2-1];
+					tvx.v3 = vlist[flist[i].p3-1];
 					vset.push_back(tvx);
 				}
 				//cout<<"*****"<<endl;
@@ -1744,9 +1746,9 @@ void importObjFile(const string& objfile,const string& mtlfile)
 		for(i=0;i<size;i++)
 		{
 			TVertex tvx;
-			tvx.v1 = vlist[flist[i].p1];
-			tvx.v2 = vlist[flist[i].p2];
-			tvx.v3 = vlist[flist[i].p3];
+			tvx.v1 = vlist[flist[i].p1-1];
+			tvx.v2 = vlist[flist[i].p2-1];
+			tvx.v3 = vlist[flist[i].p3-1];
 			vset.push_back(tvx);
 		}
 		vlist.clear();
