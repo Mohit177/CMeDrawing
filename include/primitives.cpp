@@ -46,6 +46,13 @@ void Primitive::drawPixel(point<T> p,color_t color)
 			this->buffer[temp] = color;
 		}
 	}
+	else if(std::is_same<double,T>::value)
+	{
+		point<unsigned int> pt;
+		pt.x = floor(p.x+0.5);
+		pt.y = floor(p.y+0.5);
+		this->drawPixel(pt,color);
+	}
 }
 /*Post condition: The pixel will be drawn if and only if the x and y values lie inside the window bounds*/
 
