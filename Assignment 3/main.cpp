@@ -19,11 +19,13 @@ Test file containing main function.
 #include <unistd.h>
 #include <ctime>
 
-#include "Point2.h"
+#include "Polymesh.h"
 
 using namespace std;
 const int SCREEN_WIDTH = 1301.0;
 const int SCREEN_HEIGHT = 744.0;
+bool mouse_drag = false;
+int drag_index = -1;
 
 std::vector<Point2> point_buffer;
 std::vector<Point2> control_points;
@@ -31,55 +33,74 @@ std::vector<Point2> control_points;
 // function definitions
 void drawPixel(double xPos, double yPos, double red, double green, double blue);
 void deCasteljau(double t);
+int indexOf_NearestControlPoint(double xPos, double yPos);
 
 /**
 Mouse Button callback function to handle mouse click.
 */
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
+	double xPos=0.0, yPos = 0.0;
+	glfwGetCursorPos(window, &xPos,&yPos);
+	
+	int width=0, height=0;
+	glfwGetWindowSize(window, &width, &height);
+	std::cout << width <<" "<<height <<"\n";
+	
+	xPos = (xPos*SCREEN_WIDTH)/width;
+	yPos = (yPos*SCREEN_HEIGHT)/height;
+	
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
-		double xPos=0.0, yPos = 0.0;
-		glfwGetCursorPos(window, &xPos,&yPos);
-		
-		int width=0, height=0;
-		glfwGetWindowSize(window, &width, &height);
-		std::cout << width <<" "<<height <<"\n";
-		
-		xPos = (xPos*SCREEN_WIDTH)/width;
-		yPos = (yPos*SCREEN_HEIGHT)/height;
+    	
+		int near_index = indexOf_NearestControlPoint(xPos, yPos);
+		if(near_index >=0 && near_index <= control_points.size()){
+			mouse_drag = true;
+			drag_index = near_index;
+    		return;
+		}
 		
 		control_points.push_back(Point2(xPos,yPos));
-		std::cout <<"Mouse click: "<< xPos <<" "<< yPos <<"\n";
+		return;
     }
-    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
-        double xPos=0.0, yPos=0.0;
-        glfwGetCursorPos(window, &xPos, &yPos);
-
-        int width = 0;
-        int height = 0;
-        glfwGetWindowSize(window,&width, &height);
-        cout<<width<<" "<<height<<endl;
-
-        xPos = (xPos*SCREEN_WIDTH)/width;
-        yPos = (yPos*SCREEN_HEIGHT)/height;
-
-        int size = control_points.size();
-        int i;
-        for(i=0;i<size;i++)
-        {
-        	if(abs(control_points[i].x - xPos)<=3 && abs(control_points[i].y - yPos)<=3)
-        	{
-        		control_points.erase(control_points.begin()+i);
-        		break;
-        	}
+    else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE){
+        
+        if(mouse_drag && drag_index>=0 && drag_index < control_points.size()){
+        	control_points[drag_index].x = xPos;
+        	control_points[drag_index].y = yPos;
+	    	mouse_drag = false;
+	    	drag_index = -1;
         }
+    	return;
     }
+    else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
+    
+		int near_index = indexOf_NearestControlPoint(xPos, yPos);
+		if(near_index >=0 && near_index <= control_points.size()){
+			control_points.erase(control_points.begin()+near_index);
+
+		}
+		return;
+	}
+}
+
+
+
+int indexOf_NearestControlPoint(double xPos, double yPos){
+	int ctrl_size = control_points.size();
+    int i;
+    for(i=0;i<ctrl_size;i++){
+    	if(abs(control_points[i].x - xPos)<=3 && abs(control_points[i].y - yPos)<=3)
+    	{
+    		return i;
+    	}
+    }
+    return -1;
 }
 
 /**
 Cursor postion callback to handle cursor position update.
 */
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
-	std::cout << xPos << " "<< yPos <<"\n";
+	
 }
 
 
@@ -87,9 +108,15 @@ void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 Keyboard callback to handle key press events.
 */
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
-	if(key == GLFW_KEY_ESCAPE){
-		glfwSetWindowShouldClose(window, GL_TRUE);
+
+	if(mods == GLFW_MOD_CONTROL && key == GLFW_KEY_Z && action == GLFW_PRESS){
+		control_points.pop_back();
 		return;
+	}
+	
+	switch(key){
+	case GLFW_KEY_ESCAPE:	glfwSetWindowShouldClose(window, GL_TRUE); return;
+	case GLFW_KEY_C:		control_points.clear(); point_buffer.clear(); return;
 	}
 }
 
@@ -102,12 +129,7 @@ GLFWwindow* initWindow(const int resX, const int resY){
         fprintf(stderr, "Failed to initialize GLFW\n");
         return NULL;
     }
-
-    // Open a window and create its OpenGL context
-//    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-//  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-//  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-//  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     GLFWwindow* window = glfwCreateWindow(resX, resY, "Bezier curve", NULL, NULL); // glfwGetPrimaryMonitor()
 
     if(window == NULL)
@@ -174,8 +196,11 @@ void display( GLFWwindow* window ){
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 	    
-	    for(const Point2& p: control_points){
-	    	drawPixel(p.x, p.y, 1.0, 1.0, 0.0,2);
+	    for(int i=0; i<control_points.size();i++){
+	    	if(mouse_drag && drag_index ==i)
+		    	drawPixel(control_points[i].x, control_points[i].y, 0.0, 0.0, 1.0, 3);
+	    	else
+		    	drawPixel(control_points[i].x, control_points[i].y, 1.0, 1.0, 0.0, 2);
 	    }
 	    
 	    deCasteljau((double)0.5);
