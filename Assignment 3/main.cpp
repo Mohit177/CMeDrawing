@@ -44,7 +44,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	
 	int width=0, height=0;
 	glfwGetWindowSize(window, &width, &height);
-	std::cout << width <<" "<<height <<"\n";
 	
 	xPos = (xPos*SCREEN_WIDTH)/width;
 	yPos = (yPos*SCREEN_HEIGHT)/height;
@@ -253,10 +252,7 @@ Main function
 */
 int main(int argc, char** argv){
 
-int a,b,c;
-glfwGetVersion(&a,&b,&c);
-std:: cout << a <<" " << b <<" "<<c;
-    GLFWwindow* window = initWindow(1024, 620);
+    GLFWwindow* window = initWindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     if( window != NULL )
     {
