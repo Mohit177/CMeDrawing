@@ -22,8 +22,6 @@ Test file containing main function.
 #include "Polymesh.h"
 
 using namespace std;
-const int SCREEN_WIDTH = 1301.0;
-const int SCREEN_HEIGHT = 744.0;
 bool mouse_drag = false;
 int drag_index = -1;
 
@@ -41,12 +39,6 @@ Mouse Button callback function to handle mouse click.
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
 	double xPos=0.0, yPos = 0.0;
 	glfwGetCursorPos(window, &xPos,&yPos);
-	
-	int width=0, height=0;
-	glfwGetWindowSize(window, &width, &height);
-	
-	xPos = (xPos*SCREEN_WIDTH)/width;
-	yPos = (yPos*SCREEN_HEIGHT)/height;
 	
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
     	
@@ -75,7 +67,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 		int near_index = indexOf_NearestControlPoint(xPos, yPos);
 		if(near_index >=0 && near_index <= control_points.size()){
 			control_points.erase(control_points.begin()+near_index);
-
 		}
 		return;
 	}
@@ -99,7 +90,10 @@ int indexOf_NearestControlPoint(double xPos, double yPos){
 Cursor postion callback to handle cursor position update.
 */
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
-	
+	if(mouse_drag){
+		control_points[drag_index].x = xPos;
+		control_points[drag_index].y = yPos;
+	}
 }
 
 
@@ -107,15 +101,21 @@ void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 Keyboard callback to handle key press events.
 */
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
+	if(action == GLFW_RELEASE)
+		return;
 
 	if(mods == GLFW_MOD_CONTROL && key == GLFW_KEY_Z && action == GLFW_PRESS){
 		control_points.pop_back();
 		return;
-	}
+	}	
 	
 	switch(key){
 	case GLFW_KEY_ESCAPE:	glfwSetWindowShouldClose(window, GL_TRUE); return;
 	case GLFW_KEY_C:		control_points.clear(); point_buffer.clear(); return;
+	case GLFW_KEY_G:		Polymesh mesh;
+							mesh.generateMesh(point_buffer, 144);
+							mesh.writeToFile("test.off");
+							return;
 	}
 }
 
@@ -155,9 +155,7 @@ GLFWwindow* initWindow(const int resX, const int resY){
 	glfwSetWindowPos(window, 0, 0);
 	
 	// Set cursor to center initailly
-	int width, height;
-	glfwGetWindowSize(window, &width, &height);
-	glfwSetCursorPos(window,width/2,height/2);
+	glfwSetCursorPos(window,SCREEN_WIDTH/2.0,SCREEN_HEIGHT/2.0);
     
     return window;
 }
@@ -201,6 +199,14 @@ void display( GLFWwindow* window ){
 	    	else
 		    	drawPixel(control_points[i].x, control_points[i].y, 1.0, 1.0, 0.0, 2);
 	    }
+	    
+
+	    glBegin(GL_LINES);
+	    glPointSize(1); 
+	    glColor3f(1.0,1.0,1.0);
+	    glVertex2f(SCREEN_WIDTH/2.0, 0);
+	    glVertex2f(SCREEN_WIDTH/2.0, SCREEN_HEIGHT);
+	    glEnd();
 	    
 	    deCasteljau((double)0.5);
 		drawCurve();

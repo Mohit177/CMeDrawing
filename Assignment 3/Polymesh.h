@@ -1,6 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include <math.h>
 #include <vector>
+#include <cstring>
+
+const int SCREEN_WIDTH = 1300.0;
+const int SCREEN_HEIGHT = 744.0;
+
 class Point2
 {
 	public:
@@ -33,5 +39,8 @@ class Polymesh
 	
 		Polymesh();
 		Polymesh(int n_ver, int n_face);
-		void generateMesh(std::vector<Point2> points);
+		void generateMesh(std::vector<Point2> points, int slices);
+		void writeToFile(const std::string& filename);
 };
+
+
