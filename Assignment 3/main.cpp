@@ -1,5 +1,5 @@
 /**	\file main.cpp
-Test file containing main function.
+Test file containing main function, callback functions, and de casteljau algorithm.
 */
 
 #include <GL/glew.h>
@@ -22,19 +22,22 @@ Test file containing main function.
 #include "Polymesh.h"
 
 using namespace std;
-bool mouse_drag = false;
-int drag_index = -1;
+bool mouse_drag = false;	//!< bool value, true if mouse is being dragged, false otherwise
+int drag_index = -1;		//!< Index of control point being dragged 
 
-std::vector<Point2> point_buffer;
-std::vector<Point2> control_points;
+std::vector<Point2> point_buffer;	//!< Vector of pixels on the curve
+std::vector<Point2> control_points;		//!< Vector of control points of the curve.
 
 // function definitions
-void drawPixel(double xPos, double yPos, double red, double green, double blue);
-void deCasteljau(double t);
+void drawPixel(double xPos, double yPos, double red, double green, double blue, int pixel_size);
+void deCasteljau();
 int indexOf_NearestControlPoint(double xPos, double yPos);
 
 /**
-Mouse Button callback function to handle mouse click.
+Mouse Button callback function to handle mouse click. \n
+Left clicking on the scrren adds a control point.	\n
+Right clicking on a control point deletes the point.
+Left clikcing a control point and dragging it changes its position
 */
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
 	double xPos=0.0, yPos = 0.0;
@@ -73,7 +76,11 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 }
 
 
-
+/**
+Function to find the index of nearest control point to the current cursor position, if the cursor is in its vicinity.
+@param xPos : x-coordinate of cursor
+@param yPos : y-coordinate of cursor
+*/
 int indexOf_NearestControlPoint(double xPos, double yPos){
 	int ctrl_size = control_points.size();
     int i;
@@ -88,6 +95,7 @@ int indexOf_NearestControlPoint(double xPos, double yPos){
 
 /**
 Cursor postion callback to handle cursor position update.
+It updates the control point being dragged, if any.
 */
 void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 	if(mouse_drag){
@@ -99,6 +107,11 @@ void cursor_position_callback(GLFWwindow* window, double xPos, double yPos){
 
 /**
 Keyboard callback to handle key press events.
+<b> Ctrl+Z :</b> Remove the recently added control point. \n
+<b> Esc :</b> Close the window. \n
+<b> C :</b> Clear the window \n
+<b> G :</b> Generate the Polymesh in test.off file
+
 */
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
 	if(action == GLFW_RELEASE)
@@ -160,6 +173,16 @@ GLFWwindow* initWindow(const int resX, const int resY){
     return window;
 }
 
+/**
+Function to draw a pixel on the screen.
+@param xPos: x position of pixel
+@param yPos: y position of pixel
+@param red : Red component of color (Default value is 1.0)
+@param green : green component of color (Default value is 0.0)
+@param blue : blue component of color (Default value is 0.0)
+@param pixel_size: Size of pixel (Default value is 1)
+@return void
+*/
 void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double blue=0.0, int pixel_size=1){
 	glPointSize(pixel_size);  
 	glColor3f(red, green,blue);
@@ -168,7 +191,11 @@ void drawPixel(double xPos, double yPos, double red=1.0, double green=0.0,double
 	glEnd();	
 }
 
-
+/**
+Function to draw the curve (plot pixels from the buffer)
+@param : void
+@return void
+*/
 void drawCurve(){
 	for(const Point2& point: point_buffer){
 		drawPixel(point.x, point.y);
@@ -208,7 +235,7 @@ void display( GLFWwindow* window ){
 	    glVertex2f(SCREEN_WIDTH/2.0, SCREEN_HEIGHT);
 	    glEnd();
 	    
-	    deCasteljau((double)0.5);
+	    deCasteljau();
 		drawCurve();
 
     	glfwSwapBuffers(window);
@@ -216,6 +243,13 @@ void display( GLFWwindow* window ){
     }
 }
 
+/**
+Function to interpolate between two points, with the given parameter t.
+@param p1: First Point
+@param p2: Second Point
+@param t: Value of parameter t
+@return : Interpolated point
+*/
 Point2 interpolate(const Point2& p1, const Point2& p2, double t){
 	Point2 pt;
 	pt.x = p1.x*t + p2.x*(1-t);
@@ -223,7 +257,12 @@ Point2 interpolate(const Point2& p1, const Point2& p2, double t){
 	return pt;
 }
 
-void deCasteljau(double t)
+/**
+Function to find the points on the curve defined by the control points. 
+The value of t varies from 0 to 1, with fixed increments of 0.0001.
+@return void
+*/
+void deCasteljau()
 {
 	point_buffer.clear();
 	for(double t= (double)0.0; t<= (double)1.0; t += 0.0001){
@@ -254,7 +293,7 @@ void deCasteljau(double t)
 
 	
 /**
-Main function
+Main function to run the program.
 */
 int main(int argc, char** argv){
 
