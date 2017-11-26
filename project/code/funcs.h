@@ -36,7 +36,7 @@ void display(void);
 void mouseButton(int button, int state, int x, int y);
 void mouseMotion(int x, int y);
 void keyboard(int key, int x, int y);
-void keyHandler(int key, int x, int y);
+void keyboardSpecial(int key, int x, int y);
 void createMenus(void);
 void initLighting(void);
 

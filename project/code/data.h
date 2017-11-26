@@ -1,10 +1,3 @@
-/********************************************************************
-  Header file to read volume data from files: CS580 Assignment P5
-*********************************************************************
-   Authors: Joshua Richardson and Lavanya Viswanathan
-      Date: December 01, 1997
-********************************************************************/
-
 #ifndef DATA_H
 #define DATA_H
 
