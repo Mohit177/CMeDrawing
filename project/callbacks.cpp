@@ -707,17 +707,17 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
 			case 4:
 				vert_offset = old6pt;
 				offset = ncol*imarch+jmarch;
-				*(xedge+offset) = vert_offset;
+				xedge[offset] = vert_offset;
 				break;
 			case 5:
 				contour_intersect(5,imarch,jmarch,kmarch,&pt);
 				add_vertex(&pt);
-				*(topyedge+jmarch) = vert_index;
+				topyedge[jmarch] = vert_index;
 				vert_offset = vert_index;
 				if (imarch == (nrow-2))
 				{
 				  offset = ncol*(nrow-1)+jmarch;
-				  *(yedge+offset) = vert_index;
+				  yedge[offset] = vert_index;
 				}
 				break;
 			case 6:
@@ -728,20 +728,20 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
 				if (jmarch == (ncol-2))
 				{
 				  offset = ncol*imarch+ncol-1;
-				  *(xedge+offset) = vert_index;
+				  xedge[offset] = vert_index;
 				}
 				break;
 			case 7:
-				vert_offset = *(topyedge+jmarch);
+				vert_offset = topyedge[jmarch];
 				offset = ncol*imarch+jmarch;
-				*(yedge+offset) = vert_offset;
+				yedge[offset] = vert_offset;
 				break;
 			case 8:
-				vert_offset = *(zedge+jmarch);
+				vert_offset = zedge[jmarch];
 				break;
 			case 9:
 				vert_offset = old10pt;
-				*(zedge+jmarch) = vert_offset;
+				zedge[jmarch] = vert_offset;
 				break;
 			case 10:
 				contour_intersect(10,imarch,jmarch,kmarch,&pt);
@@ -750,11 +750,11 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
 				vert_offset = vert_index;
 				if (jmarch == (ncol-2))
 				{
-				  *(zedge+ncol-1) = vert_offset;
+				  zedge[ncol-1] = vert_offset;
 				}
 				break;
 			case 11:
-				vert_offset = *(zedge+jmarch+1);
+				vert_offset = zedge[jmarch+1];
 				break;
 		}
 		edge_table[edge] = vert_offset;
@@ -765,10 +765,10 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
 	i=0;
 	while ((facet_data[cube_index][i] != -1) && (i != NUM_CUBE_EDGES))
 	{
-	for (j=0; j<3; j++)
-	vertex_list[j] = edge_table[facet_data[cube_index][i+j]];
-	add_facet(3,vertex_list);
-	i += 3;
+		for (j=0; j<3; j++)
+		vertex_list[j] = edge_table[facet_data[cube_index][i+j]];
+		add_facet(3,vertex_list);
+		i += 3;
 	}
 }
 
@@ -776,24 +776,22 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
    */
 void drawVolumeRGB(Volume *vol, int slice)
 {
-  int i,j;
-  double colorval;
-
-  printf("Z slice = %d\n",slice);
-  
-  for (i=0; i<vol->XDim; i++)
-    for (j=0; j<vol->YDim; j++)
-      {
-	colorval = ((double)(volumePixel(vol,i,j,slice)))/256.0;
-	glColor3f(colorval,colorval,colorval);
-
-	glBegin(GL_POLYGON);
-	glVertex3f(i*currentScaleFactorRGB,j*currentScaleFactorRGB,slice);
-	glVertex3f((i+1)*currentScaleFactorRGB,j*currentScaleFactorRGB,slice);
-	glVertex3f((i+1)*currentScaleFactorRGB,(j+1)*currentScaleFactorRGB,slice);
-	glVertex3f(i*currentScaleFactorRGB,(j+1)*currentScaleFactorRGB,slice);
-	glEnd();
-      }
+	int i,j;
+	double colorval;
+	for (i=0; i<vol->XDim; i++)
+	{
+		for (j=0; j<vol->YDim; j++)
+		{
+			colorval = ((double)(volumePixel(vol,i,j,slice)))/256.0;
+			glColor3f(colorval,colorval,colorval);
+			glBegin(GL_POLYGON);
+			glVertex3f(i*currentScaleFactorRGB,j*currentScaleFactorRGB,slice);
+			glVertex3f((i+1)*currentScaleFactorRGB,j*currentScaleFactorRGB,slice);
+			glVertex3f((i+1)*currentScaleFactorRGB,(j+1)*currentScaleFactorRGB,slice);
+			glVertex3f(i*currentScaleFactorRGB,(j+1)*currentScaleFactorRGB,slice);
+			glEnd();
+		}
+	}
 }
 
 /* DRAW_POLYGONAL_MODEL: This function draws the polygonal model computed
@@ -801,30 +799,30 @@ void drawVolumeRGB(Volume *vol, int slice)
 			 */
 void drawPolygonalModel(void)
 {
-  int i;
+	int i;
 
-  /*glTranslatef(-256.0,-256.0,0.0);
-  glRotatef(45.0,0.0,1.0,0.0);
-  glTranslatef(256.0,256.0,0.0);*/
+	/*glTranslatef(-256.0,-256.0,0.0);
+	glRotatef(45.0,0.0,1.0,0.0);
+	glTranslatef(256.0,256.0,0.0);*/
 
-  chooseColor(WHITE);
-  for (i=0; i<currentFacetIndex; i++)
-    {
-      glBegin(GL_POLYGON);
-      glVertex3f(currentScaleFactorRGB*(flist+i)->pt1->x,
+	chooseColor(WHITE);
+	for (i=0; i<currentFacetIndex; i++)
+	{
+		glBegin(GL_POLYGON);
+		glVertex3f(currentScaleFactorRGB*(flist+i)->pt1->x,
 		 currentScaleFactorRGB*(flist+i)->pt1->y,
 		 currentScaleFactorRGB*(flist+i)->pt1->z);
-      glNormal3f((fnlist+i)->pt1->x,(fnlist+i)->pt1->y,(fnlist+i)->pt1->z);
-      glVertex3f(currentScaleFactorRGB*(flist+i)->pt2->x,
+		glNormal3f((fnlist+i)->pt1->x,(fnlist+i)->pt1->y,(fnlist+i)->pt1->z);
+		glVertex3f(currentScaleFactorRGB*(flist+i)->pt2->x,
 		 currentScaleFactorRGB*(flist+i)->pt2->y,
 		 currentScaleFactorRGB*(flist+i)->pt2->z);
-      glNormal3f((fnlist+i)->pt2->x,(fnlist+i)->pt2->y,(fnlist+i)->pt2->z);
-      glVertex3f(currentScaleFactorRGB*(flist+i)->pt3->x,
+		glNormal3f((fnlist+i)->pt2->x,(fnlist+i)->pt2->y,(fnlist+i)->pt2->z);
+		glVertex3f(currentScaleFactorRGB*(flist+i)->pt3->x,
 		 currentScaleFactorRGB*(flist+i)->pt3->y,
 		 currentScaleFactorRGB*(flist+i)->pt3->z);
-      glNormal3f((fnlist+i)->pt3->x,(fnlist+i)->pt3->y,(fnlist+i)->pt3->z);
-      glEnd();
-    }
+		glNormal3f((fnlist+i)->pt3->x,(fnlist+i)->pt3->y,(fnlist+i)->pt3->z);
+		glEnd();
+	}
 }
 
 /* COMPUTE_POLYGONAL_MODEL: This functions computes the polygonal model 
@@ -833,146 +831,146 @@ void drawPolygonalModel(void)
 			    */
 void computePolygonalModel(void)
 {
-  int i,j,sliceNum,l;
-  int nrow,ncol,NK,NCI,NCJ,NCK;
-  int cubeIndex;
-  int pt_ij, pt_i1j, pt_ij1, pt_ijk, pt_ijk1, pt_i1jk, pt_i1jk1, pt_ij1k1, pt_k, pt_k1;
-  double dist;
-  point *pt;
+	int i,j,sliceNum,l;
+	int nrow,ncol,NK,NCI,NCJ,NCK;
+	int cubeIndex;
+	int pt_ij, pt_i1j, pt_ij1, pt_ijk, pt_ijk1, pt_i1jk, pt_i1jk1, pt_ij1k1, pt_k, pt_k1;
+	double dist;
+	point *pt;
 
-  printf("Computing the polygonal model ... \n");
+	printf("Computing the polygonal model ... \n");
 
-  generateFacetData();
-  generateEdgeData();
-  initStructures();
-  
-  nrow = volume->XDim;   /* no of density points along the x-direction */
-  ncol = volume->YDim;   /* no of density points along the y-direction */
-  NK = volume->ZDim;   /* no of density points along the z-direction */
-  NCI = nrow-1;  /* no of cubes along the x-direction */
-  NCJ = ncol-1;  /* no of cubes along the y-direction */
-  NCK = NK-1;  /* no of cubes along the z-direction */
+	generateFacetData();
+	generateEdgeData();
+	initStructures();
 
-  pt = (point *)malloc(sizeof(point));
+	nrow = volume->XDim;   /* no of density points along the x-direction */
+	ncol = volume->YDim;   /* no of density points along the y-direction */
+	NK = volume->ZDim;   /* no of density points along the z-direction */
+	NCI = nrow-1;  /* no of cubes along the x-direction */
+	NCJ = ncol-1;  /* no of cubes along the y-direction */
+	NCK = NK-1;  /* no of cubes along the z-direction */
 
-  for (sliceNum = 0; sliceNum < (NK-1); sliceNum++)
-    {
-      if (sliceNum == 0)
+	pt = (point *)malloc(sizeof(point));
+
+	for (sliceNum = 0; sliceNum < (NK-1); sliceNum++)
 	{
-	  /* read in the first two slices */
-	  for (i=0; i<nrow; i++)
-	    for (j=0; j<ncol; j++)
-	      {
-		outsideSliceA[i*ncol + j] = volumePixel(volume,i,j,0);
-		outsideSliceB[i*ncol + j] = volumePixel(volume,i,j,1);
-		outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
-	      }
-
-	  /* compute xedge for the first slice */
-	  for (i=0; i<(nrow-1); i++)
-	    for (j=0; j<ncol; j++)
-	      {
-		pt_ij = outsideSliceA[i*ncol + j];
-		pt_i1j = outsideSliceA[(i+1)*ncol + j];
-		if (((pt_ij <= baseCase) && (pt_i1j > baseCase))
-		    || ((pt_ij > baseCase) && (pt_i1j <= baseCase)))
-		  {
-		    dist = (((double)(baseCase - pt_ij))/((double)(pt_i1j - pt_ij)));
-		    pt->x = i+dist;
-		    pt->y = j;
-		    pt->z = 0;
-		    add_vertex(pt);
-		    xedge[i*ncol + j] = vert_index;
-		  }
-		else
-		  xedge[i*ncol + j] = 0;
-	      }
-
-	  /* compute yedge for the first slice */
-	  for (i=0; i<nrow; i++)
-	    for (j=0; j<(ncol-1); j++)
-	      {
-		pt_ij = outsideSliceA[i*ncol + j];
-		pt_ij1 = outsideSliceA[i*ncol + (j+1)];
-		if (((pt_ij <= baseCase) && (pt_ij1 > baseCase))
-		    || ((pt_ij > baseCase) && (pt_ij1 <= baseCase)))
-		  {
-		    dist = (((double)(baseCase - pt_ij))/((double)(pt_ij1 - pt_ij)));
-		    pt->x = i;
-		    pt->y = j+dist;
-		    pt->z = 0;
-		    add_vertex(pt);
-		    yedge[i*ncol + j] = vert_index;
-		  }
-		else
-		  yedge[i*ncol + j] = 0;
-	      }
-	}
-      else
-	{
-	  /* copy 'outsideSliceB' into 'outsideSliceA' and read in slice (sliceNum+1)
-	     into 'outsideSliceB'. Also, transfer 'outsideSliceA' to 'outsideSliceC' */
-	  for (i=0; i<nrow; i++)
-	    for (j=0; j<ncol; j++)
-	      outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
-	  for (i=0; i<nrow; i++)
-	    for (j=0; j<ncol; j++)
-	      outsideSliceA[i*ncol + j] = outsideSliceB[i*ncol + j];
-	  for (i=0; i<nrow; i++)
-	    for (j=0; j<ncol; j++)
-	      outsideSliceB[i*ncol + j] = volumePixel(volume,i,j,(sliceNum+1));
-	}
-
-      /* for each row (i.e., i = constant) */
-      for (i=0; i<(nrow-1); i++)
-	{
-	  /* load zedge and topyedge for the first row of each slice */
-	  if (i==0)
-	    {
-	      /* compute zedge */
-	      for (j=0; j<ncol; j++)
+		if (sliceNum == 0)
 		{
-		  pt_k = outsideSliceA[i*ncol + j];
-		  pt_k1 = outsideSliceB[i*ncol + j];
-		  if (((pt_k <= baseCase) && (pt_k1 > baseCase))
-		      || ((pt_k > baseCase) && (pt_k1 <= baseCase)))
-		    {
-		      dist = (((double)(baseCase - pt_k))/((double)(pt_k1 - pt_k)));
-		      pt->x = i;
-		      pt->y = j;
-		      pt->z = sliceNum+dist;
-		      add_vertex(pt);
-		      zedge[j] = vert_index;
-		    }
-		  else
-		    zedge[j] = 0;
-		}
-	      
-	      /* compute topyedge */
-	      for (j=0; j<(ncol-1); j++)
-		{
-		  pt_ijk1 = outsideSliceB[i*ncol + j];
-		  pt_ij1k1 = outsideSliceB[i*ncol + (j+1)];
-		  if (((pt_ijk1 <= baseCase) && (pt_ij1k1 > baseCase))
-		      || ((pt_ijk1 > baseCase) && (pt_ij1k1 <= baseCase)))
-		    {
-		      dist = (((double)(baseCase - pt_ijk1))/((double)(pt_ij1k1 - pt_ijk1)));
-		      pt->x = i;
-		      pt->y = j+dist;
-		      pt->z = sliceNum+1;
-		      add_vertex(pt);
-		      topyedge[j] = vert_index;
-		    }
-		  else
-		    topyedge[j] = 0;
-		}
-	    }
+			/* read in the first two slices */
+			for (i=0; i<nrow; i++)
+			for (j=0; j<ncol; j++)
+			  {
+			outsideSliceA[i*ncol + j] = volumePixel(volume,i,j,0);
+			outsideSliceB[i*ncol + j] = volumePixel(volume,i,j,1);
+			outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
+			  }
 
-	  /* for each cube in the row */
-	  for (j=0; j<(ncol-1); j++)
-	    {
-	      /* load old6pt and old10pt for the first cube of each row in each slice */
-	      if (j==0)
+			/* compute xedge for the first slice */
+			for (i=0; i<(nrow-1); i++)
+			for (j=0; j<ncol; j++)
+			  {
+			pt_ij = outsideSliceA[i*ncol + j];
+			pt_i1j = outsideSliceA[(i+1)*ncol + j];
+			if (((pt_ij <= baseCase) && (pt_i1j > baseCase))
+			    || ((pt_ij > baseCase) && (pt_i1j <= baseCase)))
+			  {
+			    dist = (((double)(baseCase - pt_ij))/((double)(pt_i1j - pt_ij)));
+			    pt->x = i+dist;
+			    pt->y = j;
+			    pt->z = 0;
+			    add_vertex(pt);
+			    xedge[i*ncol + j] = vert_index;
+			  }
+			else
+			  xedge[i*ncol + j] = 0;
+			  }
+
+			/* compute yedge for the first slice */
+			for (i=0; i<nrow; i++)
+			for (j=0; j<(ncol-1); j++)
+			  {
+			pt_ij = outsideSliceA[i*ncol + j];
+			pt_ij1 = outsideSliceA[i*ncol + (j+1)];
+			if (((pt_ij <= baseCase) && (pt_ij1 > baseCase))
+			    || ((pt_ij > baseCase) && (pt_ij1 <= baseCase)))
+			  {
+			    dist = (((double)(baseCase - pt_ij))/((double)(pt_ij1 - pt_ij)));
+			    pt->x = i;
+			    pt->y = j+dist;
+			    pt->z = 0;
+			    add_vertex(pt);
+			    yedge[i*ncol + j] = vert_index;
+			  }
+			else
+			  yedge[i*ncol + j] = 0;
+			  }
+		}
+		else
+		{
+		/* copy 'outsideSliceB' into 'outsideSliceA' and read in slice (sliceNum+1)
+		 into 'outsideSliceB'. Also, transfer 'outsideSliceA' to 'outsideSliceC' */
+		for (i=0; i<nrow; i++)
+		for (j=0; j<ncol; j++)
+		  outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
+		for (i=0; i<nrow; i++)
+		for (j=0; j<ncol; j++)
+		  outsideSliceA[i*ncol + j] = outsideSliceB[i*ncol + j];
+		for (i=0; i<nrow; i++)
+		for (j=0; j<ncol; j++)
+		  outsideSliceB[i*ncol + j] = volumePixel(volume,i,j,(sliceNum+1));
+		}
+
+		/* for each row (i.e., i = constant) */
+		for (i=0; i<(nrow-1); i++)
+		{
+		/* load zedge and topyedge for the first row of each slice */
+			if (i==0)
+			{
+			  	/* compute zedge */
+				for (j=0; j<ncol; j++)
+				{
+					pt_k = outsideSliceA[i*ncol + j];
+					pt_k1 = outsideSliceB[i*ncol + j];
+					if (((pt_k <= baseCase) && (pt_k1 > baseCase))
+					  || ((pt_k > baseCase) && (pt_k1 <= baseCase)))
+					{
+						dist = (((double)(baseCase - pt_k))/((double)(pt_k1 - pt_k)));
+						pt->x = i;
+						pt->y = j;
+						pt->z = sliceNum+dist;
+						add_vertex(pt);
+						zedge[j] = vert_index;
+					}
+					else
+						zedge[j] = 0;
+				}
+			  
+			  	/* compute topyedge */
+				for (j=0; j<(ncol-1); j++)
+				{
+					pt_ijk1 = outsideSliceB[i*ncol + j];
+					pt_ij1k1 = outsideSliceB[i*ncol + (j+1)];
+					if (((pt_ijk1 <= baseCase) && (pt_ij1k1 > baseCase))
+					  || ((pt_ijk1 > baseCase) && (pt_ij1k1 <= baseCase)))
+					{
+						dist = (((double)(baseCase - pt_ijk1))/((double)(pt_ij1k1 - pt_ijk1)));
+						pt->x = i;
+						pt->y = j+dist;
+						pt->z = sliceNum+1;
+						add_vertex(pt);
+						topyedge[j] = vert_index;
+					}
+					else
+						topyedge[j] = 0;
+				}
+			}
+
+		/* for each cube in the row */
+		for (j=0; j<(ncol-1); j++)
+		{
+		  /* load old6pt and old10pt for the first cube of each row in each slice */
+		  if (j==0)
 		{
 		  /* compute old6pt */
 		  pt_ijk1 = outsideSliceB[i*ncol + j];
@@ -1007,14 +1005,13 @@ void computePolygonalModel(void)
 		    old10pt = -1;
 		}
 
-	      cubeIndex = cube_index(i,j);
-	      if ((cubeIndex != 0) && (cubeIndex != 255))
+		  cubeIndex = cube_index(i,j);
+		  if ((cubeIndex != 0) && (cubeIndex != 255))
 		load_facet(cubeIndex,i,j,sliceNum);
-	    }
+		}
+		}
 	}
-    }
-
-  printf("done!\n");
+	printf("done!\n");
 }
 
 /* RESHAPE: Callback function for a reshape event inrowtiated by the user
