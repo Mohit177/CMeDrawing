@@ -21,18 +21,15 @@ class Context
 {
 	private:
 		GLFWwindow* window;
-		color_t* buffer; //The buffer that will be updated by drawing operations and flushed to the window
 		int w_height; //width of context
 		int w_width; //height of context
 
 	public:
 		Context();
-		~Context();
 		void initialize();
 		void createWindow(int width,int height,char* wname);
 		unsigned int getWindowHeight();
 		unsigned int getWindowWidth();
-		color_t* getFrameBuffer();
 		void terminate();
 		GLFWwindow* getWindow();
 };
