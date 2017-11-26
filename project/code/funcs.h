@@ -32,12 +32,8 @@ void drawVolumeRGB(Volume *vol, int slice);
 void drawPolygonalModel(void);
 void computePolygonalModel(void);
 void reshape(int width, int height);
-void display(void);
-void mouseButton(int button, int state, int x, int y);
-void mouseMotion(int x, int y);
+void show(void);
 void keyboard(int key, int x, int y);
 void keyboardSpecial(int key, int x, int y);
-void createMenus(void);
-void initLighting(void);
 
 #endif

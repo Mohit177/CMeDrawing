@@ -8,9 +8,9 @@
 #include <map>
 #include <string>
 #include <GL/glut.h>
-#include "./code/const.h"
-#include "code/funcs.h"
-#include "code/data.c"
+#include "const.h"
+#include "funcs.h"
+#include "data.cpp"
 #include "code/cube.h"
 using namespace std;
 
@@ -41,6 +41,10 @@ static long old6pt, old10pt;
 static long vert_index = 0;
 static long baseCase = 50;
 
+
+string inpfile_s = "../data/256.dat";
+int dim_x = TORSO_256_XDIM, dim_y = TORSO_256_YDIM, dim_z = TORSO_256_ZDIM;
+
 /* chooseColor: Function to set the current drawing color of the screen.
                 The input parameter 'color' is the value returned by GLUT 
 	        for the color option selected by the user.
@@ -60,22 +64,25 @@ void chooseColor(int cind)
                  The input parameter 'option' is the value returned by GLUT 
 		 for the option selected by the user.
 		 */
-void selectDataSet(int option,string fname)
+void selectDataSet(string fname,int xdim,int ydim, int zdim)
 {
 	/*currentVolumeDataSet = option;
 	currentSliceRGB = 0;*/
-	if(volume)
+	if(volume!=NULL)
 	{
-		freeVolume(volume);
+		volume->freeVolume();
 		freeStructures();
 	}
+	volume->createVolume(xdim,ydim,zdim);
+	volume->volReadFile(fname.c_str());
+	computePolygonalModel();
 
 	/*switch (option)
 	{
 	case TORSO_128_DATA_SET: 
 	  currentScaleFactorRGB = TORSO_128_SCALE;
 	  if (volume)
-	freeVolume(volume);
+	volume->freeVolume();
 	  freeStructures();
 	  volume = createVolume(TORSO_128_XDIM,TORSO_128_YDIM,TORSO_128_ZDIM);
 	  volReadFile(volume,"../data/128.dat");
@@ -84,7 +91,7 @@ void selectDataSet(int option,string fname)
 	case TORSO_256_DATA_SET:
 	  currentScaleFactorRGB = TORSO_256_SCALE;
 	  if (volume)
-	freeVolume(volume);
+	volume->freeVolume();
 	  freeStructures();
 	  volume = createVolume(TORSO_256_XDIM,TORSO_256_YDIM,TORSO_256_ZDIM);
 	  volReadFile(volume,"../data/256.dat");
@@ -93,7 +100,7 @@ void selectDataSet(int option,string fname)
 	case TORSO_512_DATA_SET:
 	  currentScaleFactorRGB = TORSO_512_SCALE;
 	  if (volume)
-	freeVolume(volume);
+	volume->freeVolume();
 	  freeStructures();
 	  volume = createVolume(TORSO_512_XDIM,TORSO_512_YDIM,TORSO_512_ZDIM);
 	  volReadFile(volume,"../data/512.dat");
@@ -102,7 +109,7 @@ void selectDataSet(int option,string fname)
 	case LOBSTER_DATA_SET:
 	  currentScaleFactorRGB = LOBSTER_SCALE;
 	  if (volume)
-	freeVolume(volume);
+	volume->freeVolume();
 	  freeStructures();
 	  volume = createVolume(LOBSTER_XDIM,LOBSTER_YDIM,LOBSTER_ZDIM);
 	  volReadFile(volume,"../data/lobster.dat");
@@ -111,7 +118,7 @@ void selectDataSet(int option,string fname)
 	case HYDROGEN_DATA_SET:
 	  currentScaleFactorRGB = HYDROGEN_SCALE;
 	  if (volume)
-	freeVolume(volume);
+	volume->freeVolume();
 	  freeStructures();
 	  volume = createVolume(HYDROGEN_XDIM,HYDROGEN_YDIM,HYDROGEN_ZDIM);
 	  volReadFile(volume,"../data/hydrogen.dat");
@@ -120,14 +127,14 @@ void selectDataSet(int option,string fname)
 	case VOL_TESLA_DATA_SET:
 	  currentScaleFactorRGB = VOL_TESLA_SCALE;
 	  if (volume)
-	freeVolume(volume);
+	volume->freeVolume();
 	  freeStructures();
 	  volume = createVolume(VOL_TESLA_XDIM,VOL_TESLA_YDIM,VOL_TESLA_ZDIM);
 	  volReadFile(volume,"../data/vol_tesla.dat");
 	  computePolygonalModel();
 	  break;
 	}
-	display();*/
+	show();*/
 
 }
 
@@ -141,16 +148,14 @@ void selectOption(int option)
     {
     case 'w':   /* switch between displays: RGB slices or polygonal model */
       displayType = 1-displayType;
-      createMenus();
-      initLighting();
-      display();
+      show(inpfile_s, dim_x, dim_y, dim_z);
       break;
     case 's':   /* Clear the screen */
       glClear(GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
       break;
     case 'e':   /* Exit the application */
       if (volume)
-	freeVolume(volume);
+	volume->freeVolume();
       freeStructures();
       exit(0);
       break;
@@ -782,7 +787,7 @@ void drawVolumeRGB(Volume *vol, int slice)
 	{
 		for (j=0; j<vol->YDim; j++)
 		{
-			colorval = ((double)(volumePixel(vol,i,j,slice)))/256.0;
+			colorval = ((double)(vol->volumePixel(i,j,slice)))/256.0;
 			glColor3f(colorval,colorval,colorval);
 			glBegin(GL_POLYGON);
 			glVertex3f(i*currentScaleFactorRGB,j*currentScaleFactorRGB,slice);
@@ -859,66 +864,66 @@ void computePolygonalModel(void)
 		{
 			/* read in the first two slices */
 			for (i=0; i<nrow; i++)
-			for (j=0; j<ncol; j++)
-			  {
-			outsideSliceA[i*ncol + j] = volumePixel(volume,i,j,0);
-			outsideSliceB[i*ncol + j] = volumePixel(volume,i,j,1);
-			outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
-			  }
+				for (j=0; j<ncol; j++)
+				{
+				outsideSliceA[i*ncol + j] = volume->volumePixel(i,j,0);
+				outsideSliceB[i*ncol + j] = volume->volumePixel(i,j,1);
+				outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
+				}
 
 			/* compute xedge for the first slice */
 			for (i=0; i<(nrow-1); i++)
-			for (j=0; j<ncol; j++)
-			  {
-			pt_ij = outsideSliceA[i*ncol + j];
-			pt_i1j = outsideSliceA[(i+1)*ncol + j];
-			if (((pt_ij <= baseCase) && (pt_i1j > baseCase))
-			    || ((pt_ij > baseCase) && (pt_i1j <= baseCase)))
-			  {
-			    dist = (((double)(baseCase - pt_ij))/((double)(pt_i1j - pt_ij)));
-			    pt->x = i+dist;
-			    pt->y = j;
-			    pt->z = 0;
-			    add_vertex(pt);
-			    xedge[i*ncol + j] = vert_index;
-			  }
-			else
-			  xedge[i*ncol + j] = 0;
-			  }
+				for (j=0; j<ncol; j++)
+				{
+					pt_ij = outsideSliceA[i*ncol + j];
+					pt_i1j = outsideSliceA[(i+1)*ncol + j];
+					if (((pt_ij <= baseCase) && (pt_i1j > baseCase))
+					|| ((pt_ij > baseCase) && (pt_i1j <= baseCase)))
+					{
+						dist = (((double)(baseCase - pt_ij))/((double)(pt_i1j - pt_ij)));
+						pt->x = i+dist;
+						pt->y = j;
+						pt->z = 0;
+						add_vertex(pt);
+						xedge[i*ncol + j] = vert_index;
+					}
+					else
+					xedge[i*ncol + j] = 0;
+				}
 
 			/* compute yedge for the first slice */
 			for (i=0; i<nrow; i++)
-			for (j=0; j<(ncol-1); j++)
-			  {
-			pt_ij = outsideSliceA[i*ncol + j];
-			pt_ij1 = outsideSliceA[i*ncol + (j+1)];
-			if (((pt_ij <= baseCase) && (pt_ij1 > baseCase))
-			    || ((pt_ij > baseCase) && (pt_ij1 <= baseCase)))
-			  {
-			    dist = (((double)(baseCase - pt_ij))/((double)(pt_ij1 - pt_ij)));
-			    pt->x = i;
-			    pt->y = j+dist;
-			    pt->z = 0;
-			    add_vertex(pt);
-			    yedge[i*ncol + j] = vert_index;
-			  }
-			else
-			  yedge[i*ncol + j] = 0;
-			  }
+				for (j=0; j<(ncol-1); j++)
+				{
+					pt_ij = outsideSliceA[i*ncol + j];
+					pt_ij1 = outsideSliceA[i*ncol + (j+1)];
+					if (((pt_ij <= baseCase) && (pt_ij1 > baseCase))
+					|| ((pt_ij > baseCase) && (pt_ij1 <= baseCase)))
+					{
+						dist = (((double)(baseCase - pt_ij))/((double)(pt_ij1 - pt_ij)));
+						pt->x = i;
+						pt->y = j+dist;
+						pt->z = 0;
+						add_vertex(pt);
+						yedge[i*ncol + j] = vert_index;
+					}
+					else
+						yedge[i*ncol + j] = 0;
+				}
 		}
 		else
 		{
-		/* copy 'outsideSliceB' into 'outsideSliceA' and read in slice (sliceNum+1)
-		 into 'outsideSliceB'. Also, transfer 'outsideSliceA' to 'outsideSliceC' */
-		for (i=0; i<nrow; i++)
-		for (j=0; j<ncol; j++)
-		  outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
-		for (i=0; i<nrow; i++)
-		for (j=0; j<ncol; j++)
-		  outsideSliceA[i*ncol + j] = outsideSliceB[i*ncol + j];
-		for (i=0; i<nrow; i++)
-		for (j=0; j<ncol; j++)
-		  outsideSliceB[i*ncol + j] = volumePixel(volume,i,j,(sliceNum+1));
+			/* copy 'outsideSliceB' into 'outsideSliceA' and read in slice (sliceNum+1)
+			 into 'outsideSliceB'. Also, transfer 'outsideSliceA' to 'outsideSliceC' */
+			for (i=0; i<nrow; i++)
+			for (j=0; j<ncol; j++)
+			  outsideSliceC[i*ncol + j] = outsideSliceA[i*ncol + j];
+			for (i=0; i<nrow; i++)
+			for (j=0; j<ncol; j++)
+			  outsideSliceA[i*ncol + j] = outsideSliceB[i*ncol + j];
+			for (i=0; i<nrow; i++)
+			for (j=0; j<ncol; j++)
+			  outsideSliceB[i*ncol + j] = volume->volumePixel(i,j,(sliceNum+1));
 		}
 
 		/* for each row (i.e., i = constant) */
@@ -966,49 +971,47 @@ void computePolygonalModel(void)
 				}
 			}
 
-		/* for each cube in the row */
-		for (j=0; j<(ncol-1); j++)
-		{
-		  /* load old6pt and old10pt for the first cube of each row in each slice */
-		  if (j==0)
-		{
-		  /* compute old6pt */
-		  pt_ijk1 = outsideSliceB[i*ncol + j];
-		  pt_i1jk1 = outsideSliceB[(i+1)*ncol + j];
-		  if (((pt_ijk1 < baseCase) && (pt_i1jk1 > baseCase))
-		      || ((pt_ijk1 > baseCase) && (pt_i1jk1 < baseCase)))
-		    {
-		      dist = (((double)(baseCase - pt_ijk1))/((double)(pt_i1jk1 - pt_ijk1)));
-		      pt->x = i+dist;
-		      pt->y = j;
-		      pt->z = sliceNum+1;
-		      add_vertex(pt);
-		      old6pt = vert_index;
-		    }
-		  else
-		    old6pt = -1;
+			/* for each cube in the row */
+			for (j=0; j<(ncol-1); j++)
+			{
+				/* load old6pt and old10pt for the first cube of each row in each slice */
+				if (j==0)
+				{
+					pt_ijk1 = outsideSliceB[i*ncol + j];
+					pt_i1jk1 = outsideSliceB[(i+1)*ncol + j];
+					if (((pt_ijk1 < baseCase) && (pt_i1jk1 > baseCase))
+					|| ((pt_ijk1 > baseCase) && (pt_i1jk1 < baseCase)))
+					{
+						dist = (((double)(baseCase - pt_ijk1))/((double)(pt_i1jk1 - pt_ijk1)));
+						pt->x = i+dist;
+						pt->y = j;
+						pt->z = sliceNum+1;
+						add_vertex(pt);
+						old6pt = vert_index;
+					}
+					else
+						old6pt = -1;
 
-		  /* compute old10pt */
-		  pt_i1jk1 = outsideSliceB[(i+1)*ncol + j];
-		  pt_i1jk = outsideSliceA[(i+1)*ncol + j];
-		  if (((pt_i1jk1 < baseCase) && (pt_i1jk > baseCase))
-		      || ((pt_i1jk1 > baseCase) && (pt_i1jk < baseCase)))
-		    {
-		      dist = (((double)(baseCase - pt_i1jk1))/((double)(pt_i1jk - pt_i1jk1)));
-		      pt->x = i+1;
-		      pt->y = j;
-		      pt->z = sliceNum+dist;
-		      add_vertex(pt);
-		      old10pt = vert_index;
-		    }
-		  else
-		    old10pt = -1;
-		}
-
-		  cubeIndex = cube_index(i,j);
-		  if ((cubeIndex != 0) && (cubeIndex != 255))
-		load_facet(cubeIndex,i,j,sliceNum);
-		}
+					/* compute old10pt */
+					pt_i1jk1 = outsideSliceB[(i+1)*ncol + j];
+					pt_i1jk = outsideSliceA[(i+1)*ncol + j];
+					if (((pt_i1jk1 < baseCase) && (pt_i1jk > baseCase))
+					|| ((pt_i1jk1 > baseCase) && (pt_i1jk < baseCase)))
+					{
+						dist = (((double)(baseCase - pt_i1jk1))/((double)(pt_i1jk - pt_i1jk1)));
+						pt->x = i+1;
+						pt->y = j;
+						pt->z = sliceNum+dist;
+						add_vertex(pt);
+						old10pt = vert_index;
+					}
+					else
+						old10pt = -1;
+				}
+				cubeIndex = cube_index(i,j);
+				if ((cubeIndex != 0) && (cubeIndex != 255))
+				load_facet(cubeIndex,i,j,sliceNum);
+			}
 		}
 	}
 	printf("done!\n");
@@ -1020,32 +1023,34 @@ void computePolygonalModel(void)
 	    */
 void reshape(int width, int height)
 {
-  /* change viewport dimensions */
-  glViewport(0, 0, width, height);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  glOrtho(0, width, 0, height, 1000, -1000);
-  glMatrixMode(GL_MODELVIEW);
+	/* change viewport dimensions */
+	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, width, 0, height, 1000, -1000);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 /* DISPLAY: Callback function for a redisplay event initiated by the user or
             by the application itself.
+string file_input = "../256.dat", int xdimen = TORSO_128_XDIM, int ydimen = TORSO_128_YDIM, int zdimen = TORSO_128_ZDIM
 	    */
-void display(void)
+void show(string file_input = "../256.dat", int xdimen = TORSO_128_XDIM, int ydimen = TORSO_128_YDIM, int zdimen = TORSO_128_ZDIM)
 {
+	inpfile_s = file_input;
+	dim_x = xdimen;
+	dim_y = ydimen;
+	dim_z = zdimen; 
   /* clear the display */
-  glClear(GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-  if (!volume)
-    selectDataSet(currentVolumeDataSet);
+	if (!volume)
+	selectDataSet(inpfile_s, dim_x, dim_y, dim_z);
 
-  if (displayType == RGB_SLICE_DISPLAY)
-    drawVolumeRGB(volume,currentSliceRGB);
-  else if (displayType == POLYGONAL_DISPLAY)
-    drawPolygonalModel();
-
-  /* swap the double buffers */
-  glutSwapBuffers();  
+	if (displayType == RGB_SLICE_DISPLAY)
+	drawVolumeRGB(volume,currentSliceRGB);
+	else if (displayType == POLYGONAL_DISPLAY)
+	drawPolygonalModel();
 }
 
 void keyboard(int key, int x, int y)
@@ -1058,27 +1063,27 @@ void keyboard(int key, int x, int y)
 		    */
 void keyboardHandler(int key, int x, int y)
 {
-  switch (key)
-    {
-    case GLUT_KEY_UP:
-      if (volume)
+	switch (key)
 	{
-	  currentSliceRGB++;
-	  if (currentSliceRGB >= volume->ZDim)
-	    currentSliceRGB = 0;
+		case GLUT_KEY_UP:
+			if (volume)
+			{
+				currentSliceRGB++;
+				if (currentSliceRGB >= volume->ZDim)
+				currentSliceRGB = 0;
+			}
+			show(inpfile_s, dim_x, dim_y, dim_z);
+			break;
+		case GLUT_KEY_DOWN:
+			if (volume)
+			{
+				currentSliceRGB--;
+				if (currentSliceRGB < 0)
+				currentSliceRGB = volume->ZDim-1;
+			}
+			show(inpfile_s, dim_x, dim_y, dim_z);
+			break;
 	}
-      display();
-      break;
-    case GLUT_KEY_DOWN:
-      if (volume)
-	{
-	  currentSliceRGB--;
-	  if (currentSliceRGB < 0)
-	    currentSliceRGB = volume->ZDim-1;
-	}
-      display();
-      break;
-    }
 }
 
 /* CREATEMENUS: function to create pulldown menus for the curve editing window.void createMenus(void)

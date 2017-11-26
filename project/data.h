@@ -46,8 +46,8 @@ public:
 	unsigned char *data;             /* data buffer */
 	void createVolume(unsigned int s1, unsigned int s2, unsigned int s3);
 	int freeVolume();
-	int volReadFile(char *fname);
-	int volPrintFile(char *fname);
+	int volReadFile(const char *fname);
+	int volPrintFile(const char *fname);
 
 	unsigned char volumePixel(unsigned int x, unsigned int y, unsigned int z);
 };

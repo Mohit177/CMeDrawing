@@ -1,4 +1,4 @@
-#include "data1.h"
+#include "data.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -34,7 +34,7 @@ int Volume::freeVolume(){
                   and store it in the data structure 'vol'.
 		  The inputs files are assumed to contain data in byte form.
 		  */
-int Volume::volReadFile(char *fname){
+int Volume::volReadFile(const char *fname){
 
   unsigned int i;
   char func [] = "volReadFile()";
@@ -70,7 +70,7 @@ int Volume::volReadFile(char *fname){
 		   This function should be used only for debugging purposes as 
 		   ASCII files take up a lot of memory.
 		   */
-int Volume::volPrintFile(char *fname){
+int Volume::volPrintFile(const char *fname){
   FILE *fp;
   char func [] = "volPrintFile()";
   int i,j,k;

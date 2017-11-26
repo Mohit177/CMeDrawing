@@ -9,10 +9,11 @@
 #define FUNCS_H
 #include "data.h"
 #include "const.h"
+#include <string>
 
 /* in the file 'callbacks.c' */
 void selectColor(int color);
-void selectDataSet(int option);
+void selectDataSet(int option,std::string fname,int xdim,int ydim, int zdim);
 void selectOption(int option);
 void initStructures(void);
 void freeStructures(void);
@@ -32,7 +33,7 @@ void drawVolumeRGB(Volume *vol, int slice);
 void drawPolygonalModel(void);
 void computePolygonalModel(void);
 void reshape(int width, int height);
-void display(void);
+void show(std::string file_input, int xdimen, int ydimen, int zdimen);
 void mouseButton(int button, int state, int x, int y);
 void mouseMotion(int x, int y);
 void keyboard(int key, int x, int y);

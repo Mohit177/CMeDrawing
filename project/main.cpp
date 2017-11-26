@@ -13,6 +13,7 @@ Test file containing main function
 #include <algorithm>
 
 #include "const.h"
+#include "callbacks.cpp"
 using namespace std;
 
 const int SCREEN_WIDTH = 1300;
@@ -91,7 +92,7 @@ void display( GLFWwindow* window ){
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 	   
-	   	// DRAW HERE
+        show(inpfile_s, dim_x, dim_y, dim_z);
 
     	glfwSwapBuffers(window);
 	    glfwPollEvents();
