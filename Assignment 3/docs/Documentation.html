@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Graphics Assignment 3</title>
+   
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCpp.js"></script>
+	<link type="text/css" rel="stylesheet" href="styles/shCoreEmacs.css"/>
+   <link type="text/css" rel="stylesheet" href="styles/w3.css">
+   
+
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+   <style>
+.city {display:none;}
+</style>
+</head>
+
+<body style="background: rgba(255,255,255); font-family: Helvetica">
+
+
+
+<nav class="w3-sidenav w3-black w3-card-2" style="width:130px">
+  <div class="w3-container">
+    
+  </div>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc0')">Introduction</a>
+  <a href="#" class="tablink" onclick="openTest(event, 'tc01')">Project Design</a>
+  <!--<a href="#" class="tablink" onclick="openTest(event, 'tc02')">Execution Time Analysis</a>!>-->
+  <a href="#" class="tablink" onclick="openTest(event, 'tc03')">Team Members </a>
+  <!-- <a href="#" class="tablink" onclick="openTest(event, 'tc04')">References</a> -->
+  <a href="#" class="tablink" onclick="show()">Real Life Surfaces</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc1')">Scene 1</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc2')">Scene 2</a>
+  <a href="#" class="tablink h" onclick="openTest(event, 'tc3')">Scene 3</a>
+</nav>
+
+<div style="margin-left:130px">
+
+  <div id="tc0" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Computer Graphics- Assignment 3</h1>
+    </div>
+
+    <div class="tabcontent">
+      <p>
+        <h4>Bezier Curves</h4>
+        A Bézier curve is a parametric curve frequently used in computer graphics and related fields. Generalizations of Bézier curves to higher dimensions are called Bézier surfaces, of which the Bézier triangle is a special case.
+
+        In vector graphics, Bézier curves are used to model smooth curves that can be scaled indefinitely. 'Paths', as they are commonly referred to in image manipulation programs, are combinations of linked Bézier curves. Paths are not bound by the limits of rasterized images and are intuitive to modify.
+        <img class="w3-animate-left" src="img/bezierappear.png">
+        <br>
+        <br>
+        As part of this assignment following tasks were achieved: 
+        <br>
+        <b>Task 1</b>: Evaluation of a bezier curve using 'De Castlejau Algorithm'.
+        <br>
+        <img class="w3-animate-left" src="img/decas.jpg">
+        <br>
+        <br>
+        <b>Task 2</b> : The fucntionality to define control points manually using mouse click and user inertactivity was introduced. Complex Bezier Curves of vaired shapes can be generated accorinding to one' wish.
+        <br>
+        <img class="w3-animate-left" src="img/bezier.gif">
+        <br>
+        <br>
+        <b>Task 3</b> : By definig an axis of rotation (y-Axis) various surfaces were created to model real life objects.
+        To Generate the surface of revolution follow the following instructions-
+        <ul>
+          <li>Run the code and define a curve along Y Axis by using mouse and clicking at the desired points</li>
+          <li>Run the 'test.off' file using a software 'MeshLab'</li>
+          <li>The desired curve is obtained</li>
+        </ul>
+      </p>	
+    </div>
+  </div>
+
+  <div id="tc01" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Project Design</h1>
+    </div>
+    <p>
+    	<a href="html/index.html" target="_blank">Doxygen</a>
+    	<br><br>
+      	<b>Docs folder</b>
+      	<br>
+      	Contains documentation in html format. Doxygen was used to convert docx file into html and in addition to the convertor many lines were manually added.
+
+
+    </p>
+  </div>
+
+  
+  
+  <div id="tc03" class="w3-container city w3-animate-left">
+    <div class="heading" style="color: black">
+      <h1 style="text-align: center;er; text-decoration:underline;">Team Members</h1>
+      <h2 style="text-align: center;er;">Rishabh Pokharna- 2014A7PS0108H</h2>
+      <h2 style="text-align: center;er;">Nitish Ravishankar- 2015A7PS0152H</h2>
+      <h2 style="text-align: center;er;">Mohit Goyal- 2015A7PS0151H</h2>
+    </div>
+  </div>  
+  
+  	<div id="tc1" class="w3-container city w3-animate-left">
+    	<h2>Bell</h2>
+    	<img class="w3-animate-left" src="img/bell1.gif">
+
+   	</div>
+
+  	<div id="tc2" class="w3-container city w3-animate-left">
+    	<h2>Flower Vase</h2>
+        <img class="w3-animate-left" src="img/flower.gif">
+
+    </div>
+
+  	<div id="tc3" class="w3-container city w3-animate-left">
+    	<h2>Wine Glass</h2>
+        <img class="w3-animate-left" src="img/wineglass.gif">
+
+  	</div>
+  	
+  	
+  	
+
+<script>
+function openTest(evt, testName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(testName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+function show(){
+   var x = document.getElementsByClassName('h');
+   for(var i=0;i<x.length;i++){
+      if(x[i].style.opacity != "1"){
+         x[i].style.opacity = "1";
+      }else{
+         x[i].style.opacity = "0";
+      }
+   }
+}
+window.onload=function(){
+	
+	document.getElementById('tc0').style.display = "block";
+}
+</script>
+
+
+<style>
+.h{
+   opacity:  0;
+   animation: all 0.8s;
+}
+</style>
+
+</body>
+</html>
