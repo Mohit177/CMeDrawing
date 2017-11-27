@@ -1,16 +1,8 @@
-/*******************************************************************
-       Function Prototypes for CS580 Programming Assignment 5
-********************************************************************
-    Author: Lavanya Viswanathan
-      Date: December 01, 1997
-   Subject: Function prototypes 
-********************************************************************/
-#ifndef FUNCS_H
-#define FUNCS_H
+#ifndef CALLSBACK_H
+#define CALLSBACK_H
 #include "data.h"
 #include "const.h"
 
-/* in the file 'callbacks.c' */
 void selectColor(int color);
 void selectDataSet(int option);
 void selectOption(int option);

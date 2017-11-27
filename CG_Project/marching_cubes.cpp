@@ -10,7 +10,7 @@
 
 #include <stdlib.h>
 #include <GL/glut.h>
-#include "funcs.h"
+#include "callbacks.h"
 
 //#include "callbacks.c"
 

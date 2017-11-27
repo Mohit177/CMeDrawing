@@ -3,7 +3,7 @@
 #include <math.h>
 #include <GL/glut.h>
 #include "const.h"
-#include "funcs.h"
+#include "callbacks.h"
 #include "data.h"
 #include "cube.h"
 
