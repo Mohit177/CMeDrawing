@@ -2,15 +2,17 @@
 #include <cstdlib>
 #include <cmath>
 #include <string>
+#include <fstream>
 #include <GL/glut.h>
 #include "const.h"
 #include "callbacks.h"
 #include "data.h"
 #include "cube.h"
+using namespace std;
 
 
 static int currentButton;
-static int displayType = RGB_SLICE_DISPLAY;
+static int displayType = 0;
 static int currentVolumeDataSet = TORSO_256_DATA_SET;
 static int currentSliceRGB = 0;
 static int currentScaleFactorRGB = TORSO_256_SCALE;
@@ -644,10 +646,15 @@ void drawVolumeRGB(VolumeData* vol, int slice)
 void drawPolygonalModel(void)
 {
     int i;
-
+    ofstream ofil;
+    ofil.open("tfile.mohit");
     glColor3f(1.0, 1.0, 1.0);
     for (i = 0; i < currentFacetIndex; i++)
     {
+        ofil<<currentScaleFactorRGB *(facet_list + i)->pt1->x<<" "<<currentScaleFactorRGB *(facet_list + i)->pt1->y<<" "<<currentScaleFactorRGB *(facet_list + i)->pt1->z<<" ";
+        ofil<<currentScaleFactorRGB *(facet_list + i)->pt2->x<<" "<<currentScaleFactorRGB *(facet_list + i)->pt2->y<<" "<<currentScaleFactorRGB *(facet_list + i)->pt2->z<<" ";
+        ofil<<currentScaleFactorRGB *(facet_list + i)->pt3->x<<" "<<currentScaleFactorRGB *(facet_list + i)->pt3->y<<" "<<currentScaleFactorRGB *(facet_list + i)->pt3->z<<endl;
+
         glBegin(GL_POLYGON);
         glVertex3f(currentScaleFactorRGB * (facet_list + i)->pt1->x,
             currentScaleFactorRGB * (facet_list + i)->pt1->y,
@@ -666,6 +673,7 @@ void drawPolygonalModel(void)
             (facet_normals_list + i)->pt3->z);
         glEnd();
     }
+    ofil.close();
 }
 
 
@@ -677,8 +685,6 @@ void computePolygonalModel(void)
     int pt_ij, pt_i1j, pt_ij1, pt_ijk, pt_ijk1, pt_i1jk, pt_i1jk1, pt_ij1k1, pt_k, pt_k1;
     double dist;
     Point3* pt;
-
-    printf("Computing the polygonal model ... \n");
 
     generateFacetData();
     generateEdgeData();
@@ -868,7 +874,7 @@ void display(void)
 	        deleteVolume(volume);
 	    freeStructures();
 	    volume = initVolumeData(TORSO_256_XDIM, TORSO_256_YDIM, TORSO_256_ZDIM);
-	    loadVolumeData(volume, "./256.dat");
+	    loadVolumeData(volume, "../data/lobster.dat");
 	    computePolygonalModel();
 	   
 	    display();

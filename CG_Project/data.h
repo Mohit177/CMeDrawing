@@ -5,10 +5,10 @@
 #include <cstdio>
 #include <string>
 #define TORSO_256_DATA_SET 2
-#define TORSO_256_SCALE 2
-#define TORSO_256_XDIM 256
-#define TORSO_256_YDIM 256
-#define TORSO_256_ZDIM 114
+#define TORSO_256_SCALE 4
+#define TORSO_256_XDIM 120
+#define TORSO_256_YDIM 120
+#define TORSO_256_ZDIM 34
 
 /* class to represent the 3D volume data */
 class VolumeData
