@@ -31,34 +31,6 @@ static long vert_index = 0;
 static long Threshold = 50;
 
 
-void selectColor(int color)
-{
-    switch (color)
-    {
-        case RED:
-            glColor3f(1.0, 0.0, 0.0);
-            break;
-        case GREEN:
-            glColor3f(0.0, 1.0, 0.0);
-            break;
-        case BLUE:
-            glColor3f(0.0, 0.0, 1.0);
-            break;
-        case YELLOW:
-            glColor3f(1.0, 1.0, 0.0);
-            break;
-        case MAGENTA:
-            glColor3f(1.0, 0.0, 1.0);
-            break;
-        case CYAN:
-            glColor3f(0.0, 1.0, 1.0);
-            break;
-        case WHITE:
-            glColor3f(1.0, 1.0, 1.0);
-            break;
-    }
-}
-
 void selectDataSet(int option)
 {
     currentVolumeDataSet = option;
@@ -691,7 +663,7 @@ void drawPolygonalModel(void)
 {
     int i;
 
-    selectColor(WHITE);
+    glColor3f(1.0, 1.0, 1.0);
     for (i = 0; i < currentFacetIndex; i++)
     {
         glBegin(GL_POLYGON);
@@ -906,8 +878,10 @@ void display(void)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (!volume)
-        selectDataSet(currentVolumeDataSet);
+    if (!volume){
+    	
+        //selectDataSet(currentVolumeDataSet);
+    }
 
     if (displayType == RGB_SLICE_DISPLAY)
         drawVolumeRGB(volume, currentSliceRGB);
@@ -916,12 +890,6 @@ void display(void)
 
     glutSwapBuffers();
 }
-
-
-void keyboard(int key, int x, int y)
-{
-}
-
 
 void keyboardSpecial(int key, int x, int y)
 {
@@ -945,53 +913,5 @@ void keyboardSpecial(int key, int x, int y)
             }
             display();
             break;
-    }
-}
-
-
-void createMenus(void)
-{
-    int dataSetMenu;
-
-    dataSetMenu = glutCreateMenu(selectDataSet);
-    glutAddMenuEntry("Torso: 256x256", TORSO_256_DATA_SET);
-    glutCreateMenu(selectOption);
-    glutAddSubMenu("Choose data set", dataSetMenu);
-    if (displayType == RGB_SLICE_DISPLAY)
-        glutAddMenuEntry("Switch to polygonal model", 'w');
-    else if (displayType == POLYGONAL_DISPLAY)
-        glutAddMenuEntry("Switch to RGB slices", 'w');
-    glutAddMenuEntry("Clear screen", 's');
-    glutAddMenuEntry("Exit", 'e');
-
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-}
-
-
-void initLighting(void)
-{
-    GLfloat lightPosition[] = { 0.0, 0.0, 1.0, 0.0 };
-    GLfloat lightAmbient[] = { 0.0, 0.0, 0.0, 1.0 };
-    GLfloat lightDiffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-
-    glShadeModel(GL_SMOOTH);
-
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-
-    if (displayType == POLYGONAL_DISPLAY)
-    {
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0);
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_NORMALIZE);
-    }
-    else if (displayType == RGB_SLICE_DISPLAY)
-    {
-        glDisable(GL_LIGHTING);
-        glDisable(GL_LIGHT0);
-        glDisable(GL_DEPTH_TEST);
-        glDisable(GL_NORMALIZE);
     }
 }

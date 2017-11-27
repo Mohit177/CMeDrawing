@@ -3,7 +3,6 @@
 #include "data.h"
 #include "const.h"
 
-void selectColor(int color);
 void selectDataSet(int option);
 void selectOption(int option);
 void initStructures(void);
@@ -25,7 +24,6 @@ void drawPolygonalModel(void);
 void computePolygonalModel(void);
 void reshape(int width, int height);
 void display(void);
-void keyboard(int key, int x, int y);
 void keyboardSpecial(int key, int x, int y);
 
 #endif
