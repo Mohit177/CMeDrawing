@@ -3,10 +3,10 @@
 #include "data.h"
 #include "const.h"
 
-void selectOption(int option);
-void initStructures(void);
-void freeStructures(void);
-void generateFacetData(void);
+void select_data_layer(int option);
+void initialize_Structure_Data(void);
+void delete_Structure_Data(void);
+void generate_facet_Data(void);
 void printFacetDataFile(void);
 void generateEdgeData(void);
 void printEdgeDataFile(void);

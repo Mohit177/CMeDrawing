@@ -12,7 +12,7 @@ using namespace std;
 
 
 static int currentButton;
-static int displayType = 0;
+static int displayType = 1;
 static int currentVolumeDataSet = TORSO_256_DATA_SET;
 static int currentSliceRGB = 0;
 static int currentScaleFactorRGB = TORSO_256_SCALE;
@@ -34,7 +34,7 @@ static long vert_index = 0;
 static long Threshold = 50;
 
 
-void selectOption(int option)
+void select_data_layer(int option)
 {
     switch (option)
     {
@@ -48,13 +48,13 @@ void selectOption(int option)
         case 'e':
             if (volume)
                 deleteVolume(volume);
-            freeStructures();
+            delete_Structure_Data();
             exit(0);
             break;
     }
 }
 
-void initStructures(void)
+void initialize_Structure_Data(void)
 {
     int i;
 
@@ -99,7 +99,7 @@ void initStructures(void)
     }
 }
 
-void freeStructures(void)
+void delete_Structure_Data(void)
 {
     int i;
 
@@ -143,7 +143,7 @@ void freeStructures(void)
     }
 }
 
-void generateFacetData(void)
+void generate_facet_Data(void)
 {
     int i, j, k, l, cube_index;
 
@@ -685,10 +685,9 @@ void computePolygonalModel(void)
     int pt_ij, pt_i1j, pt_ij1, pt_ijk, pt_ijk1, pt_i1jk, pt_i1jk1, pt_ij1k1, pt_k, pt_k1;
     double dist;
     Point3* pt;
-
-    generateFacetData();
+    generate_facet_Data();
     generateEdgeData();
-    initStructures();
+    initialize_Structure_Data();
 
     NI = volume->XDim;
     NJ = volume->YDim;
@@ -872,7 +871,7 @@ void display(void)
 	    currentScaleFactorRGB = TORSO_256_SCALE;
 	    if (volume)
 	        deleteVolume(volume);
-	    freeStructures();
+	    delete_Structure_Data();
 	    volume = initVolumeData(TORSO_256_XDIM, TORSO_256_YDIM, TORSO_256_ZDIM);
 	    loadVolumeData(volume, "../data/lobster.dat");
 	    computePolygonalModel();
