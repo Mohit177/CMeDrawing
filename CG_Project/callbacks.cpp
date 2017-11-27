@@ -17,7 +17,7 @@ static int numTotalVertices = 0;
 static int currentFacetIndex = 0;
 
 /* volume data set */
-static Volume *volume;
+static VolumeData *volume;
 static point *vertices_list;
 static point *normals_list;
 static triangle *facet_list;
@@ -64,60 +64,15 @@ void selectDataSet(int option)
   currentSliceRGB = 0;
   switch (option)
     {
-    case TORSO_128_DATA_SET: 
-      currentScaleFactorRGB = TORSO_128_SCALE;
-      if (volume)
-	freeVolume(volume);
-      freeStructures();
-      volume = createVolume(TORSO_128_XDIM,TORSO_128_YDIM,TORSO_128_ZDIM);
-      volReadFile(volume,"./128.dat");
-      computePolygonalModel();
-      break;
-    case TORSO_256_DATA_SET:
-      currentScaleFactorRGB = TORSO_256_SCALE;
-      if (volume)
-	freeVolume(volume);
-      freeStructures();
-      volume = createVolume(TORSO_256_XDIM,TORSO_256_YDIM,TORSO_256_ZDIM);
-      volReadFile(volume,"./256.dat");
-      computePolygonalModel();
-      break;
-    case TORSO_512_DATA_SET:
-      currentScaleFactorRGB = TORSO_512_SCALE;
-      if (volume)
-	freeVolume(volume);
-      freeStructures();
-      volume = createVolume(TORSO_512_XDIM,TORSO_512_YDIM,TORSO_512_ZDIM);
-      volReadFile(volume,"./512.dat");
-      computePolygonalModel();
-      break;
-    case LOBSTER_DATA_SET:
-      currentScaleFactorRGB = LOBSTER_SCALE;
-      if (volume)
-	freeVolume(volume);
-      freeStructures();
-      volume = createVolume(LOBSTER_XDIM,LOBSTER_YDIM,LOBSTER_ZDIM);
-      volReadFile(volume,"../data/lobster.dat");
-      computePolygonalModel();
-      break;
-    case HYDROGEN_DATA_SET:
-      currentScaleFactorRGB = HYDROGEN_SCALE;
-      if (volume)
-	freeVolume(volume);
-      freeStructures();
-      volume = createVolume(HYDROGEN_XDIM,HYDROGEN_YDIM,HYDROGEN_ZDIM);
-      volReadFile(volume,"../data/hydrogen.dat");
-      computePolygonalModel();
-      break;
-    case VOL_TESLA_DATA_SET:
-      currentScaleFactorRGB = VOL_TESLA_SCALE;
-      if (volume)
-	freeVolume(volume);
-      freeStructures();
-      volume = createVolume(VOL_TESLA_XDIM,VOL_TESLA_YDIM,VOL_TESLA_ZDIM);
-      volReadFile(volume,"../data/vol_tesla.dat");
-      computePolygonalModel();
-      break;
+	    case TORSO_256_DATA_SET:
+	      currentScaleFactorRGB = TORSO_256_SCALE;
+	      if (volume)
+		freeVolume(volume);
+	      freeStructures();
+	      volume = initVolumeData(TORSO_256_XDIM,TORSO_256_YDIM,TORSO_256_ZDIM);
+	      volReadFile(volume,"./256.dat");
+	      computePolygonalModel();
+	      break;
     }
   display();
 }
@@ -700,7 +655,7 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
 }
 
 
-void drawVolumeRGB(Volume *vol, int slice)
+void drawVolumeRGB(VolumeData *vol, int slice)
 {
   int i,j;
   double colorval;
@@ -989,13 +944,7 @@ void createMenus(void)
   int dataSetMenu;
 
   dataSetMenu = glutCreateMenu(selectDataSet);
-  glutAddMenuEntry("Torso: 128x128",TORSO_128_DATA_SET);
   glutAddMenuEntry("Torso: 256x256",TORSO_256_DATA_SET);
-  glutAddMenuEntry("Torso: 512x512",TORSO_512_DATA_SET);
-  glutAddMenuEntry("Lobster",LOBSTER_DATA_SET);
-  glutAddMenuEntry("Hydrogen",HYDROGEN_DATA_SET);
-  glutAddMenuEntry("Vol_Tesla",VOL_TESLA_DATA_SET);
-
   glutCreateMenu(selectOption);
   glutAddSubMenu("Choose data set",dataSetMenu);
   if (displayType == RGB_SLICE_DISPLAY)

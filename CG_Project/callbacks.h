@@ -20,7 +20,7 @@ void printVerticesFile(void);
 void printFacetsFile(void);
 int cube_index(int imarch, int jmarch);
 void load_facet(int cube_index, int imarch, int jmarch, int kmarch);
-void drawVolumeRGB(Volume *vol, int slice);
+void drawVolumeRGB(VolumeData *vol, int slice);
 void drawPolygonalModel(void);
 void computePolygonalModel(void);
 void reshape(int width, int height);
