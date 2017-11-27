@@ -53,7 +53,7 @@
 
 #define SHORT_INT_MIN          -32767
 
-class point 
+class Point3 
 {
 public:	
   double x,y,z;
@@ -62,7 +62,7 @@ public:
 class triangle
 {
 public:	
-  point *pt1, *pt2, *pt3;
+  Point3 *pt1, *pt2, *pt3;
 } ;
 
 

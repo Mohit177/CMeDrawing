@@ -17,9 +17,12 @@ static int numTotalVertices = 0;
 static int currentFacetIndex = 0;
 
 /* volume data set */
+
 static VolumeData *volume;
-static point *vertices_list;
-static point *normals_list;
+
+static Point3 *vertices_list;
+static Point3 *normals_list;
+
 static triangle *facet_list;
 static triangle *facet_normals_list;
 
@@ -116,17 +119,17 @@ void initStructures(void)
   if (!topyedge)
     topyedge = (long *)malloc(sizeof(long) * volume->YDim);
   if (!vertices_list)
-    vertices_list = (point *)malloc(sizeof(point)*500000);
+    vertices_list = (Point3*)malloc(sizeof(Point3)*500000);
   if (!normals_list)
-    normals_list = (point *)malloc(sizeof(point)*500000);
+    normals_list = (Point3*)malloc(sizeof(Point3)*500000);
   if (!facet_list)
     {
       facet_list = (triangle *)malloc(sizeof(triangle)*500000);
       for (i=0; i<500000; i++)
 	{
-	  (facet_list+i)->pt1 = (point *)malloc(sizeof(point));
-	  (facet_list+i)->pt2 = (point *)malloc(sizeof(point));
-	  (facet_list+i)->pt3 = (point *)malloc(sizeof(point));
+	  (facet_list+i)->pt1 = (Point3*)malloc(sizeof(Point3));
+	  (facet_list+i)->pt2 = (Point3*)malloc(sizeof(Point3));
+	  (facet_list+i)->pt3 = (Point3*)malloc(sizeof(Point3));
 	}
     }
   if (!facet_normals_list)
@@ -134,9 +137,9 @@ void initStructures(void)
       facet_normals_list = (triangle *)malloc(sizeof(triangle)*500000);
       for (i=0; i<500000; i++)
 	{
-	  (facet_normals_list+i)->pt1 = (point *)malloc(sizeof(point));
-	  (facet_normals_list+i)->pt2 = (point *)malloc(sizeof(point));
-	  (facet_normals_list+i)->pt3 = (point *)malloc(sizeof(point));
+	  (facet_normals_list+i)->pt1 = (Point3*)malloc(sizeof(Point3));
+	  (facet_normals_list+i)->pt2 = (Point3*)malloc(sizeof(Point3));
+	  (facet_normals_list+i)->pt3 = (Point3*)malloc(sizeof(Point3));
 	}
     }
 }
@@ -344,7 +347,7 @@ short int getCorner(int corner, int imarch, int jmarch)
 }
 
 
-void contour_intersect(int edge_name, int imarch, int jmarch, int kmarch, point *pt)// linear interpolation wala
+void contour_intersect(int edge_name, int imarch, int jmarch, int kmarch, Point3*pt)// linear interpolation wala
 {
   short int A=0, B=0, C=0;
   double dist = 0.5;
@@ -389,7 +392,7 @@ void contour_intersect(int edge_name, int imarch, int jmarch, int kmarch, point 
 }
 
 
-void add_vertex(point *pt)
+void add_vertex(Point3*pt)
 {
   int sindex;
   double sumSquares;
@@ -436,15 +439,15 @@ void add_vertex(point *pt)
 void add_facet(int num_verts, long vertex_list[])
 {
   int i;
-  point *pt1,*pt2,*pt3, *npt1, *npt2, *npt3;
+  Point3 *pt1,*pt2,*pt3, *npt1, *npt2, *npt3;
 
   /* allocate memory */
-  pt1 = (point *)malloc(sizeof(point));
-  pt2 = (point *)malloc(sizeof(point));
-  pt3 = (point *)malloc(sizeof(point));
-  npt1 = (point *)malloc(sizeof(point));
-  npt2 = (point *)malloc(sizeof(point));
-  npt3 = (point *)malloc(sizeof(point));
+  pt1 = (Point3*)malloc(sizeof(Point3));
+  pt2 = (Point3*)malloc(sizeof(Point3));
+  pt3 = (Point3*)malloc(sizeof(Point3));
+  npt1 = (Point3*)malloc(sizeof(Point3));
+  npt2 = (Point3*)malloc(sizeof(Point3));
+  npt3 = (Point3*)malloc(sizeof(Point3));
 
   pt1 = (vertices_list+vertex_list[0]);
   pt2 = (vertices_list+vertex_list[1]);
@@ -558,7 +561,7 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
   long vert_offset;
   long i,j, debugindex;
   long offset;
-  point pt;
+  Point3 pt;
 
   static long NI, NJ;
   
@@ -710,7 +713,7 @@ void computePolygonalModel(void)
   int cubeIndex;
   int pt_ij, pt_i1j, pt_ij1, pt_ijk, pt_ijk1, pt_i1jk, pt_i1jk1, pt_ij1k1, pt_k, pt_k1;
   double dist;
-  point *pt;
+  Point3 *pt;
 
   printf("Computing the polygonal model ... \n");
 
@@ -725,7 +728,7 @@ void computePolygonalModel(void)
   NCJ = NJ-1;
   NCK = NK-1;
 
-  pt = (point *)malloc(sizeof(point));
+  pt = (Point3*)malloc(sizeof(Point3));
 
   for (sliceNum = 0; sliceNum < (NK-1); sliceNum++)
     {
