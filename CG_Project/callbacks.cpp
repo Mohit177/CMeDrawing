@@ -1,12 +1,3 @@
-/********************************************************************
-       Callback Subroutines for CS580 Programming Assignment 5
-*********************************************************************
-    Author: Lavanya Viswanathan
-      Date: December 01, 1997
-  Comments: Subroutines to support GLUT library callbacks: 
-            menu support, redisplay/reshape, mouse actions.
-********************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -16,14 +7,12 @@
 #include "data.h"
 #include "cube.h"
 
-/* static global variables for storing state information */
-static int currentButton;  /* currently pressed mouse button */  
-static int displayType = RGB_SLICE_DISPLAY;  /* current display setting, i.e., 
-						whether RGB slices (color coded) are being viewed
-						or whether the polygonal model is being viewed. */
-static int currentVolumeDataSet = TORSO_256_DATA_SET;   /* current volume data set */
-static int currentSliceRGB = 0;   /* current slice being displayed in RGB form */
-static int currentScaleFactorRGB = TORSO_256_SCALE;   /* current scale factor for the data set being displayed */
+
+static int currentButton; 
+static int displayType = RGB_SLICE_DISPLAY; 
+static int currentVolumeDataSet = TORSO_256_DATA_SET;
+static int currentSliceRGB = 0; 
+static int currentScaleFactorRGB = TORSO_256_SCALE;
 static int numTotalVertices = 0;
 static int currentFacetIndex = 0;
 
@@ -34,17 +23,13 @@ static point *normals_list;
 static triangle *facet_list;
 static triangle *facet_normals_list;
 
-/* slices, etc */
 static short int *outsideSliceA, *outsideSliceB, *outsideSliceC;
 static long *xedge, *yedge, *zedge, *topyedge;
 static long old6pt, old10pt;
 static long vert_index = 0;
 static long Threshold = 50;
 
-/* SELECTCOLOR: Function to set the current drawing color of the screen.
-                The input parameter 'color' is the value returned by GLUT 
-	        for the color option selected by the user.
-	        */
+
 void selectColor(int color)
 {
   switch (color) 
@@ -73,10 +58,6 @@ void selectColor(int color)
     }
 }
 
-/* SELECT_DATA_SET: Function to handle the options in the data set submenu.
-                 The input parameter 'option' is the value returned by GLUT 
-		 for the option selected by the user.
-		 */
 void selectDataSet(int option)
 {
   currentVolumeDataSet = option;
@@ -89,7 +70,7 @@ void selectDataSet(int option)
 	freeVolume(volume);
       freeStructures();
       volume = createVolume(TORSO_128_XDIM,TORSO_128_YDIM,TORSO_128_ZDIM);
-      volReadFile(volume,"../../data/128.dat");
+      volReadFile(volume,"./128.dat");
       computePolygonalModel();
       break;
     case TORSO_256_DATA_SET:
@@ -98,7 +79,7 @@ void selectDataSet(int option)
 	freeVolume(volume);
       freeStructures();
       volume = createVolume(TORSO_256_XDIM,TORSO_256_YDIM,TORSO_256_ZDIM);
-      volReadFile(volume,"../../data/256.dat");
+      volReadFile(volume,"./256.dat");
       computePolygonalModel();
       break;
     case TORSO_512_DATA_SET:
@@ -107,7 +88,7 @@ void selectDataSet(int option)
 	freeVolume(volume);
       freeStructures();
       volume = createVolume(TORSO_512_XDIM,TORSO_512_YDIM,TORSO_512_ZDIM);
-      volReadFile(volume,"../data/512.dat");
+      volReadFile(volume,"./512.dat");
       computePolygonalModel();
       break;
     case LOBSTER_DATA_SET:
@@ -141,24 +122,18 @@ void selectDataSet(int option)
   display();
 }
 
-/* SELECTOPTION: Function to handle the options in the main pulldown menu.
-                 The input parameter 'option' is the value returned by GLUT 
-		 for the option selected by the user.
-		 */
 void selectOption(int option)
 {
   switch(option)
     {
-    case 'w':   /* switch between displays: RGB slices or polygonal model */
+    case 'w':
       displayType = 1-displayType;
-      //createMenus();
-//      initLighting();
       display();
       break;
-    case 's':   /* Clear the screen */
+    case 's':
       glClear(GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
       break;
-    case 'e':   /* Exit the application */
+    case 'e':
       if (volume)
 	freeVolume(volume);
       freeStructures();
@@ -167,8 +142,6 @@ void selectOption(int option)
     }
 }
 
-/* INIT_STRUCTURES: Allocate memory for the data structures used in this program.
-   */
 void initStructures(void)
 {
   int i;
@@ -213,8 +186,6 @@ void initStructures(void)
     }
 }
 
-/* FREE_STRUCTURES: Free the memory allocated to the data structures used in this program.
-   */
 void freeStructures(void)
 {
   int i;
@@ -259,20 +230,16 @@ void freeStructures(void)
     }
 }
 
-/* GENERATE_FACET_DATA: This function generates the 'facet_data' array for all 
-                        possible permutations of a marching cube.
-			*/
 void generateFacetData(void)
 {
   int i,j,k,l,cube_index;
 
   for (i=0; i<NUM_CUBE_PERMS; i++) 
-    {				/* i is the targeted cube_index */
+    {				
       for (j=0; j<NUM_BASIS_CUBES; j++) 
-	{			/* scan each of the NUM_BASIS_CUBES possible basis cubes */
+	{			
 	  for (k=0; k<NUM_CUBE_ROTATIONS; k++) 
-	    {			/* and every possible rotation for those cubes */
-	      /* first determine if we have a matching cube_index */
+	    {		
 	      cube_index=0;
 	      for (l=0; l<NUM_CUBE_VERTICES; l++) 
 		{
@@ -281,7 +248,7 @@ void generateFacetData(void)
 		}
 	  
 	      if (cube_index==i) 
-		{		/* we have located a matching cube_index */
+		{
 		  for (l=0; l<NUM_CUBE_EDGES; l++) 
 		    {
 		      if (init_facet_data[j][l]>=0) 
@@ -301,9 +268,7 @@ void generateFacetData(void)
     }
 }
 
-/* PRINT_FACET_DATA_FILE: Print facet data array to a file. This function is useful for
-                          debugging purposes.
-			  */
+
 void printFacetDataFile(void)
 {
   FILE *FACET_DATA_FILE;
@@ -326,28 +291,26 @@ void printFacetDataFile(void)
   printf("done!\n");
 }
 
-/* GENERATE_EDGE_DATA: This function generates the 'edge_data' array for all 
-                       possible permutations of a marching cube.
-		       */
+
 void generateEdgeData(void)
 {
   int found_edge[NUM_CUBE_EDGES]={FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE};
   int i,j,k;
 
   for (i=0; i<NUM_CUBE_PERMS; i++) 
-    {				/* i is the index for facet_data and edge_data */
+    {				
       for (j=0; j<NUM_CUBE_EDGES; j++) 
-	{				/* j counts through edge_list[] */
+	{				
 	  for (k=0; k<NUM_CUBE_EDGES; k++) 
-	    {				/* k counts through facet_data[i][] */
+	    {	
 	      if (edge_list[j]==facet_data[i][k]) 
 		found_edge[j]=TRUE;
 	    }
 	}
     
-      k = 0;			/* k is now a position counter in the edge_data[][] table */
+      k = 0;
       for (j=0; j<NUM_CUBE_EDGES; j++) 
-	{ /* again, j counts through edge_list[] */
+	{ 
 	  if (found_edge[j])
 	    {
 	      edge_data[i][k] = edge_list[j];
@@ -357,18 +320,16 @@ void generateEdgeData(void)
 
       while (k < NUM_CUBE_EDGES) 
 	{
-	  edge_data[i][k] = (-1);	/* fill up remaining space */
+	  edge_data[i][k] = (-1);
 	  k++;
 	}
 
-      for (k=0; k<NUM_CUBE_EDGES; k++) /* restore found_edge[] to initial state */
+      for (k=0; k<NUM_CUBE_EDGES; k++)
 	found_edge[k] = FALSE; 
     }
 }
 
-/* PRINT_EDGE_DATA_FILE: Print edge data array to a file. This function is useful for
-                         debugging purposes.
-			 */
+
 void printEdgeDataFile(void)
 {
   FILE *EDGE_DATA_FILE;
@@ -391,9 +352,7 @@ void printEdgeDataFile(void)
   printf("done!\n");
 }
 
-/* GET_CORNER: This function returns the density value for a particular corner 
-               of a cube in marching space.
-	       */
+
 short int getCorner(int corner, int imarch, int jmarch)
 {
   short int result;
@@ -429,11 +388,7 @@ short int getCorner(int corner, int imarch, int jmarch)
   return(result);
 }
 
-/* CONTOUR_INTERSECT: Find the intersection point of the contour with the edge of the cube.
-                      The current cube is the one at (imarch,jmarch,kmarch).
-		      The edge of the cube to find the intersection for is 'edge_name'.
-		      The resulting point is stored in 'pt'.
-		      */
+
 void contour_intersect(int edge_name, int imarch, int jmarch, int kmarch, point *pt)// linear interpolation wala
 {
   short int A=0, B=0, C=0;
@@ -478,10 +433,7 @@ void contour_intersect(int edge_name, int imarch, int jmarch, int kmarch, point 
     }
 }
 
-/* ADD_VERTEX: This function adds the vertex pointed to by 'pt' into the list 
-               of total vertices for the volumetric polygonal model. The index
-	       into which the vertex is written is given by 'vert_index'.
-	       */
+
 void add_vertex(point *pt)
 {
   int sindex;
@@ -525,9 +477,7 @@ void add_vertex(point *pt)
     }
 }
 
-/* ADD_FACET: This function adds a facet with 'num_verts' vertices given by
-              'vertex_list' into the facet table.
-	      */
+
 void add_facet(int num_verts, long vertex_list[])
 {
   int i;
@@ -559,8 +509,7 @@ void add_facet(int num_verts, long vertex_list[])
     }
 }
 
-/* PRINT_VERTICES_FILE: Print the data structure 'vertices_list' to a file.
-   */
+
 void printVerticesFile(void)
 {
   FILE *VERTICES_FILE;
@@ -578,8 +527,7 @@ void printVerticesFile(void)
   printf("done!\n");
 }
 
-/* PRINT_FACETS_FILE: Print the data structure 'facet_list' to a file.
-   */
+
 void printFacetsFile(void)
 {
   FILE *FACETS_FILE;
@@ -599,10 +547,7 @@ void printFacetsFile(void)
   printf("done!\n");
 }
 
-/* CUBE_INDEX: This function analyses a given voxel (from outsideSliceA and 
-               outsideSliceB) and returns the cube index of that voxel using
-	       the current threshold values.
-	       */
+
 int cube_index(int imarch, int jmarch)
 {
   short int corner;
@@ -744,7 +689,6 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
       i++;
     }
 
-  /* now add the new facets to the facet table */
   i=0;
   while ((facet_data[cube_index][i] != -1) && (i != NUM_CUBE_EDGES))
     {
@@ -755,8 +699,7 @@ void load_facet(int cube_index, int imarch, int jmarch, int kmarch)
     }
 }
 
-/* DRAW_VOLUME_RBG: Draws the volume data slice by slice in RGB shading form.
-   */
+
 void drawVolumeRGB(Volume *vol, int slice)
 {
   int i,j;
@@ -779,16 +722,10 @@ void drawVolumeRGB(Volume *vol, int slice)
       }
 }
 
-/* DRAW_POLYGONAL_MODEL: This function draws the polygonal model computed
-                         by the marching cubes algorithm.
-			 */
+
 void drawPolygonalModel(void)
 {
   int i;
-
-  /*glTranslatef(-256.0,-256.0,0.0);
-  glRotatef(45.0,0.0,1.0,0.0);
-  glTranslatef(256.0,256.0,0.0);*/
 
   selectColor(WHITE);
   for (i=0; i<currentFacetIndex; i++)
@@ -810,10 +747,7 @@ void drawPolygonalModel(void)
     }
 }
 
-/* COMPUTE_POLYGONAL_MODEL: This functions computes the polygonal model 
-                            for a given data set using the marching cubes 
-			    algorithm.
-			    */
+
 void computePolygonalModel(void)
 {
   int i,j,sliceNum,l;
@@ -829,12 +763,12 @@ void computePolygonalModel(void)
   generateEdgeData();
   initStructures();
   
-  NI = volume->XDim;   /* no of density points along the x-direction */
-  NJ = volume->YDim;   /* no of density points along the y-direction */
-  NK = volume->ZDim;   /* no of density points along the z-direction */
-  NCI = NI-1;  /* no of cubes along the x-direction */
-  NCJ = NJ-1;  /* no of cubes along the y-direction */
-  NCK = NK-1;  /* no of cubes along the z-direction */
+  NI = volume->XDim;
+  NJ = volume->YDim;
+  NK = volume->ZDim;
+  NCI = NI-1;
+  NCJ = NJ-1;
+  NCK = NK-1;
 
   pt = (point *)malloc(sizeof(point));
 
@@ -842,7 +776,6 @@ void computePolygonalModel(void)
     {
       if (sliceNum == 0)
 	{
-	  /* read in the first two slices */
 	  for (i=0; i<NI; i++)
 	    for (j=0; j<NJ; j++)
 	      {
@@ -851,7 +784,6 @@ void computePolygonalModel(void)
 		outsideSliceC[i*NJ + j] = outsideSliceA[i*NJ + j];
 	      }
 
-	  /* compute xedge for the first slice */
 	  for (i=0; i<(NI-1); i++)
 	    for (j=0; j<NJ; j++)
 	      {
@@ -871,7 +803,6 @@ void computePolygonalModel(void)
 		  xedge[i*NJ + j] = 0;
 	      }
 
-	  /* compute yedge for the first slice */
 	  for (i=0; i<NI; i++)
 	    for (j=0; j<(NJ-1); j++)
 	      {
@@ -893,8 +824,6 @@ void computePolygonalModel(void)
 	}
       else
 	{
-	  /* copy 'outsideSliceB' into 'outsideSliceA' and read in slice (sliceNum+1)
-	     into 'outsideSliceB'. Also, transfer 'outsideSliceA' to 'outsideSliceC' */
 	  for (i=0; i<NI; i++)
 	    for (j=0; j<NJ; j++)
 	      outsideSliceC[i*NJ + j] = outsideSliceA[i*NJ + j];
@@ -906,13 +835,11 @@ void computePolygonalModel(void)
 	      outsideSliceB[i*NJ + j] = volumePixel(volume,i,j,(sliceNum+1));
 	}
 
-      /* for each row (i.e., i = constant) */
+    
       for (i=0; i<(NI-1); i++)
 	{
-	  /* load zedge and topyedge for the first row of each slice */
 	  if (i==0)
 	    {
-	      /* compute zedge */
 	      for (j=0; j<NJ; j++)
 		{
 		  pt_k = outsideSliceA[i*NJ + j];
@@ -931,7 +858,6 @@ void computePolygonalModel(void)
 		    zedge[j] = 0;
 		}
 	      
-	      /* compute topyedge */
 	      for (j=0; j<(NJ-1); j++)
 		{
 		  pt_ijk1 = outsideSliceB[i*NJ + j];
@@ -951,13 +877,10 @@ void computePolygonalModel(void)
 		}
 	    }
 
-	  /* for each cube in the row */
 	  for (j=0; j<(NJ-1); j++)
 	    {
-	      /* load old6pt and old10pt for the first cube of each row in each slice */
 	      if (j==0)
 		{
-		  /* compute old6pt */
 		  pt_ijk1 = outsideSliceB[i*NJ + j];
 		  pt_i1jk1 = outsideSliceB[(i+1)*NJ + j];
 		  if (((pt_ijk1 < Threshold) && (pt_i1jk1 > Threshold))
@@ -973,7 +896,6 @@ void computePolygonalModel(void)
 		  else
 		    old6pt = -1;
 
-		  /* compute old10pt */
 		  pt_i1jk1 = outsideSliceB[(i+1)*NJ + j];
 		  pt_i1jk = outsideSliceA[(i+1)*NJ + j];
 		  if (((pt_i1jk1 < Threshold) && (pt_i1jk > Threshold))
@@ -1000,10 +922,7 @@ void computePolygonalModel(void)
   printf("done!\n");
 }
 
-/* RESHAPE: Callback function for a reshape event initiated by the user
-	    The input parameters 'width' and 'height' specify the current 
-	    width and height of the window.
-	    */
+
 void reshape(int width, int height)
 {
   /* change viewport dimensions */
@@ -1014,12 +933,10 @@ void reshape(int width, int height)
   glMatrixMode(GL_MODELVIEW);
 }
 
-/* DISPLAY: Callback function for a redisplay event initiated by the user or
-            by the application itself.
-	    */
+
 void display(void)
 {
-  /* clear the display */
+
   glClear(GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
   if (!volume)
@@ -1030,73 +947,17 @@ void display(void)
   else if (displayType == POLYGONAL_DISPLAY)
     drawPolygonalModel();
 
-  /* swap the double buffers */
   glutSwapBuffers();  
 }
 
-/* MOUSEBUTTON: Function to handle mouse press/release events.
-                The input parameter 'button' specifies which mouse button has 
-		been pressed by the user (GLUT_LEFT_BUTTON, GLUT_MIDDLE_BUTTON)
-		The parameter 'state' specifies the state of the button cur-
-		rently pressed, i.e., whether the button has been pressed or
-		released (GLUT_DOWN or GLUT_UP).
-		The parameters 'x' and 'y' specify the current mouse position.
-		*/
-		/*
-void mouseButton(int button, int state, int x, int y)
-{
-  int j,k;
 
-  currentButton = button;
-
-  if (button == GLUT_LEFT_BUTTON)
-    {
-      switch (state) 
-	{      
-	case GLUT_DOWN:
-	  break;
-	}
-    }    
-  else if (button == GLUT_MIDDLE_BUTTON)
-    {
-      switch (state)
-	{
-	case GLUT_DOWN:
-	  break;
-	case GLUT_UP:
-	  break;
-	}
-    }
-}
-*/
-/* MOUSEMOTION: Function to handle mouse movement events.
-		The parameters 'x' and 'y' specify the current mouse position.
-		*/
-/*		
-void mouseMotion(int x, int y)
-{
-  switch (currentButton)
-    {
-    case(GLUT_LEFT_BUTTON):
-    case(GLUT_MIDDLE_BUTTON):
-      break;
-    }
-}
-*/
-/* KEYBOARD: Function to handle keyboard inputs other than special keys.
-             'key' specifies the key pressed while 'x' and 'y' specify the 
-	     current position of the mouse.
-	     */
 	     
 void keyboard(int key, int x, int y)
 {
 }
 
 
-/* KEYBOARDSPECIAL: Callback function to handle special key keyboard operations (arrow keys).
-                    The input parameter 'key' specifies the key pressed by the user.
-		    The parameters 'x' and 'y' specify the current mouse position.
-		    */
+
 void keyboardSpecial(int key, int x, int y)
 {
   switch (key)
@@ -1122,8 +983,7 @@ void keyboardSpecial(int key, int x, int y)
     }
 }
 
-/* CREATEMENUS: function to create pulldown menus for the curve editing window.
-                */
+
 void createMenus(void)
 {
   int dataSetMenu;
@@ -1145,27 +1005,22 @@ void createMenus(void)
   glutAddMenuEntry("Clear screen", 's');
   glutAddMenuEntry("Exit", 'e');
 
-  /* attach all menus to the right mouse button */
   glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-/* INIT_LIGHTING: Initialize light sources' attributes and positions for the scene.
- */
+
 void initLighting(void)
 {
   GLfloat lightPosition[] = {0.0,0.0,1.0,0.0};
   GLfloat lightAmbient[] = {0.0,0.0,0.0,1.0};
   GLfloat lightDiffuse[] = {1.0,1.0,1.0,1.0};
 
-  /* define properties of the lighting model */
   glShadeModel(GL_SMOOTH);
 
-  /* define the properties of Light Source 0 */
   glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
   glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
   glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
 
-  /* enable required lights and depth testing */
   if (displayType == POLYGONAL_DISPLAY)
     {
       glEnable(GL_LIGHTING);

@@ -42,12 +42,12 @@
 #define VOL_TESLA_ZDIM        10
 
 /* data structure to hold the three dimensional volume data buffer */
-typedef struct 
-{
+class Volume{
+public:
   unsigned int XDim, YDim, ZDim;   /* number of samples per dimension */
   unsigned int totalSize;          /* total size of the data buffer = XDim*YDim*ZDim */
   unsigned char *data;             /* data buffer */
-} Volume;
+};
 
 /* macro to read a given pixel density value from the volume data buffer */
 #define volumePixel(vol, x, y, z)      vol->data[z * (vol->XDim * vol->YDim) + y * vol->XDim + x]
