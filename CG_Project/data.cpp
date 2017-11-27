@@ -1,13 +1,13 @@
 #include "data.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
-Volume* createVolume(unsigned int sx, unsigned int sy, unsigned int sz)
+VolumeData* initVolumeData(unsigned int sx, unsigned int sy, unsigned int sz)
 {
-    Volume* volume;
-    char func[] = "createVolume()";
+    VolumeData* volume;
+    char func[] = "initVolumeData()";
 
-    if (!(volume = (Volume*)calloc(1, sizeof(Volume))))
+    if (!(volume = (VolumeData*)calloc(1, sizeof(VolumeData))))
     {
         errno = ENOMEM;
         perror(func);
@@ -27,7 +27,7 @@ Volume* createVolume(unsigned int sx, unsigned int sy, unsigned int sz)
 
     return (volume);
 }
-int freeVolume(Volume* vol)
+int freeVolume(VolumeData* vol)
 {
     char func[] = "freeVolume()";
 
@@ -44,7 +44,7 @@ int freeVolume(Volume* vol)
     return 0;
 }
 
-int volReadFile(Volume* vol, char* fname)
+int volReadFile(VolumeData* vol, char* fname)
 {
     unsigned int i;
     char func[] = "volReadFile()";
@@ -80,7 +80,7 @@ int volReadFile(Volume* vol, char* fname)
     return 0;
 }
 
-int volPrintFile(Volume* vol, char* fname)
+int volPrintFile(VolumeData* vol, char* fname)
 {
     FILE* fp;
     char func[] = "volPrintFile()";
