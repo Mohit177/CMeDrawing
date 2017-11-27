@@ -10,7 +10,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_STENCIL);
     glutInitWindowPosition(0, 0);
     glutInitWindowSize(windWidth, windHeight);
-    glutCreateWindow("Volume Rendering: Matching Cubes Algorithm");
+    glutCreateWindow("Matching Cubes");
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glLineWidth(DEFAULT_LINE_WIDTH);

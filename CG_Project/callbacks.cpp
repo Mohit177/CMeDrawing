@@ -20,8 +20,8 @@ static int currentFacetIndex = 0;
 static Volume *volume;
 static Point3 *vertices_list;
 static Point3 *normals_list;
-static triangle *facet_list;
-static triangle *facet_normals_list;
+static Triangle *facet_list;
+static Triangle *facet_normals_list;
 
 static short int *outsideSliceA, *outsideSliceB, *outsideSliceC;
 static long *xedge, *yedge, *zedge, *topyedge;
@@ -166,7 +166,7 @@ void initStructures(void)
     normals_list = (Point3*)malloc(sizeof(Point3)*500000);
   if (!facet_list)
     {
-      facet_list = (triangle *)malloc(sizeof(triangle)*500000);
+      facet_list = (Triangle *)malloc(sizeof(Triangle)*500000);
       for (i=0; i<500000; i++)
 	{
 	  (facet_list+i)->pt1 = (Point3*)malloc(sizeof(Point3));
@@ -176,7 +176,7 @@ void initStructures(void)
     }
   if (!facet_normals_list)
     {
-      facet_normals_list = (triangle *)malloc(sizeof(triangle)*500000);
+      facet_normals_list = (Triangle *)malloc(sizeof(Triangle)*500000);
       for (i=0; i<500000; i++)
 	{
 	  (facet_normals_list+i)->pt1 = (Point3*)malloc(sizeof(Point3));

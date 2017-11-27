@@ -59,7 +59,7 @@ public:
   double x,y,z;
 };
 
-class triangle
+class Triangle
 {
 public:	
   Point3 *pt1, *pt2, *pt3;
