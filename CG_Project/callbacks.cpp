@@ -31,25 +31,6 @@ static long vert_index = 0;
 static long Threshold = 50;
 
 
-void selectDataSet(int option)
-{
-    currentVolumeDataSet = option;
-    currentSliceRGB = 0;
-    switch (option)
-    {
-        case TORSO_256_DATA_SET:
-            currentScaleFactorRGB = TORSO_256_SCALE;
-            if (volume)
-                deleteVolume(volume);
-            freeStructures();
-            volume = initVolumeData(TORSO_256_XDIM, TORSO_256_YDIM, TORSO_256_ZDIM);
-            loadVolumeData(volume, "./256.dat");
-            computePolygonalModel();
-            break;
-    }
-    display();
-}
-
 void selectOption(int option)
 {
     switch (option)
@@ -879,8 +860,17 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     if (!volume){
-    	
-        //selectDataSet(currentVolumeDataSet);
+	    currentSliceRGB = 0;
+
+	    currentScaleFactorRGB = TORSO_256_SCALE;
+	    if (volume)
+	        deleteVolume(volume);
+	    freeStructures();
+	    volume = initVolumeData(TORSO_256_XDIM, TORSO_256_YDIM, TORSO_256_ZDIM);
+	    loadVolumeData(volume, "./256.dat");
+	    computePolygonalModel();
+	   
+	    display();
     }
 
     if (displayType == RGB_SLICE_DISPLAY)

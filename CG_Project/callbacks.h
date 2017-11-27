@@ -3,7 +3,6 @@
 #include "data.h"
 #include "const.h"
 
-void selectDataSet(int option);
 void selectOption(int option);
 void initStructures(void);
 void freeStructures(void);
