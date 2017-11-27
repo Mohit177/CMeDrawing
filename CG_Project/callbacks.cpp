@@ -12,7 +12,7 @@ using namespace std;
 
 
 static int currentButton;
-static int displayType = 1;
+static int displayType = 0;
 static int currentVolumeDataSet = TORSO_256_DATA_SET;
 static int currentSliceRGB = 0;
 static int currentScaleFactorRGB = TORSO_256_SCALE;

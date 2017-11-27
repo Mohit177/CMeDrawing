@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Marching Cubes</title>
+   
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCpp.js"></script>
+	<link type="text/css" rel="stylesheet" href="styles/shCoreEmacs.css"/>
+   	<link type="text/css" rel="stylesheet" href="styles/w3.css">
+   
+
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+   	<style>
+		.city {display:none;}
+	</style>
+</head>
+
+<body style="background: rgba(255,255,255); font-family: Helvetica">
+
+
+
+	<nav class="w3-sidenav w3-black w3-card-2" style="width:130px">
+	  	<div class="w3-container">
+	    
+	  	</div>
+	 	<a href="#" class="tablink" onclick="openTest(event, 'tc0')">Introduction</a>
+	  	<a href="#" class="tablink" onclick="openTest(event, 'tc01')">Project Design</a>
+	  	<!--<a href="#" class="tablink" onclick="openTest(event, 'tc02')">Execution Time Analysis</a>!>-->
+	  	<a href="#" class="tablink" onclick="openTest(event, 'tc03')">Team Members </a>
+	  	<!-- <a href="#" class="tablink" onclick="openTest(event, 'tc04')">References</a> -->
+	  	<a href="#" class="tablink" onclick="show()">Results</a>
+	  	<a href="#" class="tablink h" onclick="openTest(event, 'tc1')">Lobster</a>
+	</nav>
+
+	<div style="margin-left:130px">
+
+	  <div id="tc0" class="w3-container city w3-animate-left">
+	    <div class="heading" style="color: black">
+	      <h1 style="text-align: center;er; text-decoration:underline;">Marching Cubes</h1>
+	    </div>
+
+	    <div class="tabcontent">
+	      <p>
+	        <h4>Introduction</h4>
+	        Marching cubes is a computer graphics algorithm, published in the 1987 SIGGRAPH proceedings by Lorensen and Cline, for extracting a polygonal mesh of an isosurface from a three-dimensional discrete scalar field (sometimes called voxels). This paper is one of the most cited papers in the computer graphics field. The applications of this algorithm are mainly concerned with medical visualizations such as CT and MRI scan data images, and special effects or 3-D modelling with what is usually called metaballs or other metasurfaces. An analogous two-dimensional method is called the marching squares algorithm.
+	        <br>
+	        <img class="w3-animate-left" src="img/ex.png" width="300" height="300"><br>
+	        This 3-D polygonal mesh for a structure of was recontructed using the marching cubes algorithm.
+	        <br>
+	        <br>
+	        The algorithm is implemenetd in the following steps:- 
+	        <br>
+	        <b>Step 1</b>: A cube is iterated over the whole volume of object while tagging each vertex in each iteration as IN or OUT based on the notion of their "density". Of 8 vertices each vertex can either be inside or outside the surface thus, generating 256 possibilities. Out of these 256 possible cases due to symmetery it reduces down to 15 distinct classes.   
+	        <br>
+	        <img class="w3-animate-left" src="img/15.png" height="200"> Credit: Wikipedia
+	        <br>
+	        <br>
+	        <b>Step 2</b> : Supporting data structures are used to store the intersection points and store in a OFF format file to generate the polygonal mesh. There are 2 ways to find these intersection points:
+	        <ul>
+	        	<li>Calculating the mid-points of the edges</li>
+	        	<li>Finding the intersection points through Liner Interpolation</li>
+	        </ul>
+	        In our approach we have used the later method as it gives a better reconstruction then the former.
+	        Also while calculating the intersection points we have taken the advantage of not repeatedly calculating the intersection points amongst the common edges of the adjacent cubes in subsequent iterations, instead reproducing the results from the prvious one.
+	      </p>	
+	    </div>
+	  </div>
+
+	  <div id="tc01" class="w3-container city w3-animate-left">
+	    <div class="heading" style="color: black">
+	      <h1 style="text-align: center;er; text-decoration:underline;">Project Design</h1>
+	    </div>
+	    <p>
+	    	<a href="html/index.html" target="_blank">Doxygen</a>
+	    	<br><br>
+	      	<b>Docs folder</b>
+	      	<br>
+	      	Contains documentation in html format. Doxygen was used to convert docx file into html and in addition to the convertor many lines were manually added.
+	    </p>
+	  </div>
+
+	  
+	  
+	  <div id="tc03" class="w3-container city w3-animate-left">
+	    <div class="heading" style="color: black">
+	      <h1 style="text-align: center;er; text-decoration:underline;">Team Members</h1>
+	      <h2 style="text-align: center;er;">Rishabh Pokharna- 2014A7PS0108H</h2>
+	      <h2 style="text-align: center;er;">Nitish Ravishankar- 2015A7PS0152H</h2>
+	      <h2 style="text-align: center;er;">Mohit Goyal- 2015A7PS0151H</h2>
+	    </div>
+	  </div>  
+	  
+	  	<div id="tc1" class="w3-container city w3-animate-left">
+	    	<h2>Lobster</h2>
+	    	<img class="w3-animate-left" src="img/lobster.png">
+	    	<img class="w3-animate-left" src="img/lobster.gif">
+	   	</div>
+ 	</div>
+  	
+  	
+  	
+
+<script>
+	function openTest(evt, testName) {
+	  var i, x, tablinks;
+	  x = document.getElementsByClassName("city");
+	  for (i = 0; i < x.length; i++) {
+	     x[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablink");
+	  for (i = 0; i < x.length; i++) {
+	     tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+	  }
+	  document.getElementById(testName).style.display = "block";
+	  evt.currentTarget.className += " w3-red";
+	}
+	function show(){
+	   var x = document.getElementsByClassName('h');
+	   for(var i=0;i<x.length;i++){
+	      if(x[i].style.opacity != "1"){
+	         x[i].style.opacity = "1";
+	      }else{
+	         x[i].style.opacity = "0";
+	      }
+	   }
+	}
+	window.onload=function(){
+		
+		document.getElementById('tc0').style.display = "block";
+	}
+	</script>
+
+
+	<style>
+	.h{
+	   opacity:  0;
+	   animation: all 0.8s;
+	}
+	</style>
+
+</body>
+</html>
