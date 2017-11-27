@@ -24,7 +24,7 @@ void drawJungleGym();
 void drawMonkeyBars();
 void drawMerryGoRound();
 void drawBench(GLfloat red, GLfloat green, GLfloat blue);
-void importObjFile(const std::string&, const std::string& );
-void drawObjFile();
+void importObjFile(const std::string&, const std::string&, int);
+void drawObjFile(int);
 
 #endif

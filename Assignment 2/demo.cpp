@@ -218,7 +218,7 @@ void display( GLFWwindow* window )
 		
 		
 		glPushMatrix();
-			glTranslatef(15,0,20);
+			glTranslatef(16,0,20);
 			glScalef(1.2,1,1.2);
 			merry_alpha += animation_speed;		// Merry-go-round
 			glRotatef(merry_alpha,0,1,0);
@@ -226,7 +226,7 @@ void display( GLFWwindow* window )
 		glPopMatrix();
 		
 		glPushMatrix();
-			glTranslatef(35,0,20);
+			glTranslatef(34,0,20);
 			glScalef(1.2,1,1.2);
 			merry_alpha += animation_speed*1.2;		// Merry-go-round
 			glRotatef(merry_alpha,0,1,0);
@@ -246,80 +246,101 @@ void display( GLFWwindow* window )
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(0,5,0);
-			glScalef(10,10,10);
-			//glTranslatef(0,2.3,0);			// Tree 1
-			drawObjFile();
+			glTranslatef(0,-3,-60);
+			//glRotatef(90,0,1,0);
+			glScalef(10,10,9);
+			//glTranslatef(0,2.3,0);			
+			drawObjFile(0);
 		glPopMatrix();
 
-		/*glPushMatrix();
-			glTranslatef(42,0,-42);
+		glPushMatrix();
+			glScalef(2,2,2);
+			glTranslatef(0,2.27,0);
+			drawObjFile(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0,0,-75);
+			glRotatef(-90,0,1,0);
+			glScalef(3,3,3);
+			drawObjFile(2);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(42,0,-92);
 			glScalef(2,2,2);
 			glTranslatef(0,2.3,0);			// Tree 2
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(42,0,42);
 			glScalef(2,2,2);
 			glTranslatef(0,2.3,0);			// Tree 3
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(-42,0,42);
 			glScalef(2,2,2);
 			glTranslatef(0,2.3,0);			// Tree 4
-			drawObjFile();
+			drawObjFile(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(-42,0,-92);
+			glScalef(2,2,2);
+			glTranslatef(0,2.3,0);			// Tree 4
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(-42,0,7);
 			glTranslatef(0,2.3,0);			// Tree 11
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(-42,0,-7);
 			glTranslatef(0,2.3,0);			// Tree 12
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(-7,0,42);
 			glTranslatef(0,2.3,0);			// Tree 13
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(7,0,42);
 			glTranslatef(0,2.3,0);			// Tree 14
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(42,0,7);
 			glTranslatef(0,2.3,0);			// Tree 11
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(42,0,-7);
 			glTranslatef(0,2.3,0);			// Tree 11
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(-7,0,-42);
 			glTranslatef(0,2.3,0);			// Tree 13
-			drawObjFile();
+			drawObjFile(1);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glTranslatef(7,0,-42);
 			glTranslatef(0,2.3,0);			// Tree 14
-			drawObjFile();
-		glPopMatrix();*/
+			drawObjFile(1);
+		glPopMatrix();
 		
     glPopMatrix();
         // Update Screen
@@ -338,8 +359,9 @@ int main(int argc, char** argv)
     GLFWwindow* window = initWindow(1024, 620);
 	cam.set(Point3(0,5,0),Point3(0,5,-20),Vector3(0,1,0));
 	cam.setShape(45.0f, SCREEN_WIDTH/SCREEN_HEIGHT, 0.01f, 1000.0);
-    importObjFile("train.obj","train.mtl");
-
+    importObjFile("train.obj","train.mtl",0);
+    importObjFile("first.obj","first.mtl",1);
+    importObjFile("BlenderNatureAsset.obj","BlenderNatureAsset.mtl",2);
     if( NULL != window )
     {
         display( window );

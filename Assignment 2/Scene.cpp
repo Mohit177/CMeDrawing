@@ -33,8 +33,11 @@ struct TVertex
 
 vector<TVertex> vset;
 vector<Vector3> cset;
-GLfloat* varr;
-GLfloat* carr;
+GLfloat* varr=NULL;
+GLfloat* carr=NULL;
+
+GLfloat* iarr[6];
+int gsize[3];
 
 
 /**
@@ -50,30 +53,31 @@ void drawBoundary(){
 	    // Outer Boundary
 		-50,0,50,	-3,0,50,	-3,6,50,	-50,6,50,		//Front left
 		3,0,50,		50,0,50,	50,6,50,	3,6,50,			//Front right
-		-50,0,-50,	-50,0,50,	-50,6,50,	-50,6,-50,		// Left
-		50,0,50,	50,0,-50,	50,6,-50,	50,6,50,		// Right
-		50,0,-50,	-50,0,-50,	-50,6,-50,	50,6,-50,		// Back
+		-50,0,-100,	-50,0,50,	-50,6,50,	-50,6,-100,		// Left
+		50,0,50,	50,0,-100,	50,6,-100,	50,6,50,		// Right
+		50,0,-100,	-50,0,-100,	-50,6,-100,	50,6,-100,		// Back
 	    // Top of Boundary
 		-50,6,50,	-3,6,50,	-3,6,47,	-50,6,47,		// Front Left
 		3,6,50,		50,6,50,	50,6,47,	3,6,47,			// Front Right
-		-50,6,-50,	-50,6,50,	-47,6,50,	-47,6,-50,		// Left
-		50,6,50,	50,6,-50,	47,6,-50,	47,6,50,		// Right
-		-50,6,-47,	50,6,-47,	50,6,-50,	-50,6,-50,		// Top
+		-50,6,-100,	-50,6,50,	-47,6,50,	-47,6,-100,		// Left
+		50,6,50,	50,6,-100,	47,6,-100,	47,6,50,		// Right
+		-50,6,-97,	50,6,-97,	50,6,-100,	-50,6,-100,		// Top
 	    // Inner Boundary
 		-47,0,47,	-3,0,47,	-3,6,47,	-47,6,47,	// Front Left
 		3,0,47,		47,0,47,	47,6,47,	3,6,47,		// Front Right
-		-47,0,47,	-47,0,-47,	-47,6,-47,	-47,6,47,	// Left
-		47,0,47,	47,0,-47,	47,6,-47,	47,6,47,	// Left
-		-47,0,-47,	47,0,-47,	47,6,-47,	-47,6,-47,	// back
+		-47,0,47,	-47,0,-97,	-47,6,-97,	-47,6,47,	// Left
+		47,0,47,	47,0,-97,	47,6,-97,	47,6,47,	// Left
+		-47,0,-97,	47,0,-97,	47,6,-97,	-47,6,-97,	// back
 		// Gate faces
 		-3,0,47,	-3,0,50,	-3,6,50,	-3,6,47,		// Left
 		3,0,47,		3,0,50,		3,6,50,		3,6,47,			// Right
 		// Ground Bottom
 		-50,0,50,	-50,0,3,	-3,0,3,	   -3,0,50,
         3,0,50,     3,0,3,      50,0,3,     50,0,50,
-        -50,0,-3,   -50,0,-50,  -3,0,-50,   -3,0,-3,
-        3,0,-3,     3,0,-50,    50,0,-50,   50,0,-3,
-        // Roadways.
+        -50,0,-3,   -50,0,-100,  -3,0,-100,   -3,0,-3,
+        3,0,-3,     3,0,-100,    50,0,-100,   50,0,-3,
+
+        // Roadways
         -3,0,50,    -3,0,-50,   3,0,-50,    3,0,50,
         -47,0,3,    -47,0,-3,   47,0,-3,    47,0,3 
 	};
@@ -97,7 +101,7 @@ void drawBoundary(){
 		colors[i] = 0.2;
 	}
 	// Ground
-	for(int i=204;i<204+48;i+=3){
+	for(int i=204;i<252;i+=3){
 		colors[i]	= 0.0;
 		colors[i+1] = 128.0/255;
 		colors[i+2] = 0.0;
@@ -1489,69 +1493,72 @@ void drawBench(GLfloat red=0.4, GLfloat green=0.4, GLfloat blue=0.4){
 	glPushMatrix();
 	glTranslatef(-25,0,-45);
 	for(i=0;i<8;i++)
-	{
-		glScalef(0.8,0.8,0.8);
-		glPushMatrix();
+	{	
+		if(i>1)
+		{	
+			glScalef(0.8,0.8,0.8);
 			glPushMatrix();
-				glScalef(0.5,5,0.5);				// Left leg back
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
-			
-			glPushMatrix();
-				glTranslatef(10,0,0);				// Right leg back
-				glScalef(0.5,5,0.5);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
-			
-			glPushMatrix();
-				glTranslatef(0,0,5);				// Left leg front
-				glScalef(0.5,3,0.5);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
-			
-			glPushMatrix();
-				glTranslatef(10,0,5);				// Right leg front
-				glScalef(0.5,3,0.5);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
+				glPushMatrix();
+					glScalef(0.5,5,0.5);				// Left leg back
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
+				
+				glPushMatrix();
+					glTranslatef(10,0,0);				// Right leg back
+					glScalef(0.5,5,0.5);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
+				
+				glPushMatrix();
+					glTranslatef(0,0,5);				// Left leg front
+					glScalef(0.5,3,0.5);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
+				
+				glPushMatrix();
+					glTranslatef(10,0,5);				// Right leg front
+					glScalef(0.5,3,0.5);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
 
-			glPushMatrix();
-				glTranslatef(0,2,0);				// Seat
-				glScalef(10,0.5,5);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0,2,0);				// Seat
+					glScalef(10,0.5,5);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
 
-			glPushMatrix();
-				glTranslatef(0,3,0);				// left handrest
-				glScalef(0.5,0.5,6);
-				drawUnitCube(red,green,blue);
+				glPushMatrix();
+					glTranslatef(0,3,0);				// left handrest
+					glScalef(0.5,0.5,6);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
+				
+				glPushMatrix();
+					glTranslatef(10,3,0);				// Right handrest
+					glScalef(0.5,0.5,6);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
+				
+				glPushMatrix();
+					glTranslatef(0,5,0);				// Top bar
+					glScalef(10.5,0.5,0.5);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
+				
+				glPushMatrix();
+					glTranslatef(0,3,0);				// back bar
+					glScalef(10,0.5,0.5);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
+				
+				glPushMatrix();
+					glTranslatef(0,4,0);				// back bar
+					glScalef(10.5,0.5,0.5);
+					drawUnitCube(red,green,blue);
+				glPopMatrix();
 			glPopMatrix();
-			
-			glPushMatrix();
-				glTranslatef(10,3,0);				// Right handrest
-				glScalef(0.5,0.5,6);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
-			
-			glPushMatrix();
-				glTranslatef(0,5,0);				// Top bar
-				glScalef(10.5,0.5,0.5);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
-			
-			glPushMatrix();
-				glTranslatef(0,3,0);				// back bar
-				glScalef(10,0.5,0.5);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
-			
-			glPushMatrix();
-				glTranslatef(0,4,0);				// back bar
-				glScalef(10.5,0.5,0.5);
-				drawUnitCube(red,green,blue);
-			glPopMatrix();
-		glPopMatrix();
-		glScalef(1.25,1.25,1.25);
+			glScalef(1.25,1.25,1.25);
+		}
 		if(i%2!=0)
 		{
 			glTranslatef(20,0,20);
@@ -1572,8 +1579,9 @@ Method to import an .obj file.
 @param mtlfile: mtl fine name
 @return void
 */
-void importObjFile(const string& objfile,const string& mtlfile)
+void importObjFile(const string& objfile,const string& mtlfile,int ind)
 {
+	//cout<<ind<<endl<<endl<<endl;
 	vset.clear();
 	cset.clear();
 	ifstream ifil;
@@ -1735,7 +1743,7 @@ void importObjFile(const string& objfile,const string& mtlfile)
 				{
 					string tem_string = line.substr(7,line.length());
 					lcl = cmap[tem_string];
-					cout<<"Idhar: "<<tem_string<<" "<<lcl.x<<" "<<lcl.y<<" "<<lcl.z<<endl;
+					//cout<<"Idhar: "<<tem_string<<" "<<lcl.x<<" "<<lcl.y<<" "<<lcl.z<<endl;
 				}
 			}
 		}
@@ -1754,44 +1762,54 @@ void importObjFile(const string& objfile,const string& mtlfile)
 		vlist.clear();
 	}
 	ifil.close();
-	
 	int size = vset.size()*9;
 	varr = new GLfloat[size];
 	carr = new GLfloat[size];
 	size = vset.size();
+	gsize[ind] = size*3;
 	int k=0;
 	for(i=0;i<size;i++)
 	{
 		varr[k]=vset[i].v1.x;
 		carr[k++]=cset[i].x;
+		
 		varr[k]=vset[i].v1.y;
 		carr[k++]=cset[i].y;
+		
 		varr[k]=vset[i].v1.z;
 		carr[k++]=cset[i].z;
+		
 
 		varr[k]=vset[i].v2.x;
 		carr[k++]=cset[i].x;
+		
 		varr[k]=vset[i].v2.y;
 		carr[k++]=cset[i].y;
+		
 		varr[k]=vset[i].v2.z;
 		carr[k++]=cset[i].z;
+		
 
 		varr[k]=vset[i].v3.x;
 		carr[k++]=cset[i].x;
+		
 		varr[k]=vset[i].v3.y;
 		carr[k++]=cset[i].y;
+		
 		varr[k]=vset[i].v3.z;
 		carr[k++]=cset[i].z;
 	}
+	iarr[2*ind] = varr;
+	iarr[2*ind+1] = carr;
 }
 
-void drawObjFile()
+void drawObjFile(int ind)
 {
-	int size = vset.size()*3;
+	int size = gsize[ind];
 	glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, varr);
-    glColorPointer(3, GL_FLOAT, 0, carr);
+    glVertexPointer(3, GL_FLOAT, 0, iarr[2*ind]);
+    glColorPointer(3, GL_FLOAT, 0, iarr[2*ind+1]);
     glDrawArrays(GL_TRIANGLES, 0, size);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
