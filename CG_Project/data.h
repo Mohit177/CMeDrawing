@@ -3,6 +3,7 @@
 
 #include <errno.h>
 #include <cstdio>
+#include <string>
 #define TORSO_256_DATA_SET 2
 #define TORSO_256_SCALE 2
 #define TORSO_256_XDIM 256
@@ -22,7 +23,7 @@ public:
 
 VolumeData* initVolumeData(unsigned int s1, unsigned int s2, unsigned int s3);
 void deleteVolume(VolumeData* vol);
-int loadVolumeData(VolumeData* vol, char* fname);
-int showVolumeData(VolumeData* vol, char* fname);
+void loadVolumeData(VolumeData* vol, std::string fname);
+void showVolumeData(VolumeData* vol, std::string fname);
 
 #endif
