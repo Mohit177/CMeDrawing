@@ -57,32 +57,32 @@ void initStructures(void)
     int i;
 
     if (!outsideSliceC)
-        outsideSliceC = (short int*)malloc(sizeof(short int) * volume->XDim * volume->YDim);
+        outsideSliceC = new short int[volume->XDim * volume->YDim];
     if (!outsideSliceA)
-        outsideSliceA = (short int*)malloc(sizeof(short int) * volume->XDim * volume->YDim);
+        outsideSliceA = new short int[volume->XDim * volume->YDim];
     if (!outsideSliceB)
-        outsideSliceB = (short int*)malloc(sizeof(short int) * volume->XDim * volume->YDim);
+        outsideSliceB = new short int[volume->XDim * volume->YDim];
     if (!xedge)
-        xedge = (long*)malloc(sizeof(long) * volume->XDim * volume->YDim);
+        xedge = new long[volume->XDim * volume->YDim];
     if (!yedge)
-        yedge = (long*)malloc(sizeof(long) * volume->XDim * volume->YDim);
+        yedge = new long[volume->XDim * volume->YDim];
     if (!zedge)
-        zedge = (long*)malloc(sizeof(long) * volume->YDim);
+        zedge = new long[volume->YDim];
     if (!topyedge)
-        topyedge = (long*)malloc(sizeof(long) * volume->YDim);
+        topyedge = new long[volume->YDim];
     if (!vertices_list)
-        vertices_list = (Point3*)malloc(sizeof(Point3) * 500000);
+        vertices_list = new Point3[500000];
     if (!normals_list)
-        normals_list = (Point3*)malloc(sizeof(Point3) * 500000);
+        normals_list = new Point3[500000];
     if (!facet_list)
     {
 
         facet_list = (Triangle*)malloc(sizeof(Triangle) * 500000);
         for (i = 0; i < 500000; i++)
         {
-            (facet_list + i)->pt1 = (Point3*)malloc(sizeof(Point3));
-            (facet_list + i)->pt2 = (Point3*)malloc(sizeof(Point3));
-            (facet_list + i)->pt3 = (Point3*)malloc(sizeof(Point3));
+            (facet_list + i)->pt1 = new Point3;
+            (facet_list + i)->pt2 = new Point3;
+            (facet_list + i)->pt3 = new Point3;
         }
     }
     if (!facet_normals_list)
@@ -90,9 +90,9 @@ void initStructures(void)
         facet_normals_list = (Triangle*)malloc(sizeof(Triangle) * 500000);
         for (i = 0; i < 500000; i++)
         {
-            (facet_normals_list + i)->pt1 = (Point3*)malloc(sizeof(Point3));
-            (facet_normals_list + i)->pt2 = (Point3*)malloc(sizeof(Point3));
-            (facet_normals_list + i)->pt3 = (Point3*)malloc(sizeof(Point3));
+            (facet_normals_list + i)->pt1 = new Point3;
+            (facet_normals_list + i)->pt2 = new Point3;
+            (facet_normals_list + i)->pt3 = new Point3;
         }
     }
 }
@@ -102,42 +102,42 @@ void freeStructures(void)
     int i;
 
     if (outsideSliceA)
-        free(outsideSliceA);
+        delete(outsideSliceA);
     if (outsideSliceB)
-        free(outsideSliceB);
+        delete(outsideSliceB);
     if (outsideSliceC)
-        free(outsideSliceC);
+        delete(outsideSliceC);
     if (xedge)
-        free(xedge);
+        delete(xedge);
     if (yedge)
-        free(yedge);
+        delete(yedge);
     if (zedge)
-        free(zedge);
+        delete(zedge);
     if (topyedge)
-        free(topyedge);
+        delete(topyedge);
     if (vertices_list)
-        free(vertices_list);
+        delete(vertices_list);
     if (normals_list)
-        free(normals_list);
+        delete(normals_list);
     if (facet_list)
     {
         for (i = (500000 - 1); i > 0; i--)
         {
-            free((facet_list + i)->pt1);
-            free((facet_list + i)->pt2);
-            free((facet_list + i)->pt3);
+            delete((facet_list + i)->pt1);
+            delete((facet_list + i)->pt2);
+            delete((facet_list + i)->pt3);
         }
-        free(facet_list);
+        delete(facet_list);
     }
     if (facet_normals_list)
     {
         for (i = (500000 - 1); i > 0; i--)
         {
-            free((facet_normals_list + i)->pt1);
-            free((facet_normals_list + i)->pt2);
-            free((facet_normals_list + i)->pt3);
+            delete((facet_normals_list + i)->pt1);
+            delete((facet_normals_list + i)->pt2);
+            delete((facet_normals_list + i)->pt3);
         }
-        free(facet_normals_list);
+        delete(facet_normals_list);
     }
 }
 
