@@ -1,50 +1,36 @@
 #include "data.h"
 #include <cstdio>
+#include <string>
 #include <cstdlib>
+#include <iostream>
 
 VolumeData* initVolumeData(unsigned int sx, unsigned int sy, unsigned int sz)
 {
     VolumeData* volume;
     char func[] = "initVolumeData()";
-
-    if (!(volume = (VolumeData*)calloc(1, sizeof(VolumeData))))
-    {
-        errno = ENOMEM;
-        perror(func);
-        return 0;
-    }
-    if (!(volume->data = (unsigned char*)malloc(sizeof(unsigned char) * sx * sy * sz)))
-    {
-        errno = ENOMEM;
-        perror(func);
-        free(volume);
-        return 0;
-    }
+    volume = new VolumeData;
+    volume->data = new unsigned char[sx*sy*sz];
     volume->XDim = sx;
     volume->YDim = sy;
     volume->ZDim = sz;
     volume->totalSize = sx * sy * sz;
-
-    return (volume);
+	return (volume);
 }
-int freeVolume(VolumeData* vol)
+void deleteVolume(VolumeData* vol)
 {
-    char func[] = "freeVolume()";
-
-    if (!vol)
+    std::string func = "freeVolume()";
+    if(vol==NULL)
     {
-        errno = EINVAL;
-        perror(func);
-        return errno;
+    	std::cout<<"error in deleteVolume"<<std::endl;
     }
     if (vol->data)
-        free(vol->data);
-    free(vol);
-
-    return 0;
+    {
+        delete[] vol->data;
+    }
+    delete vol;
 }
 
-int volReadFile(VolumeData* vol, char* fname)
+int loadVolumeData(VolumeData* vol, char* fname)
 {
     unsigned int i;
     char func[] = "volReadFile()";
@@ -80,7 +66,7 @@ int volReadFile(VolumeData* vol, char* fname)
     return 0;
 }
 
-int volPrintFile(VolumeData* vol, char* fname)
+int showVolumeData(VolumeData* vol, char* fname)
 {
     FILE* fp;
     char func[] = "volPrintFile()";

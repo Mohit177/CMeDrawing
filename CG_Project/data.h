@@ -21,8 +21,8 @@ public:
 #define volumePixel(vol, x, y, z) vol->data[z * (vol->XDim * vol->YDim) + y * vol->XDim + x]
 
 VolumeData* initVolumeData(unsigned int s1, unsigned int s2, unsigned int s3);
-int freeVolume(VolumeData* vol);
-int volReadFile(VolumeData* vol, char* fname);
-int volPrintFile(VolumeData* vol, char* fname);
+void deleteVolume(VolumeData* vol);
+int loadVolumeData(VolumeData* vol, char* fname);
+int showVolumeData(VolumeData* vol, char* fname);
 
 #endif

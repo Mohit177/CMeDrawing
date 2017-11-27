@@ -68,10 +68,10 @@ void selectDataSet(int option)
         case TORSO_256_DATA_SET:
             currentScaleFactorRGB = TORSO_256_SCALE;
             if (volume)
-                freeVolume(volume);
+                deleteVolume(volume);
             freeStructures();
             volume = initVolumeData(TORSO_256_XDIM, TORSO_256_YDIM, TORSO_256_ZDIM);
-            volReadFile(volume, "./256.dat");
+            loadVolumeData(volume, "./256.dat");
             computePolygonalModel();
             break;
     }
@@ -91,7 +91,7 @@ void selectOption(int option)
             break;
         case 'e':
             if (volume)
-                freeVolume(volume);
+                deleteVolume(volume);
             freeStructures();
             exit(0);
             break;
