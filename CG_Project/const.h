@@ -55,11 +55,13 @@
 
 class point 
 {
+public:	
   double x,y,z;
 };
 
 class triangle
 {
+public:	
   point *pt1, *pt2, *pt3;
 } ;
 
